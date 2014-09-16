@@ -1,4 +1,4 @@
-# `nwcplay`
+# The `nwcplay` Object
 
 Methods from the `nwcplay` object can only be used while running within a *play hook* called by the NWC program. The following methods are available from the `nwcplay` package:
 

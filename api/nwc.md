@@ -8,14 +8,10 @@ The **nwc** package provides basic access into the NoteWorthy Composer system.
 This enables a script to hook into existing events or areas of NWC. Possible HookType values include:
 
  - "**userdraw**" -> 'UserObjType', *Lua-function*
+   <br>This enables a local drawing function found in the script to use methods from the nwcdraw package to render any user objects that use this object type.
    
-   This enables a local drawing function found in the script to use
-   methods from the nwcdraw package to render any user objects that use
-   this object type.
  - "**userplay**" -> 'UserObjType', *Lua-function*
-   
-   This enables a local play function, which can use methods from the
-   nwcplay package to send custom MIDI messages for this object type.
+   <br>This enables a local play function, which can use methods from the nwcplay package to send custom MIDI messages for this object type.
 
 
 ------------------------------------

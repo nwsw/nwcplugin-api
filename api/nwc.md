@@ -1,7 +1,9 @@
 # **The nwc package:**
 
+The **nwc** package provides basic access into the NoteWorthy Composer system.
+
 <hr>
-**nwc.sethook**('HookType',...)
+## **nwc.sethook**('HookType',...)
 
 This enables a script to hook into existing events or areas of NWC. Possible HookType values include:
 

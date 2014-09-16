@@ -1,6 +1,6 @@
-# **The nwcplay package:**
+# nwcplay
 
-Methods from the **nwcplay** package can only be used when executing a "userplay" hook function called by the NWC program. The following methods are available from the **nwcplay** package:
+Methods from the `nwcplay` object can only be used when executing a **userplay** hook function called by the NWC program. The following methods are available from the **nwcplay** package:
 
 <hr>
 **nwcplay.PPQ**

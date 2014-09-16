@@ -19,15 +19,14 @@ This enables a script to hook into existing events or areas of NWC. Possible Hoo
   
 This enables the creation of a new user object type. The UserObjectSpecTable supports the following keys:
 
-  **spec** = 'Object_nwctxt'
+- **spec** = 'Object_nwctxt'
+  <br>The spec key should provide a string that depicts the user object as it should exist initially when added to a staff.
   
-  The spec key should provide a string that depicts the user object as it should exist initially when added to a staff.
+- **draw** = _Lua-function_
+  <br>This is the userdraw hook function.
   
-  **draw** = _Lua-function_
-  This is the userdraw hook function.
-  
-  **play** = _Lua-function_
-  This is the userplay hook function.
+- **play** = _Lua-function_
+  <br>This is the userplay hook function.
 
 
 ## nwc.hasTypeface('font-typeface'), Returns Boolean

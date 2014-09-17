@@ -1,8 +1,9 @@
-# **The nwc package:**
+# The `nwc` Object
 
-The **nwc** package provides basic access into the NoteWorthy Composer system.
+The `nwc` object provides setup and initialization methods for hooking into the *NoteWorthy Composer* system.
 
-------------------------------------
+
+---------------------------------
 **nwc.sethook**('HookType',...)
 
 This enables a script to hook into existing events or areas of NWC. Possible HookType values include:
@@ -14,7 +15,7 @@ This enables a script to hook into existing events or areas of NWC. Possible Hoo
    <br>This enables a local play function, which can use methods from the nwcplay package to send custom MIDI messages for this object type.
 
 
-------------------------------------
+---------------------------------
 **nwc.addUserObjType**({UserObjectSpecTable})
   
 This enables the creation of a new user object type. The UserObjectSpecTable supports the following keys:
@@ -29,19 +30,19 @@ This enables the creation of a new user object type. The UserObjectSpecTable sup
 <br>This is the userplay hook function.
 
 
-------------------------------------
+---------------------------------
 **nwc.hasTypeface**('font-typeface'), Returns Boolean
 
 This method can be used to identify if a particular font typeface is available on the system before trying to use it. For best performance, it is recommended that this action be done within the plugin startup code.
 
 
-------------------------------------
+---------------------------------
 **nwc.memusage**()
 
 Each editor window uses its own Lua machine. This returns how much memory (in KB) is used by the current window's Lua instance.
 
 
-------------------------------------
+---------------------------------
 **nwc.debug**('Message',...)
 
 This directs a message to the debug console.

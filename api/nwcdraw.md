@@ -1,5 +1,15 @@
 # The `nwcdraw` Object
-Methods from the `nwcdraw` package can only be used within a draw hook called by the NWC program. The following methods are available from the `nwcdraw` package:
+Methods from the `nwcdraw` package can only be used within a draw hook called by the NWC program. 
+
+
+## About Drawing Coordinates
+
+The draw hook has a two dimensional, floating point, coordinate system relative to its current position in the staff. The point (0,0) is the base point for the object. The **x dimension** uses a notehead width resolution, much like the Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects. Therefore, a coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the user object anchor position.
+
+
+## Available Methods
+
+The following methods are available from the `nwcdraw` package:
 
 ------------------
 **nwcdraw.getAspectRatio**(), returns #X-DividedBy-Y

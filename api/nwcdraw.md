@@ -123,3 +123,8 @@ This draws a line using the current pen. Only the first X coordinate is required
 **nwcdraw.curve**('Direction',#X1,#Y1,[#X2],[#Y2],[#X3],[#Y3])
 
 This draws a horizontal curve, starting at (X1,Y1) and ending at (X3,Y3), which fits the point at (X2,Y2). The PenStyle is the same as for the "line" action. The 'Direction' should be either 'Upward' or 'Downward'.
+
+------------------
+**nwcdraw.bezier**(#X1,#Y1,#X2,[#Y2],[#X3],[#Y3])
+
+This draws a bezier curve, starting at the current position. If X3 is omitted, then a [quadratic bezier curve](https://www.google.com/search?q=quadratic+bezier) is drawn using (X1,Y1) and (X2,Y2), with Y2 defaulting to 0. If X3 is included, then a [cubic bezier curve](https://www.google.com/search?q=quadratic+bezier) is drawn, with Y3 defaulting to 0 if not specified.

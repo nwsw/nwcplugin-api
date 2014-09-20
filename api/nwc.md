@@ -4,6 +4,12 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 
 
 ---------------------------------
+**nwc.VERSION**
+
+This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well.
+
+
+---------------------------------
 **nwc.sethook**('HookType',...)
 
 This enables a script to hook into existing events or areas of NWC. Possible HookType values include:

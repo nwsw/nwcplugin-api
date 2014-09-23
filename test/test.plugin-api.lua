@@ -10,6 +10,7 @@
 local NewObjectSpec = '|User|...'
 
 local DefaultChordFontFace = nwc.hasTypeface("MusikChordSerif") and "MusikChordSerif" or "Arial"
+local DefaultChordFontSize = (DefaultChordFontFace == "MusikChordSerif") and 8 or 5
 
 local function setPenOpts(defStyle)
 	local penstyle = nwcuser.getUserProp("Pen") or (defStyle or "solid")
@@ -64,7 +65,7 @@ end
 nwc.sethook("userdraw","test.debug",draw_testDebug)
 
 ------------------------------------------------------------------------------------
-NewObjectSpec = '|User|test.boxtext|Angle:[#0-360]0|Pen:solid|Thickness:[#1-1000]350|Typeface:[*]Arial|Size:[#.#]6|Text:[*]Hello World'
+NewObjectSpec = '|User|test.boxtext|Angle:[#0-360]0|Pen:solid|Thickness:[#1-1000]350|Typeface:[*]Arial|Size:[#.#]6|Text:[*]"Hello World"'
 ------------------------------------------------------------------------------------
 local function draw_test_boxtext()
 	local xyar = nwcdraw.getAspectRatio()
@@ -78,13 +79,14 @@ local function draw_test_boxtext()
 	nwcdraw.alignText("top","left")
 	nwcdraw.setTypeface(nwcuser.getUserProp("Typeface:") or "Arial")
 	nwcdraw.setFontSize(nwcuser.getUserProp("Size:"))
-	setPenOpts()
 
 	local t = nwcuser.getUserProp("Text:")
 	local w,h = nwcdraw.calcTextSize(t)
 	nwcdraw.angleText(t,angle)
 
+	if nwcuser.getUserProp("Thickness:") == "0" then return end
 	local angleRad = math.rad(angle)
+	setPenOpts()
 	nwcdraw.moveTo(0,0)
 	nwcdraw.line(rotate(0,-h,angleRad))
 	nwcdraw.line(rotate(w,-h,angleRad))
@@ -206,7 +208,7 @@ local function draw_testChordFun()
 		fullname = "??"
 	end
 
-	nwcdraw.setFontClass(getFont())
+	nwcdraw.setFont(DefaultChordFontFace,DefaultChordFontSize)
 	nwcdraw.alignText("baseline","center")
 	nwcdraw.text(fullname)
 

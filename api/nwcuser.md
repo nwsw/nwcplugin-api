@@ -22,6 +22,18 @@ This returns the string value for any property that exists in the current user o
 
 
 ---------------------------------
+**nwcuser.getNoteCount**(#ItemIndexOffset), Returns #NoteCount
+
+This returns the number of notes found at the position indicated by ItemIndexOffset.
+
+
+---------------------------------
+**nwcuser.getNotePos**(#ItemIndexOffset,#NoteNumber), Returns #NotePosition
+
+This returns the staff Y coordinate for the given NoteNumber at the position indicated by ItemIndexOffset. The NoteNumber must starts from 1, and will yield valid positions up through nwcuser.getNoteCount note numbers. This function returns Nil if there is no such note number.
+
+
+---------------------------------
 **nwcuser.find**('action',...,'What',...), Returns #ItemIndexOffset
 
 This method can be used to find other items on the same staff as the current user object. The following values are supported for the 'action' field:

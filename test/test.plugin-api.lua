@@ -42,6 +42,13 @@ local function getFont(defaultFont)
 	return useFont or defaultFont
 end
 
+local function allNotePos(itemOffset)
+	local noteNum = 0
+	return function()
+		noteNum = noteNum+1
+		return nwcuser.getNotePos(itemOffset,noteNum)
+	end
+end
 
 ------------------------------------------------------------------------------------
 -- NewObjectSpec = '|User|test.debug'
@@ -97,6 +104,27 @@ end
 nwc.addUserObjType({
 	spec = NewObjectSpec,
 	draw = draw_test_boxtext,
+	})
+
+------------------------------------------------------------------------------------
+NewObjectSpec = '|User|test.notelines'
+------------------------------------------------------------------------------------
+local function draw_test_notelines()
+	local nextNote = nwcuser.find("next","note")
+	if not nextNote then return end
+
+	setPenOpts()
+	local xpos = nwcdraw.locate("item",nextNote)
+	
+	for np in allNotePos(nextNote) do
+		nwcdraw.moveTo(0,0)
+		nwcdraw.line(xpos,np)
+	end
+end
+
+nwc.addUserObjType({
+	spec = NewObjectSpec,
+	draw = draw_test_notelines,
 	})
 
 ------------------------------------------------------------------------------------

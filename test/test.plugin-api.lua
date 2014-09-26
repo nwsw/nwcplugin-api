@@ -50,6 +50,125 @@ local function allNotePos(itemOffset)
 	end
 end
 
+local function getUserPoint(propName)
+	local userpt = nwcuser.getUserProp(propName) or "0,0"
+	local x = tonumber(userpt:match("([%.%d]+),")) or 0
+	local y = tonumber(userpt:match(",([%.%-%d]+)")) or 0
+	return x,y
+end
+
+local function fitPts(pts)
+	local function getcp(p)
+		local n = #p
+		local cp = {}
+		local tmp = {}
+		local b = 2.0
+
+		cp[1] = p[1] / b
+		for i=1,n-1 do
+			tmp[i+1] = 1 / b
+			b = ((i < (n-1)) and 4.0 or 3.5) - tmp[i+1]
+			cp[i+1] = (p[i+1] - cp[i]) / b
+		end
+
+		for i=1,n-1 do
+			cp[n-i] = cp[n-i] - (tmp[n-i+1] * cp[n-i+1])
+		end
+
+		return cp
+	end
+
+	local n = #pts - 1
+
+	assert(n > 0)
+
+	if n == 1 then
+		local cp1 = {(2* pts[1][1] + pts[2][1]) / 3, (2 * pts[1][2] + pts[2][2]) / 3}
+		return {cp1,{(2*cp1[1] - pts[1][1]), (2*cp1[2] - pts[1][2])}}
+	end
+
+	local ipos = {}
+
+	-- intermediate X positions
+	ipos[1] = pts[1][1] + 2*pts[2][1]
+
+	for i = 2,n-1 do
+		ipos[i] = 4*pts[i][1] + 2*pts[i + 1][1]
+	end
+
+	ipos[n] = (8*pts[n][1] + pts[n+1][1]) / 2.0
+
+	local x = getcp(ipos)
+
+	-- intermediate Y positions
+	ipos[1] = pts[1][2] + 2 * pts[2][2]
+
+	for i=2,n-1 do
+		ipos[i] = 4*pts[i][2] + 2*pts[i + 1][2]
+	end
+
+	ipos[n] = (8*pts[n][2] + pts[n+1][2]) / 2.0
+
+	local y = getcp(ipos)
+
+	local cp = {}
+	for i=1,n do
+		local cp1 = {x[i], y[i]}
+		local cp2
+
+		if i < (n-1) then
+			cp2 = {(2*pts[i + 1][1] - x[i + 1]), (2*pts[i + 1][2] - y[i + 1])}
+		else
+			cp2 = {((pts[n][1] + x[n - 1]) / 2), ((pts[n][2] + y[n - 1]) / 2)}
+		end
+
+		cp[i] = {cp1,cp2}
+	end
+
+	return cp
+end
+
+local function freehandLine(x1,y1,x2,y2,driftmax)
+	local xdiff = x2 - x1
+	local ydiff = y2 - y1
+	local linelen = math.sqrt(xdiff^2 + ydiff^2)
+	local xdrift,ydrift = 0,0
+	local numsegs = 2
+	local pts = {{x1,y1}}
+
+	if math.abs(ydiff) > math.abs(xdiff) then
+		-- create random deviation using change in y
+		numsegs = math.min(64,math.max(2,math.floor(math.abs(ydiff)/3)))
+		xdrift = tonumber(driftmax) or 0.2
+	else
+		-- create random deviation using change in x
+		numsegs = math.min(64,math.max(2,math.floor(math.abs(xdiff)/3)))
+		ydrift = tonumber(driftmax) or 0.4
+	end
+
+	for i=1,numsegs-1 do
+		local r = math.random() - 0.5
+		local x = x1 + (i*xdiff)/numsegs + r*xdrift
+		local y = y1 + (i*ydiff)/numsegs + r*ydrift
+
+		table.insert(pts,{x,y})
+	end
+
+	table.insert(pts,{x2,y2})
+
+	local cp = fitPts(pts)
+
+	nwcdraw.moveTo(x1,y1)
+	for i=2,#pts do
+		local cp1,cp2 = cp[i-1][1],cp[i-1][2]
+		nwcdraw.bezier(
+			cp1[1],cp1[2],
+			cp2[1],cp2[2],
+			pts[i][1],pts[i][2]
+			)
+	end
+end
+
 ------------------------------------------------------------------------------------
 -- NewObjectSpec = '|User|test.debug'
 ------------------------------------------------------------------------------------
@@ -125,6 +244,63 @@ end
 nwc.addUserObjType({
 	spec = NewObjectSpec,
 	draw = draw_test_notelines,
+	})
+
+------------------------------------------------------------------------------------
+NewObjectSpec = '|User|test.freehand|pt1:[@Coordinate]0,0|pt2:[@Coordinate]0,8|drift:[#.#]0.25'
+------------------------------------------------------------------------------------
+local function draw_test_freehand()
+	local x1,y1 = getUserPoint("pt1")
+	local x2,y2 = getUserPoint("pt2")
+
+	if (x2 == x1) and (y2 == y1) then return end
+
+	local drift = tonumber(nwcuser.getUserProp("drift")) or 0.25
+	setPenOpts()
+
+	freehandLine(x1,y1,x2,y2,drift)
+end
+
+nwc.addUserObjType({
+	spec = NewObjectSpec,
+	draw = draw_test_freehand,
+	})
+
+------------------------------------------------------------------------------------
+NewObjectSpec = '|User|test.tracenotespan|Span:[#2-32]2'
+------------------------------------------------------------------------------------
+local function draw_test_tracenotespan()
+	local span = getSpan()
+	local targetx,ytop,ybtm,termtype = nwcdraw.locate("note",span)
+
+	setPenOpts()
+
+	if span > 1 then
+		local pts = {}
+		for i=1,span do
+			targetx,ytop,ybtm,termtype = nwcdraw.locate("note",i)
+			table.insert(pts,{targetx,ytop})
+		end
+			
+		nwcdraw.hintline(pts[1][1],pts[1][2])
+
+		local cp = fitPts(pts)
+
+		nwcdraw.moveTo(pts[1][1],pts[1][2])
+		for i=2,#pts do
+			local cp1,cp2 = cp[i-1][1],cp[i-1][2]
+			nwcdraw.bezier(
+				cp1[1],cp1[2],
+				cp2[1],cp2[2],
+				pts[i][1],pts[i][2]
+				)
+		end
+	end
+end
+
+nwc.addUserObjType({
+	spec = NewObjectSpec,
+	draw = draw_test_tracenotespan,
 	})
 
 ------------------------------------------------------------------------------------

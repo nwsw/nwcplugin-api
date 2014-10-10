@@ -62,17 +62,18 @@ local function fitPts(pts)
 		local n = #p
 		local cp = {}
 		local tmp = {}
-		local b = 2.0
 
-		cp[1] = p[1] / b
-		for i=1,n-1 do
-			tmp[i+1] = 1 / b
-			b = ((i < (n-1)) and 4.0 or 3.5) - tmp[i+1]
-			cp[i+1] = (p[i+1] - cp[i]) / b
+		cp[1] = p[1] / 2
+
+		local b = 2.0
+		for i=2,n do
+			tmp[i] = 1 / b
+			b = ((i < n) and 4.0 or 3.5) - tmp[i]
+			cp[i] = (p[i] - cp[i-1]) / b
 		end
 
-		for i=1,n-1 do
-			cp[n-i] = cp[n-i] - (tmp[n-i+1] * cp[n-i+1])
+		for i=n-1,1,-1 do
+			cp[i] = cp[i] - (tmp[i+1] * cp[i+1])
 		end
 
 		return cp
@@ -84,42 +85,33 @@ local function fitPts(pts)
 
 	if n == 1 then
 		local cp1 = {(2* pts[1][1] + pts[2][1]) / 3, (2 * pts[1][2] + pts[2][2]) / 3}
-		return {cp1,{(2*cp1[1] - pts[1][1]), (2*cp1[2] - pts[1][2])}}
+		return {{cp1,{(2*cp1[1] - pts[1][1]), (2*cp1[2] - pts[1][2])}}}
 	end
 
 	local ipos = {}
+	local xy = {}
 
-	-- intermediate X positions
-	ipos[1] = pts[1][1] + 2*pts[2][1]
+	for axis=1,2 do
+		ipos[1] = pts[1][axis] + 2*pts[2][axis]
 
-	for i = 2,n-1 do
-		ipos[i] = 4*pts[i][1] + 2*pts[i + 1][1]
+		for i = 2,n-1 do
+			ipos[i] = 4*pts[i][axis] + 2*pts[i + 1][axis]
+		end
+
+		ipos[n] = (8*pts[n][axis] + pts[n+1][axis]) / 2.0
+
+		xy[axis] = getcp(ipos)
 	end
-
-	ipos[n] = (8*pts[n][1] + pts[n+1][1]) / 2.0
-
-	local x = getcp(ipos)
-
-	-- intermediate Y positions
-	ipos[1] = pts[1][2] + 2 * pts[2][2]
-
-	for i=2,n-1 do
-		ipos[i] = 4*pts[i][2] + 2*pts[i + 1][2]
-	end
-
-	ipos[n] = (8*pts[n][2] + pts[n+1][2]) / 2.0
-
-	local y = getcp(ipos)
 
 	local cp = {}
 	for i=1,n do
-		local cp1 = {x[i], y[i]}
+		local cp1 = {xy[1][i],xy[2][i]}
 		local cp2
 
-		if i < (n-1) then
-			cp2 = {(2*pts[i + 1][1] - x[i + 1]), (2*pts[i + 1][2] - y[i + 1])}
+		if i < n then
+			cp2 = {(2*pts[i + 1][1] - xy[1][i + 1]), (2*pts[i + 1][2] - xy[2][i + 1])}
 		else
-			cp2 = {((pts[n][1] + x[n - 1]) / 2), ((pts[n][2] + y[n - 1]) / 2)}
+			cp2 = {((pts[n][1] + xy[1][n - 1]) / 2), ((pts[n][2] + xy[2][n - 1]) / 2)}
 		end
 
 		cp[i] = {cp1,cp2}
@@ -191,7 +183,7 @@ end
 nwc.sethook("userdraw","test.debug",draw_testDebug)
 
 ------------------------------------------------------------------------------------
-NewObjectSpec = '|User|test.boxtext|Angle:[#0-360]0|Pen:solid|Thickness:[#1-1000]350|Typeface:[*]Arial|Size:[#.#]6|Text:[*]"Hello World"'
+NewObjectSpec = '|User|test.boxtext|Angle:[#0-360]0|Pen:solid|Thickness:[#1-1000]350|Mode:[*]stroke|Typeface:[*]Arial|Size:[#.#]6|Text:[*]"Hello World"'
 ------------------------------------------------------------------------------------
 local function draw_test_boxtext()
 	local xyar = nwcdraw.getAspectRatio()
@@ -201,6 +193,7 @@ local function draw_test_boxtext()
 		return (x*math.cos(r) - y*math.sin(r)),((x*math.sin(r) + y*math.cos(r))*xyar)
 	end
 
+	local skipBox = nwcuser.getUserProp("Thickness:") == "0"
 	local angle = tonumber(nwcuser.getUserProp("Angle:")) or 0
 	nwcdraw.alignText("top","left")
 	nwcdraw.setTypeface(nwcuser.getUserProp("Typeface:") or "Arial")
@@ -208,16 +201,28 @@ local function draw_test_boxtext()
 
 	local t = nwcuser.getUserProp("Text:")
 	local w,h = nwcdraw.calcTextSize(t)
-	nwcdraw.angleText(t,angle)
 
-	if nwcuser.getUserProp("Thickness:") == "0" then return end
-	local angleRad = math.rad(angle)
 	setPenOpts()
+
+	if not skipBox then
+		local angleRad = math.rad(angle)
+		nwcdraw.moveTo(0,0)
+		nwcdraw.beginPath()
+		nwcdraw.line(rotate(0,-h,angleRad))
+		nwcdraw.line(rotate(w,-h,angleRad))
+		nwcdraw.line(rotate(w,0,angleRad))
+		nwcdraw.closeFigure()
+		nwcdraw.endPath("fill")
+
+		nwcdraw.setWhiteout()
+	end
+
 	nwcdraw.moveTo(0,0)
-	nwcdraw.line(rotate(0,-h,angleRad))
-	nwcdraw.line(rotate(w,-h,angleRad))
-	nwcdraw.line(rotate(w,0,angleRad))
-	nwcdraw.line(0,0)
+	if string.lower(nwcuser.getUserProp("Mode:") or "fill") == "stroke" then
+		nwcdraw.strokeText(t,angle)
+	else
+		nwcdraw.text(t,angle)
+	end
 end
 
 nwc.addUserObjType({
@@ -234,7 +239,7 @@ local function draw_test_notelines()
 
 	setPenOpts()
 	local xpos = nwcdraw.locate("item",nextNote)
-	
+
 	for np in allNotePos(nextNote) do
 		nwcdraw.moveTo(0,0)
 		nwcdraw.line(xpos,np)
@@ -295,6 +300,11 @@ local function draw_test_tracenotespan()
 				pts[i][1],pts[i][2]
 				)
 		end
+
+		for i=1,#pts-1 do
+			local cp1,cp2 = cp[i][1],cp[i][2]
+			nwcdraw.hintline(cp1[1],cp1[2],cp2[1],cp2[2]);
+		end
 	end
 end
 
@@ -354,7 +364,7 @@ local function draw_testSlur()
 	arcpt_x = arcpt_x*x_dest
 
 	setPenOpts()
-	nwcdraw.curve(direction,0,0,arcpt_x,arcpt_Y,x_dest,target_y)
+	nwcdraw.curve(direction,arcpt_x,arcpt_Y,x_dest,target_y)
 end
 
 nwc.addUserObjType({

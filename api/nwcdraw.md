@@ -84,21 +84,27 @@ This method sets the current alignment mode for drawing text. VertAlign must be 
 
 
 ------------------
-**nwcdraw.text**('MsgString')
+**nwcdraw.text**('MsgString', [#RotationAngle])
 
-This draws text at the current position, as set by a previous call to the nwcdraw.moveTo method.
+This draws text at the current position, as set by a previous call to the nwcdraw.moveTo method. The text can be rotated around the current position using the #RotationAngle, which is specified from 0 to 360 degrees, with 0 as the default.
 
 
 ------------------
-**nwcdraw.angleText**('MsgString', #RotationAngle)
+**nwcdraw.strokeText**('MsgString', [#RotationAngle])
 
-This rotates and draws the MsgString text, starting at the current position.
+This will render the text using the current pen. The #RotationAngle is the same as for **nwcdraw.text**.
 
 
 ------------------
 **nwcdraw.setPen**('PenStyle',#ThicknessMicrons)
 
 The PenStyle can be one of 'solid', 'dot', or 'dash'. The ThicknessMicrons sets the line thiickness in microns.
+
+
+------------------
+**nwcdraw.setWhiteout**([false])
+
+This turns on **whiteout** mode, where everything is drawn in the background color. When printing, this sets the drawing color to White. Specifying **false** in the function call will turn off **whiteout** mode.
 
 
 ------------------
@@ -120,11 +126,52 @@ This draws a line using the current pen. Only the first X coordinate is required
 
 
 ------------------
-**nwcdraw.curve**('Direction',#X1,#Y1,[#X2],[#Y2],[#X3],[#Y3])
+**nwcdraw.curve**('Direction',#X1,#Y1,...[#Xn],[#Yn])
 
-This draws a horizontal curve, starting at (X1,Y1) and ending at (X3,Y3), which fits the point at (X2,Y2). The PenStyle is the same as for the "line" action. The 'Direction' should be either 'Upward' or 'Downward'.
+This draws a horizontal curve, starting at the current position and ending at the last point. The curve will be shaped over or under the intermediate (Xi,Yi) points. The PenStyle is the same as for the "line" action. The 'Direction' should be either 'Upward' or 'Downward'.
+
+The last point's Y coordinate is optional, and will default to the current position if not specified.
+
 
 ------------------
 **nwcdraw.bezier**(#X1,#Y1,#X2,[#Y2],[#X3],[#Y3])
 
 This draws a bezier curve, starting at the current position. If X3 is omitted, then a [quadratic bezier curve](https://www.google.com/search?q=quadratic+bezier) is drawn using (X1,Y1) and (X2,Y2), with Y2 defaulting to 0. If X3 is included, then a [cubic bezier curve](https://www.google.com/search?q=cubic+bezier) is drawn, with Y3 defaulting to 0 if not specified.
+
+
+------------------
+**nwcdraw.ellipse**(#Width,#Height)
+
+This draws an ellipse at the current position using the current pen. The #Width is specified as a relative X coordinate, and #Height as a relative Y coordinate. For a circle, one of the coordinate sizes must be normalized using **nwcdraw.getAspectRatio**.
+
+
+------------------
+**nwcdraw.pathBegin**()
+
+This starts a new figure which should be captured as a new path. While rendering into a path, only the line, curve, bezier, and ellipse functions should be used. When the figure has been constucted, you should use **endPath** to close and render the path.
+
+The following will create and fill a rectangle:
+
+```lua
+function fillRect(x1,y1,x2,y2)
+	nwcdraw.moveTo(x1,y1)
+	nwcdraw.pathBegin()
+	nwcdraw.line(x2,y1)
+	nwcdraw.line(x2,y2)
+	nwcdraw.line(x1,y2)
+	nwcdraw.closeFigure()
+	nwcdraw.endPath("fill")
+end
+```
+
+------------------
+**nwcdraw.closeFigure**()
+
+This will close the current path figure by extending a line to the path origin. This function can only be used while generating a new path.
+
+
+------------------
+**nwcdraw.endPath**("RenderMode")
+
+This closes and renders the current path. The RenderMode should be "stroke" to render the figure using the current pen, or "fill" to alternately paint the figure's interior.
+

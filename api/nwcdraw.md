@@ -16,6 +16,13 @@ The following methods are available from the `nwcdraw` package:
 
 This provides an aspect ratio that can be used to normalize the X and Y coordinates within the userdraw function. 
 
+
+------------------
+**nwcdraw.getTarget**(), returns 'Target'
+
+This indicates the drawing target, which will be one of the following: **edit**, **view**, **print**, or **selector**.
+
+
 ------------------
 **nwcdraw.locate**('ObjType', ['UserType'], [Count])
 

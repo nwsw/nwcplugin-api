@@ -153,7 +153,7 @@ This draws an ellipse at the current position using the current pen. The #Width 
 
 
 ------------------
-**nwcdraw.pathBegin**()
+**nwcdraw.beginPath**()
 
 This starts a new figure which should be captured as a new path. While rendering into a path, only the line, curve, bezier, and ellipse functions should be used. When the figure has been constucted, you should use **endPath** to close and render the path.
 
@@ -162,7 +162,7 @@ The following will create and fill a rectangle:
 ```lua
 function fillRect(x1,y1,x2,y2)
 	nwcdraw.moveTo(x1,y1)
-	nwcdraw.pathBegin()
+	nwcdraw.beginPath()
 	nwcdraw.line(x2,y1)
 	nwcdraw.line(x2,y2)
 	nwcdraw.line(x1,y2)

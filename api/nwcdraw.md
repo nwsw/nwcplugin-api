@@ -175,7 +175,7 @@ For a circle, one of the dimensions must either be normalized using **nwcdraw.ge
 ------------------
 **nwcdraw.beginPath**()
 
-This starts a new figure which should be captured as a new path. While rendering into a path, only the line, curve, bezier, and ellipse functions should be used. When the figure has been constucted, you should use **endPath** to close and render the path.
+This starts a new figure which should be captured as a new path. While rendering into a path, only the line, curve, bezier, rectangle, roundRect and ellipse functions should be used. When the figure has been constructed, you should use **endPath** to close and render the path.
 
 The following will create and fill a rectangle:
 

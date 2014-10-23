@@ -147,9 +147,29 @@ This draws a bezier curve, starting at the current position. If X3 is omitted, t
 
 
 ------------------
-**nwcdraw.ellipse**(#Width,#Height)
+**nwcdraw.rectangle**(#Width,#Height)
 
-This draws an ellipse at the current position using the current pen. The #Width is specified as a relative X coordinate, and #Height as a relative Y coordinate. For a circle, one of the coordinate sizes must be normalized using **nwcdraw.getAspectRatio**.
+This draws a rectangle from the current position using the current pen. The (#Width,#Height) pair defines the relative position of the far corner of the rectangle.
+
+For a square, one of the dimensions must either be normalized using **nwcdraw.getAspectRatio**, or not specified so it will be calculated based on the other dimension.
+
+
+------------------
+**nwcdraw.roundRect**(#X_Offset,[#Y_Offset],[#RoundingWidth],[#RoundingHeight])
+
+This draws a rectangle around the current position using the current pen. The (#X_Offset,#Y_Offset) pair defines the distance to the right and top edges of the rectangle.
+
+The (#RoundingWidth, #RoundingHeight) pair define an optional major and minor radius used for rounding of the rectangle's corners.
+
+For a square, one of the dimensions must either be normalized using **nwcdraw.getAspectRatio**, or not specified so it will be calculated based on the other dimension.
+
+
+------------------
+**nwcdraw.ellipse**(#X_Radius,#y_Radius)
+
+This draws an ellipse around the current position using the current pen. The #X_Radius and #Y_Radius are relative coordinates which define the major and minor radius for the ellipse.
+
+For a circle, one of the dimensions must either be normalized using **nwcdraw.getAspectRatio**, or not specified so it will be calculated based on the other dimension.
 
 
 ------------------
@@ -180,5 +200,8 @@ This will close the current path figure by extending a line to the path origin. 
 ------------------
 **nwcdraw.endPath**("RenderMode")
 
-This closes and renders the current path. The RenderMode should be "stroke" to render the figure using the current pen, or "fill" to alternately paint the figure's interior.
+This closes and renders the current path. The RenderMode should be one of:
 
+- "fill" to alternately paint the figure's interior
+- "stroke" to render the figure using the current pen
+- "strokeandfill" to do both (this is the default)

@@ -15,7 +15,7 @@ local DefaultChordFontSize = (DefaultChordFontFace == "MusikChordSerif") and 8 o
 local function setPenOpts(defStyle)
 	local penstyle = nwcuser.getUserProp("Pen") or (defStyle or "solid")
 	local penwidth = tonumber(nwcuser.getUserProp("Thickness:")) or 175
-	nwcdraw.setPen(penstyle, penwidth);
+	nwcdraw.setPen(penstyle, penwidth)
 end
 
 local function getSpan(defaultSpan)
@@ -162,25 +162,30 @@ local function freehandLine(x1,y1,x2,y2,driftmax)
 end
 
 ------------------------------------------------------------------------------------
--- NewObjectSpec = '|User|test.debug'
+NewObjectSpec = '|User|test.printsig|Class:StaffSig'
 ------------------------------------------------------------------------------------
-local function draw_testDebug()
-	local m1 = nwc.memusage()
-	local m2 = "KB"
+local function printsig_Draw()
+	local t = nwcuser.getUserProp("Text") or nwcuser.getUserProp("Class") or "text"
+	nwcdraw.setFontClass(getFont())
+	local w = nwcdraw.calcTextSize(t)
 
-	nwcdraw.setFontClass("PageSmallText")
-	local x1,y1 = nwcdraw.calcTextSize(m1)
-	local x2,y2 = nwcdraw.calcTextSize(m2)
-	--nwc.debug("Memory Used:",m1)
-	nwcdraw.moveTo(-x1/2)
-	nwcdraw.text(m1)
-	nwcdraw.moveTo(-x2/2,-y1)
-	nwcdraw.text(m2)
+	if not nwcdraw.isDrawing() then return w end
+
+	nwcdraw.alignText('top','right')
+	nwcdraw.text(t)
 end
 
--- we only set a draw hook for this object, as their really is no need for
--- most users to add it
-nwc.sethook("userdraw","test.debug",draw_testDebug)
+local function printsig_Width()
+	-- this is intended to demonstrate that you can either use a separate function for the
+	-- width hook, or combine it with the draw hook and use nwcdraw.isDrawing()
+	return printsig_Draw()
+end
+
+nwc.addUserObjType({
+	spec	= NewObjectSpec,
+	width	= printsig_Width,
+	draw	= printsig_Draw,
+	})
 
 ------------------------------------------------------------------------------------
 NewObjectSpec = '|User|test.boxtext|Angle:[#0-360]0|Pen:solid|Thickness:[#1-1000]350|Mode:[*]stroke|Typeface:[*]Arial|Size:[#.#]6|Text:[*]"Hello World"'
@@ -262,6 +267,7 @@ local function draw_test_freehand()
 
 	local drift = tonumber(nwcuser.getUserProp("drift")) or 0.25
 	setPenOpts()
+	nwcdraw.setPen("solid",300)
 
 	freehandLine(x1,y1,x2,y2,drift)
 end
@@ -379,21 +385,33 @@ NewObjectSpec = '|User|test.chordfun|Span:[#1-32]1|Name:[*]C'
 local chordKeys = {
 	['']	=	{1,5,8},
 	['M']	=	{1,5,8},
+	['Maj']	=	{1,5,8},
 	['m']	=	{1,4,8},
+	['min']	=	{1,4,8},
 	['dim']	=	{1,4,7},
 	['aug']	=	{1,5,9},
+	['+']	=	{1,5,9},
 	['sus']	=	{1,6,8},
+	['sus2']	=	{1,3,8},
 	['6']	=	{1,5,8,10},
+	['6/9']	=	{1,5,10,15},
 	['m6']	=	{1,4,8,10},
 	['7']	=	{1,5,8,11},
-	['dim7']=	{1,4,7,10},
+	['7#5']	=	{1,5,9,11},
+	['7#9']	=	{1,5,11,16},
+	['add9']	=	{1,5,8,15},
+	['dim7']	=	{1,4,7,10},
 	['m7']	=	{1,4,8,11},
-	['m7b5']=	{1,4,7,11},
+	['m7b5']	=	{1,4,7,11},
+	['m7#5']	=	{1,4,9.11},
+	['m7b9']	=	{1,4,11,14},
 	['M7']	=	{1,5,8,12},
-	['7sus']=	{1,6,8,11},
+	['7sus']	=	{1,6,8,11},
+	['7b9']	=	{1,5,11,14},
 	['9']	=	{1,5,8,11,15},
 	['m9']	=	{1,4,8,11,15},
 	['M9']	=	{1,5,8,12,15},
+	['13th']	=	{1,11,17,22},
 	}
 
 local notenameShift = {

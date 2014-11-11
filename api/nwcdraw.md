@@ -24,6 +24,18 @@ This indicates the drawing target, which will be one of the following: **edit**,
 
 
 ------------------
+**nwcdraw.isDrawing**(), returns Boolean
+
+This indicates if the draw hook is currently active. When not active, the width predraw hook is being called and no physical drawing functions may legally be invoked.
+
+
+------------------
+**nwcdraw.isAutoInsert**(), returns Boolean
+
+This indicates if the current user object has been automatically inserted at the start of the current printed system. This will only be true when the drawing target is **print**.
+
+
+------------------
 **nwcdraw.locate**('ObjType', ['UserType'], [Count])
 
 This function is used to locate the relative position of other areas of the current staff. It is generally used to get the location of the next **item**, **note**, **bar**, or **user** object in the current staff. When locating a user object, you must specify the user object type. The Count is used to skip through multiple matching objects, and can be negative to locate behind the current object.

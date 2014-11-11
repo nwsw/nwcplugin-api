@@ -15,4 +15,4 @@ The following objects are available, depending on which hook is currently runnin
 
 ## Plugin Initialization
 
-When a plugin script is loaded, it is responsible for creating the necessary hooks into NWC. Currently, there are `play` and `draw` hook types. These can be created and assigned to NWC `User` object types. Refer to the `sethook` and `addUserObjType` methods in the [nwc](nwc.md) object specification. 
+When a plugin script is loaded, it is responsible for creating the necessary hooks into NWC. Currently, there are `play`, `draw`, and `width` hook types. These can be created and assigned to NWC `User` object types. Refer to the `sethook` and `addUserObjType` methods in the [nwc](nwc.md) object specification. 

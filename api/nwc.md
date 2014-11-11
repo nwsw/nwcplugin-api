@@ -29,6 +29,9 @@ This enables the creation of a new user object type. The UserObjectSpecTable sup
 - **spec** = 'Object_nwctxt'
 <br>The spec key should provide a string that depicts the user object as it should exist initially when added to a staff.
   
+- **width** = *Lua-function*
+<br>This is the `width` predraw hook function that can be used to increase the horizontal space allotted to a user object. This hook can only be set from here.
+  
 - **draw** = *Lua-function*
 <br>This is the userdraw hook function.
   

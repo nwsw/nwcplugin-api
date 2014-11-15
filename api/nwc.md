@@ -1,23 +1,28 @@
 # The `nwc` Object
 
-The `nwc` object provides setup and initialization methods for hooking into the *NoteWorthy Composer* system.
+The `nwc` object provides setup and initialization methods for hooking into the *NoteWorthy Composer* system. These include:
 
-[nwc.addUserObjType](](#addUserObjType)
-[nwc.debug](#debug)
-[nwc.hasTypeface](#hasTypeface)
-[nwc.memusage](#memusage)
-[nwc.sethook](#sethook)
-[nwc.VERSION](#VERSION)
+<table>
+<tr>
+<td><a href="#VERSION">VERSION</a></td>
+</tr><tr>
+<td><a href="#addUserObjType">addUserObjType</a></td>
+<td><a href="#debug">debug</a></td>
+<td><a href="#hasTypeface">hasTypeface</a></td>
+<td><a href="#memusage">memusage</a></td>
+<td><a href="#sethook">sethook</a></td>
+</tr>
+</table>
 
 ---------------------------------
-### VERSION
+<a name="VERSION"></a>
 **nwc.VERSION**
 
 This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well.
 
 
 ---------------------------------
-### sethook
+<a name="sethook"></a>
 **nwc.sethook**('HookType',...)
 
 This enables a script to hook into existing events or areas of NWC. Possible HookType values include:
@@ -30,7 +35,7 @@ This enables a script to hook into existing events or areas of NWC. Possible Hoo
 
 
 ---------------------------------
-### addUserObjType
+<a name="addUserObjType"></a>
 **nwc.addUserObjType**({UserObjectSpecTable})
   
 This enables the creation of a new user object type. The UserObjectSpecTable supports the following keys:
@@ -49,21 +54,21 @@ This enables the creation of a new user object type. The UserObjectSpecTable sup
 
 
 ---------------------------------
-### hasTypeface
+<a name="hasTypeface"></a>
 **nwc.hasTypeface**('font-typeface'), Returns Boolean
 
 This method can be used to identify if a particular font typeface is available on the system before trying to use it. For best performance, it is recommended that this action be done within the plugin startup code.
 
 
 ---------------------------------
-### memusage
+<a name="memusage"></a>
 **nwc.memusage**()
 
 Each editor window uses its own Lua machine. This returns how much memory (in KB) is used by the current window's Lua instance.
 
 
 ---------------------------------
-### debug
+<a name="debug"></a>
 **nwc.debug**('Message',...)
 
 This directs a message to the debug console.

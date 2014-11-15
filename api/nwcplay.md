@@ -2,15 +2,21 @@
 
 Methods from the `nwcplay` object can only be used while running within a *play hook* called by the NWC program. The following items are available from the `nwcplay` package:
 
-nwcplay.PPQ
-nwcplay.getBarLength
-nwcplay.getClef
-nwcplay.getNoteVelocity
-nwcplay.getTimeSig
-nwcplay.getTransposition
-nwcplay.locate
-nwcplay.midi
-nwcplay.note
+<table>
+<tr>
+<td><a href="#PPQ">PPQ</a></td>
+</tr><tr>
+<td><a href="#getBarLength">getBarLength</a></td>
+<td><a href="#getClef">getClef</a></td>
+<td><a href="#getNoteVelocity">getNoteVelocity</a></td>
+<td><a href="#getTimeSig">getTimeSig</a></td>
+<td><a href="#getTransposition">getTransposition</a></td>
+</tr><tr>
+<td><a href="#locate">locate</a></td>
+<td><a href="#midi">midi</a></td>
+<td><a href="#note">note</a></td>
+</tr>
+</table>
 
 
 ## About Play Song Position
@@ -23,42 +29,49 @@ The following are available from the `nwcplay` object:
 
 
 ------------------
+<a name="PPQ"></a>
 **nwcplay.PPQ**
 
 This is a constant that expresses the Pulses Per Quarter Note used when rendering the notation to MIDI.
 
 
 ------------------
+<a name="getClef"></a>
 **nwcplay.getClef**(), Returns 'ClefType'
 
 This returns the active clef at the current play back position.
 
 
 ------------------
+<a name="getTransposition"></a>
 **nwcplay.getTransposition**(), Returns #Semitones
 
 This returns the number of semitones of transposition that apply at the current play back position. This includes an octave offset specified by the clef.
 
 
 ------------------
+<a name="getTimeSig"></a>
 **nwcplay.getTimeSig**(), Returns #Numerator,#Denominator
 
 This returns the time signature at the current play back position.
 
 
 ------------------
+<a name="getBarLength"></a>
 **nwcplay.getBarLength**(), Returns #SongPulses
 
 This returns the total song pulses contained in the current measure/bar.
 
 
 ------------------
+<a name="getNoteVelocity"></a>
 **nwcplay.getNoteVelocity**(), Returns #Velocity
 
 This returns the default note velocity at the current play back position.
 
 
 ------------------
+<a name="locate"></a>
 **nwcplay.locate**('ObjType', ['UserType'], [Count])
 
 This function is used to locate the the play time offset to adjacent items in the current staff. It is generally used to get the song position of the next **item**, **note**, **bar**, or **user** object in the current staff. When locating a user object, you must specify the user object type. The Count is used to skip through multiple matching objects, and can be negative to locate behind the current object.
@@ -70,12 +83,14 @@ This function returns multiple values:
 
 
 ------------------
+<a name="note"></a>
 **nwcplay.note**(#offsetSPP,#durationPulses,#midiNoteNumber,[#velocity])
 
 This adds a note to the performance relative to the current time position of the user object. The channel and port are set by the current staff environment. The durationPulses and offsetSPP are restricted to an area near the current play back position. If the velocity is not specified, then the current velocity from the staff position is used.
 
 
 ------------------
+<a name="midi"></a>
 **nwcplay.midi**(#offsetSPP,'Command',#midiData1,[#midiData2])
 
 This adds a midi message into the performance relative to the current time position of the user object. The channel and port are set by the current staff environment.

@@ -2,51 +2,56 @@
 
 Each invocation of the `draw` and `play` hooks includes a `nwcuser` object for working with the current User item in the staff, and its surrounding items. It includes the following methods:
 
-[nwcuser.find](#find)
-[nwcuser.getNoteCount](#getNoteCount)
-[nwcuser.getNotePos](#getNotePos)
-[nwcuser.getObjType](#getObjType)
-[nwcuser.getUserProp](#getUserProp)
-[nwcuser.getUserType](#getUserType)
+<table>
+<tr>
+<td><a href="#find">find</a></td>
+<td><a href="#getNoteCount">getNoteCount</a></td>
+<td><a href="#getNotePos">getNotePos</a></td>
+<td><a href="#getObjType">getObjType</a></td>
+</tr><tr>
+<td><a href="#getUserProp">getUserProp</a></td>
+<td><a href="#getUserType">getUserType</a></td>
+</tr>
+</table>
 
 
 ---------------------------------
-### getObjType
+<a name="getObjType"></a>
 **nwcuser.getObjType**([#ItemIndexOffset]), Returns 'ObjType'
 
 This method returns the name of the object at the indicated ItemIndexOffset, with the default being the current user object.
 
 
 ---------------------------------
-### getUserType
+<a name="getUserType"></a>
 **nwcuser.getUserType**([#ItemIndexOffset]), Returns 'UserObjType'
 
 This method returns the type of the current User object, or another User object indicated by ItemIndexOffset. If the item at the designated offset index is not a User item, then Nil is returned.
 
 
 ---------------------------------
-### getUserProp
+<a name="getUserProp"></a>
 **nwcuser.getUserProp**([#ItemIndexOffset], 'PropertyLabel'), Returns 'PropertyValue'
 
 This returns the string value for any property that exists in the current user object, or another User object indicated by the optional ItemIndexOffset. If the item at the designated offset index is not a User item, or does not contain the requested property, then Nil is returned.
 
 
 ---------------------------------
-### getNoteCount
+<a name="getNoteCount"></a>
 **nwcuser.getNoteCount**(#ItemIndexOffset), Returns #NoteCount
 
 This returns the number of notes found at the position indicated by ItemIndexOffset.
 
 
 ---------------------------------
-### getNotePos
+<a name="getNotePos"></a>
 **nwcuser.getNotePos**(#ItemIndexOffset,#NoteNumber), Returns #NotePosition
 
 This returns the staff Y coordinate for the given NoteNumber at the position indicated by ItemIndexOffset. The NoteNumber must starts from 1, and will yield valid positions up through nwcuser.getNoteCount note numbers. This function returns Nil if there is no such note number.
 
 
 ---------------------------------
-### find
+<a name="find"></a>
 **nwcuser.find**('action',...,'What',...), Returns #ItemIndexOffset
 
 This method can be used to find other items on the same staff as the current user object. The following values are supported for the 'action' field:

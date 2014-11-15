@@ -2,14 +2,22 @@
 
 The `nwc` object provides setup and initialization methods for hooking into the *NoteWorthy Composer* system.
 
+[nwc.addUserObjType](](#addUserObjType)
+[nwc.debug](#debug)
+[nwc.hasTypeface](#hasTypeface)
+[nwc.memusage](#memusage)
+[nwc.sethook](#sethook)
+[nwc.VERSION](#VERSION)
 
 ---------------------------------
+### VERSION
 **nwc.VERSION**
 
 This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well.
 
 
 ---------------------------------
+### sethook
 **nwc.sethook**('HookType',...)
 
 This enables a script to hook into existing events or areas of NWC. Possible HookType values include:
@@ -22,6 +30,7 @@ This enables a script to hook into existing events or areas of NWC. Possible Hoo
 
 
 ---------------------------------
+### addUserObjType
 **nwc.addUserObjType**({UserObjectSpecTable})
   
 This enables the creation of a new user object type. The UserObjectSpecTable supports the following keys:
@@ -40,18 +49,21 @@ This enables the creation of a new user object type. The UserObjectSpecTable sup
 
 
 ---------------------------------
+### hasTypeface
 **nwc.hasTypeface**('font-typeface'), Returns Boolean
 
 This method can be used to identify if a particular font typeface is available on the system before trying to use it. For best performance, it is recommended that this action be done within the plugin startup code.
 
 
 ---------------------------------
+### memusage
 **nwc.memusage**()
 
 Each editor window uses its own Lua machine. This returns how much memory (in KB) is used by the current window's Lua instance.
 
 
 ---------------------------------
+### debug
 **nwc.debug**('Message',...)
 
 This directs a message to the debug console.

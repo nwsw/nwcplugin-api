@@ -1,6 +1,16 @@
 # The `nwcplay` Object
 
-Methods from the `nwcplay` object can only be used while running within a *play hook* called by the NWC program. The following methods are available from the `nwcplay` package:
+Methods from the `nwcplay` object can only be used while running within a *play hook* called by the NWC program. The following items are available from the `nwcplay` package:
+
+nwcplay.PPQ
+nwcplay.getBarLength
+nwcplay.getClef
+nwcplay.getNoteVelocity
+nwcplay.getTimeSig
+nwcplay.getTransposition
+nwcplay.locate
+nwcplay.midi
+nwcplay.note
 
 
 ## About Play Song Position

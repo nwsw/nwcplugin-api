@@ -162,7 +162,7 @@ local function freehandLine(x1,y1,x2,y2,driftmax)
 end
 
 ------------------------------------------------------------------------------------
-NewObjectSpec = '|User|test.printsig|Class:StaffSig'
+NewObjectSpec = '|User|test.printsig1|Class:StaffSig'
 ------------------------------------------------------------------------------------
 local function printsig_Draw()
 	local t = nwcuser.getUserProp("Text") or nwcuser.getUserProp("Class") or "text"
@@ -183,6 +183,21 @@ end
 
 nwc.addUserObjType({
 	spec	= NewObjectSpec,
+	width	= printsig_Width,
+	draw	= printsig_Draw,
+	})
+nwc.addUserObjType({
+	spec	= '|User|test.printsig2|Class:StaffSig',
+	width	= printsig_Width,
+	draw	= printsig_Draw,
+	})
+nwc.addUserObjType({
+	spec	= '|User|test.printsig3|Class:StaffSig',
+	width	= printsig_Width,
+	draw	= printsig_Draw,
+	})
+nwc.addUserObjType({
+	spec	= '|User|test.printsig4|Class:StaffSig',
 	width	= printsig_Width,
 	draw	= printsig_Draw,
 	})

@@ -1,5 +1,41 @@
 # The `nwcdraw` Object
-Methods from the `nwcdraw` package can only be used within a draw hook called by the NWC program. 
+Methods from the `nwcdraw` package can only be used within a `draw` or `width` hook, which are invoked by the NWC program.
+
+The following methods can be used from both the `draw` and `width` hooks:
+
+nwcdraw.getAspectRatio
+nwcdraw.getTarget
+nwcdraw.isDrawing
+nwcdraw.isAutoInsert
+nwcdraw.setFontClass
+nwcdraw.setFont
+nwcdraw.getTypeface
+nwcdraw.getFontSize
+nwcdraw.getFontStyle
+nwcdraw.setTypeface
+nwcdraw.setFontSize
+nwcdraw.setFontStyle
+nwcdraw.calcTextSize
+
+The remaining methods can only be used from the `draw` hook (when nwcdraw.isDrawing returns true):
+
+nwcdraw.alignText
+nwcdraw.bezier
+nwcdraw.curve
+nwcdraw.ellipse
+nwcdraw.hintline
+nwcdraw.locate
+nwcdraw.line
+nwcdraw.moveTo
+nwcdraw.rectangle
+nwcdraw.roundRect
+nwcdraw.setPen
+nwcdraw.setWhiteout
+nwcdraw.strokeText
+nwcdraw.text
+nwcdraw.beginPath
+nwcdraw.closeFigure
+nwcdraw.endPath
 
 
 ## About Drawing Coordinates

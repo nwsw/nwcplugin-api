@@ -43,8 +43,8 @@ The remaining methods can only be used from the `draw` hook (when nwcdraw.isDraw
 <td><a href="#setWhiteout">setWhiteout</a></td>
 <td><a href="#strokeText">strokeText</a></td>
 <td><a href="#text">text</a></td>
-<td><a href="#beginPath">beginPath</a></td>
 </tr><tr>
+<td><a href="#beginPath">beginPath</a></td>
 <td><a href="#closeFigure">closeFigure</a></td>
 <td><a href="#endPath">endPath</a></td>
 </tr>

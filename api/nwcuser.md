@@ -7,7 +7,11 @@ Each invocation of the `draw` and `play` hooks includes a `nwcuser` object for w
 <td><a href="#find">find</a></td>
 <td><a href="#getNoteCount">getNoteCount</a></td>
 <td><a href="#getNotePos">getNotePos</a></td>
+<td><a href="#getNotePitchPos">getNotePitchPos</a></td>
+</tr><tr>
 <td><a href="#getObjType">getObjType</a></td>
+<td><a href="#getPropTable">getPropTable</a></td>
+<td><a href="#getStaffPos">getStaffPos</a></td>
 </tr><tr>
 <td><a href="#getUserProp">getUserProp</a></td>
 <td><a href="#getUserType">getUserType</a></td>
@@ -21,6 +25,19 @@ Each invocation of the `draw` and `play` hooks includes a `nwcuser` object for w
 
 This method returns the name of the object at the indicated ItemIndexOffset, with the default being the current user object.
 
+
+------------------
+<a name="getStaffPos"></a>
+**nwcuser.getStaffPos**([#ItemIndexOffset]), returns Number
+
+This returns the staff position of the object at the indicated ItemIndexOffset. This works best with expression and user objects.
+
+
+---------------------------------
+<a name="getPropTable"></a>
+**nwcuser.getPropTable**([#ItemIndexOffset]), Returns PropertyTable
+
+This method returns a table containing the nwctxt properties for the object at the ItemIndexOffset, with the default being the current user object.
 
 ---------------------------------
 <a name="getUserType"></a>
@@ -48,6 +65,15 @@ This returns the number of notes found at the position indicated by ItemIndexOff
 **nwcuser.getNotePos**(#ItemIndexOffset,#NoteNumber), Returns #NotePosition
 
 This returns the staff Y coordinate for the given NoteNumber at the position indicated by ItemIndexOffset. The NoteNumber must starts from 1, and will yield valid positions up through nwcuser.getNoteCount note numbers. This function returns Nil if there is no such note number.
+
+
+---------------------------------
+<a name="getNotePitchPos"></a>
+**nwcuser.getNotePitchPos**(#ItemIndexOffset,#NoteNumber), Returns 'PitchPosText'
+
+This returns the PitchPos nwctxt for the given NoteNumber at the position indicated by ItemIndexOffset. The NoteNumber must starts from 1, and will yield valid positions up through nwcuser.getNoteCount note numbers. This function returns Nil if there is no such note number.
+
+Note that unlike the **getNotePos** function, the position information contained in the 'PitchPosText' is an absolute staff position, and would need to be normalized with a user object's current staff position when using it for drawing.
 
 
 ---------------------------------

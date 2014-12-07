@@ -64,11 +64,11 @@ This method can be used to identify if a particular font typeface is available o
 <a name="memusage"></a>
 **nwc.memusage**()
 
-Each editor window uses its own Lua machine. This returns how much memory (in KB) is used by the current window's Lua instance.
+This returns how much memory (in KB) is used by the Lua machine.
 
 
 ---------------------------------
 <a name="debug"></a>
 **nwc.debug**('Message',...)
 
-This directs a message to the debug console.
+This directs a message to the debug console. You can also use `print` to do the same thing.

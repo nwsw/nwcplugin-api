@@ -153,9 +153,9 @@ This method can be used to change the style of the current font used for text. T
 
 ------------------
 <a name="calcTextSize"></a>
-**nwcdraw.calcTextSize**('MsgString',['Font']), returns #Width,#Height
+**nwcdraw.calcTextSize**('MsgString'), returns #Width,#Height
 
-This method can be used to get the displayed size of text.  The font is the same nwctxt labels as used in the Font: field of Text Expressions.
+This method can be used to get the displayed size of text. 
 
 
 ------------------

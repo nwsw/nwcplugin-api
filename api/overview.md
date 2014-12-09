@@ -12,6 +12,7 @@ The following objects are available, depending on which hook is currently runnin
 
 - [nwcdraw](nwcdraw.md) 
 
+- [nwcDrawPos](nwcDrawPos.md) 
 
 ## Plugin Initialization
 

@@ -8,6 +8,8 @@ The following objects are available, depending on which hook is currently runnin
 
 - [nwcuser](nwcuser.md)
 
+- [nwcStaffItem](nwcStaffItem.md)
+
 - [nwcplay](nwcplay.md)
 
 - [nwcdraw](nwcdraw.md) 

@@ -5,18 +5,19 @@ The following methods can be used from both the `draw` and `width` hooks:
 
 <table>
 <tr>
+<td><a href="#bind">bind</a></td>
 <td><a href="#calcTextSize">calcTextSize</a></td>
 <td><a href="#getAspectRatio">getAspectRatio</a></td>
 <td><a href="#getFontSize">getFontSize</a></td>
 <td><a href="#getFontStyle">getFontStyle</a></td>
-<td><a href="#getTarget">getTarget</a></td>
 </tr><tr>
+<td><a href="#getTarget">getTarget</a></td>
 <td><a href="#getTypeface">getTypeface</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
 <td><a href="#isDrawing">isDrawing</a></td>
 <td><a href="#setFont">setFont</a></td>
-<td><a href="#setFontClass">setFontClass</a></td>
 </tr><tr>
+<td><a href="#setFontClass">setFontClass</a></td>
 <td><a href="#setFontSize">setFontSize</a></td>
 <td><a href="#setFontStyle">setFontStyle</a></td>
 <td><a href="#setTypeface">setTypeface</a></td>
@@ -78,6 +79,16 @@ This indicates the drawing target, which will be one of the following: **edit**,
 **nwcdraw.isDrawing**(), returns Boolean
 
 This indicates if the draw hook is currently active. When not active, the width predraw hook is being called and no physical drawing functions may legally be invoked.
+
+
+------------------
+<a name="bind"></a>
+**nwcdraw.bind**({RefObj},...)
+
+This binds one or more reference objects to the current user object's enviroment. The supported `{RefObj}` types are:
+
+- [ref.ntnptr](ref.ntnptr.md)
+- [ref.drawpos](ref.drawpos.md) 
 
 
 ------------------

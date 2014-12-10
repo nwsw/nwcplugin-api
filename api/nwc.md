@@ -10,6 +10,8 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 <td><a href="#debug">debug</a></td>
 <td><a href="#hasTypeface">hasTypeface</a></td>
 <td><a href="#memusage">memusage</a></td>
+</tr><tr>
+<td><a href="#newRef">newRef</a></td>
 <td><a href="#sethook">sethook</a></td>
 </tr>
 </table>
@@ -19,6 +21,21 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 **nwc.VERSION**
 
 This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well.
+
+
+---------------------------------
+<a name="newRef"></a>
+**nwc.newRef**('RefType'), Returns {RefObject}
+
+This creates a new reference object that can be used in an event hook to access existing NWC objects. 
+New reference objects must be created during plugin startup. 
+They cannot be created during event hook execution. Therefore, this method can only be used during plugin loading/initialization.
+
+The 'RefType' must be one of the following string values:
+
+ - '[ntnptr](ref.ntnptr.md)'
+
+ - '[drawpos](ref.drawpos.md)'
 
 
 ---------------------------------

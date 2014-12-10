@@ -36,6 +36,13 @@ This is a constant that expresses the Pulses Per Quarter Note used when renderin
 
 
 ------------------
+<a name="bind"></a>
+**nwcplay.bind**({RefObj},...)
+
+This binds one or more [ref.ntnptr](ref.ntnptr.md) objects to the current user object's enviroment.
+
+
+------------------
 <a name="getClef"></a>
 **nwcplay.getClef**(), Returns 'ClefType'
 

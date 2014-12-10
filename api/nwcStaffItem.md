@@ -32,10 +32,21 @@ New objects must be created during plugin startup. They cannot be created during
 
 ------------------
 <a name="init"></a>
-**{nwcStaffItem}:init**()
+**nwcStaffItem.init**({nwcStaffItem},...)
 
-This initializes a `nwcStaffItem` object with the current user object's enviroment. This must be done before other methods can be used.
+This initializes one or more `nwcStaffItem` objects with the current user object's enviroment. This must be done before other methods can be used.
 
+This must be done before its other methods can be used on the object. Multiple items
+can be initialized by passing them into the function, as shown in this excerpt:
+
+```Lua
+local item1 = nwcStaffItem.init()
+local item2 = nwcStaffItem.init()
+local item3 = nwcStaffItem.init()
+
+local function draw()
+	nwcStaffItem.init(item1,item2,item3)
+```
 
 ------------------
 <a name="goto"></a>

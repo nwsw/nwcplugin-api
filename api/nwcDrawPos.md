@@ -31,10 +31,19 @@ New objects must be created during plugin startup. They cannot be created during
 
 ------------------
 <a name="init"></a>
-**{nwcDrawPos}:init**()
+**{nwcDrawPos}:init**(...)
 
-This initializes a `nwcDrawPos` object with the current user object's enviroment. This must be done before its other methods can be used.
+This initializes one or more `nwcDrawPos` objects with the current user object's enviroment. This must be done before its other methods can be used on the object. Multiple draw positions 
+can be initialized by passing them into the function, as shown in this excerpt:
 
+```Lua
+local drawpos1 = nwcDrawPos.init()
+local drawpos2 = nwcDrawPos.init()
+local drawpos3 = nwcDrawPos.init()
+
+local function draw()
+	nwcDrawPos.init(drawpos1,drawpos2,drawpos3)
+```
 
 ------------------
 <a name="locate"></a>

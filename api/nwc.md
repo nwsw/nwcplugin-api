@@ -28,8 +28,8 @@ This is a constant that indicates the current version of nwctxt when written to 
 **nwc.newRef**('RefType'), Returns {RefObject}
 
 This creates a new reference object that can be used in an event hook to access existing NWC objects. 
-New reference objects must be created during plugin startup. 
-They cannot be created during event hook execution. Therefore, this method can only be used during plugin loading/initialization.
+New reference objects must be created during plugin startup. They cannot be created during event hook
+execution.
 
 The 'RefType' must be one of the following string values:
 

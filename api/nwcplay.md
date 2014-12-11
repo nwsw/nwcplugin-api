@@ -40,15 +40,7 @@ This is a constant that expresses the Pulses Per Quarter Note used when renderin
 <a name="user"></a>
 **nwcplay.user**
 
-This is a [ref.ntnptr](ref.ntnptr.md) bound to the current user object. It can be used in the `play` hook without using the `bind` method.
-You can also use `bind` to reset its reference back to the current user object.
-
-
-------------------
-<a name="bind"></a>
-**nwcplay.bind**({RefObj},...)
-
-This binds one or more [ref.ntnptr](ref.ntnptr.md) objects to the current user object's enviroment.
+This is a [ntnptr](ref.ntnptr.md) reference, initially bound to the current user object.
 
 
 ------------------

@@ -8,7 +8,6 @@ The following can be used from both the `draw` and `width` hooks:
 <td><a href="#user">user</a></td>
 <td><a href="#userpos">userpos</a></td>
 </tr><tr>
-<td><a href="#bind">bind</a></td>
 <td><a href="#calcTextSize">calcTextSize</a></td>
 <td><a href="#getAspectRatio">getAspectRatio</a></td>
 <td><a href="#getFontSize">getFontSize</a></td>
@@ -67,16 +66,14 @@ The following methods are available from the `nwcdraw` package:
 <a name="user"></a>
 **nwcdraw.user**
 
-This is a [ref.ntnptr](ref.ntnptr.md) bound to the current user object. It can be used in nwcdraw hooks without using the `bind` method.
-You can also use `bind` to reset its reference back to the current user object.
+This is a [ntnptr](ref.ntnptr.md) reference, initially bound to the current user object.
 
 
 ------------------
 <a name="userpos"></a>
 **nwcdraw.userpos**
 
-This is a [ref.drawpos](ref.drawpos.md) bound to the current user object. It can be used in nwcdraw hooks without using the `bind` method.
-You can also use `bind` to reset its reference back to the current user object's drawing position.
+This is a [drawpos](ref.drawpos.md) reference, initially bound to the current user object.
 
 
 ------------------
@@ -98,16 +95,6 @@ This indicates the drawing target, which will be one of the following: **edit**,
 **nwcdraw.isDrawing**(), returns Boolean
 
 This indicates if the draw hook is currently active. When not active, the width predraw hook is being called and no physical drawing functions may legally be invoked.
-
-
-------------------
-<a name="bind"></a>
-**nwcdraw.bind**({RefObj},...)
-
-This binds one or more reference objects to the current user object's enviroment. The supported `{RefObj}` types are:
-
-- [ref.ntnptr](ref.ntnptr.md)
-- [ref.drawpos](ref.drawpos.md) 
 
 
 ------------------

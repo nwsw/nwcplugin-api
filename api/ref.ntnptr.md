@@ -1,7 +1,6 @@
 # `ntnptr` References
-This object type enables reference access to the notation items found within a staff. A `ntnptr` object must be declared during plugin startup intialization before it can be used in a hook function.
-This is done using the `nwc.newRef` method. Usually, each `ntnptr` object must then be intialized in every hook event function using the appropriate `bind` function to synchronize it with the currently 
-active event hook.
+This object type enables reference access to the notation items found within a staff. A `ntnptr` object must be declared during plugin startup initialization before it can be used in a hook function.
+This is done using the `nwc.newRef` method.
 
 The following methods are provided by the `ntnptr` object:
 
@@ -11,10 +10,12 @@ The following methods are provided by the `ntnptr` object:
 <td><a href="#locate">goto</a></td>
 <td><a href="#noteCount">noteCount</a></td>
 <td><a href="#notePos">notePos</a></td>
-<td><a href="#notePitchPos">notePitchPos</a></td>
 </tr><tr>
+<td><a href="#notePitchPos">notePitchPos</a></td>
 <td><a href="#objType">objType</a></td>
 <td><a href="#propTable">propTable</a></td>
+<td><a href="#reset">reset</a></td>
+</tr><tr>
 <td><a href="#staffPos">staffPos</a></td>
 <td><a href="#userProp">userProp</a></td>
 <td><a href="#userType">userType</a></td>
@@ -27,12 +28,19 @@ The following methods are provided by the `ntnptr` object:
 The following methods are available from `ntnptr`:
 
 ------------------
+<a name="reset"></a>
+**{ntnptr}:reset**()
+
+This sets a `ntnptr` reference back to the current user object.
+
+
+------------------
 <a name="goto"></a>
 **{ntnptr}:goto**(Reference)
 
 This initializes a `ntnptr` object with the staff item indicated by the `Reference` paramater.
 
-The `Reference` paramater can be a `ref.drawpos` object, or an offset index from the current user object.
+The `Reference` paramater can be a [drawpos](ref.drawpos.md) object, or an offset index from the current user object.
 
 
 ---------------------------------
@@ -53,68 +61,59 @@ This returns the staff position of the object. This works best with expression a
 <a name="propTable"></a>
 **{ntnptr}:propTable**(), Returns PropertyTable
 
-This method returns a table containing the nwctxt properties for the object at the ItemIndexOffset, with the default being the current user object.
+This method returns a table containing the nwctxt properties for the object.
 
 ---------------------------------
 <a name="userType"></a>
 **{ntnptr}:userType**(), Returns 'UserObjType'
 
-This method returns the type of the current User object, or another User object indicated by ItemIndexOffset. If the item at the designated offset index is not a User item, then Nil is returned.
+This method returns the type of the current User object. If the item is not a User item, then Nil is returned.
 
 
 ---------------------------------
 <a name="userProp"></a>
 **{ntnptr}:userProp**('PropertyLabel'), Returns 'PropertyValue'
 
-This returns the string value for any property that exists in the current user object, or another User object indicated by the optional ItemIndexOffset. If the item at the designated offset index is not a User item, or does not contain the requested property, then Nil is returned.
+This returns the string value for any property that exists in the current user object, or Nil if this is not a User object.
 
 
 ---------------------------------
 <a name="noteCount"></a>
 **{ntnptr}:noteCount**(), Returns #NoteCount
 
-This returns the number of notes found at the position indicated by ItemIndexOffset.
+This returns the number of notes found in the object.
 
 
 ---------------------------------
 <a name="notePos"></a>
 **{ntnptr}:notePos**(#NoteNumber), Returns #NotePosition
 
-This returns the staff Y coordinate for the given NoteNumber at the position indicated by ItemIndexOffset. The NoteNumber must starts from 1, and will yield valid positions up through `{ntnptr}:noteCount` note numbers. This function returns Nil if there is no such note number.
+This returns the staff Y coordinate for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnptr}:noteCount()` note numbers. This function returns Nil if there is no such note number.
 
 
 ---------------------------------
 <a name="notePitchPos"></a>
 **{ntnptr}:notePitchPos**(#NoteNumber), Returns 'PitchPosText'
 
-This returns the PitchPos nwctxt for the given NoteNumber at the position indicated by ItemIndexOffset. The NoteNumber must starts from 1, and will yield valid positions up through ntnptr}:noteCount note numbers. This function returns Nil if there is no such note number.
+This returns the PitchPos nwctxt for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnptr}:noteCount()`. This function returns Nil if there is no such note number.
 
-Note that unlike the **getNotePos** function, the position information contained in the 'PitchPosText' is an absolute staff position, and would need to be normalized with a user object's current staff position when using it for drawing.
+Note that unlike the **notePos** function, the position information contained in the 'PitchPosText' is an absolute staff position, and would need to be normalized with a user object's current staff position when using it for drawing.
 
 
 ---------------------------------
 <a name="find"></a>
-**{ntnptr}:find**('action',...,'What',...), Returns Boolean
+**{ntnptr}:find**('action','What',...), Returns Boolean
 
-This method can be used to find other items on the same staff as the current user object. The following values are supported for the 'action' field:
+This method can be used to find other items on the same staff as the current object. The following values are supported for the 'action' field:
 
  - **next**
-   <br>Finds the next match to the right of the current user object.
-   
+   <br>Finds the next match to the right of the current object.
  - **prior**
-   <br>Finds the prior match to the left of the current user object.
-   
+   <br>Finds the prior match to the left of the current object.
  - **first**
    <br>Finds the first match from the start of the staff.
-   
  - **last**
    <br>Finds the last match from the end of the staff.
-   
- - **before**, #ItemIndexOffset
-   <br>Finds the prior match to the left of the specified ItemIndexOffset.
-
- - **after**, #ItemIndexOffset
-   <br>Finds the next match to the right of the specified ItemIndexOffset.
 
 The following values are supported for the 'What' field:
 
@@ -128,7 +127,7 @@ The following values are supported for the 'What' field:
    <br>This matches any items that contain one or more notes.
    
  - **noteOrRest**
-   <br>This matches any note or rest item, including grace notes and rests.
+   <br>This matches any note or rest item, including grace notes.
    
  - **bar**
    <br>This matches any bar line.

@@ -1,15 +1,15 @@
 # `drawpos` References
 This object enables reference access to different drawing positions on a visible staff. A `drawpos` object must be declared during plugin startup intialization before it can be used in a `draw` hook. 
-This is done using the `nwc.newRef` method. Usually, each `drawpos` object must then be intialized in the `draw` event hook using the `nwcdraw.bind` function to synchronize it with the current 
-user  object's environment.
+This is done using the `nwc.newRef` method.
 
 The following methods are provided by the `drawpos` object:
 
 <table>
 <tr>
+<td><a href="#isAutoInsert">isAutoInsert</a></td>
 <td><a href="#locate">locate</a></td>
 </tr><tr>
-<td><a href="#isAutoInsert">isAutoInsert</a></td>
+<td><a href="#reset">reset</a></td>
 </tr>
 </table>
 
@@ -17,6 +17,13 @@ The following methods are provided by the `drawpos` object:
 ## Available Methods
 
 The following methods are available from `drawpos`:
+
+------------------
+<a name="reset"></a>
+**{drawpos}:reset**()
+
+This sets a `drawpos` reference back to the current user object.
+
 
 ------------------
 <a name="locate"></a>

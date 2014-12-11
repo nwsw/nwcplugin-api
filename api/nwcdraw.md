@@ -1,10 +1,13 @@
 # The `nwcdraw` Object
 Methods from the `nwcdraw` package can only be used within a `draw` or `width` hook, which are invoked by the NWC program.
 
-The following methods can be used from both the `draw` and `width` hooks:
+The following can be used from both the `draw` and `width` hooks:
 
 <table>
 <tr>
+<td><a href="#user">user</a></td>
+<td><a href="#userpos">userpos</a></td>
+</tr><tr>
 <td><a href="#bind">bind</a></td>
 <td><a href="#calcTextSize">calcTextSize</a></td>
 <td><a href="#getAspectRatio">getAspectRatio</a></td>
@@ -59,6 +62,22 @@ The draw hook has a two dimensional, floating point, coordinate system relative 
 ## Available Methods
 
 The following methods are available from the `nwcdraw` package:
+
+------------------
+<a name="user"></a>
+**nwcdraw.user**
+
+This is a [ref.ntnptr](ref.ntnptr.md) bound to the current user object. It can be used in nwcdraw hooks without using the `bind` method.
+You can also use `bind` to reset its reference back to the current user object.
+
+
+------------------
+<a name="userpos"></a>
+**nwcdraw.userpos**
+
+This is a [ref.drawpos](ref.drawpos.md) bound to the current user object. It can be used in nwcdraw hooks without using the `bind` method.
+You can also use `bind` to reset its reference back to the current user object's drawing position.
+
 
 ------------------
 <a name="getAspectRatio"></a>

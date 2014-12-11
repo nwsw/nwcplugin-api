@@ -6,8 +6,6 @@ The following modules are available, depending on which hook is currently runnin
 
 - [nwc](nwc.md)
 
-- [nwcuser](nwcuser.md)
-
 - [nwcplay](nwcplay.md)
 
 - [nwcdraw](nwcdraw.md) 
@@ -16,7 +14,7 @@ The following reference objects are available for use:
 
 - [ref.ntnptr](ref.ntnptr.md)
 
-- [ref.drawpos](ref.drawpos.md) 
+- [ref.drawpos](ref.drawpos.md)
 
 
 ## Plugin Initialization

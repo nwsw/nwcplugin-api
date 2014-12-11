@@ -28,13 +28,13 @@ This is a constant that indicates the current version of nwctxt when written to 
 **nwc.newRef**('RefType'), Returns {RefObject}
 
 This creates a new reference object that can be used in an event hook to access existing NWC objects. 
-New reference objects must be created during plugin startup. They cannot be created during event hook
-execution.
+New reference objects must be created during plugin startup, and are reset each time they are used for the
+first time in an event hook function. References cannot be created during event hook execution, and their
+state is not maintained across event hook instances.
 
 The 'RefType' must be one of the following string values:
 
  - '[ntnptr](ref.ntnptr.md)'
-
  - '[drawpos](ref.drawpos.md)'
 
 

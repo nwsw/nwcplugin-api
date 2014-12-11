@@ -38,7 +38,7 @@ This sets a `ntnptr` reference back to the current user object.
 <a name="goto"></a>
 **{ntnptr}:goto**(Reference)
 
-This initializes a `ntnptr` object with the staff item indicated by the `Reference` paramater.
+This updates `ntnptr` to a new reference item.
 
 The `Reference` paramater can be a [drawpos](ref.drawpos.md) object, or an offset index from the current user object.
 

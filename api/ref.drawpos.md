@@ -6,7 +6,7 @@ The following methods are provided by the `drawpos` object:
 
 <table>
 <tr>
-<td><a href="#find">find</a></td>
+<td><a href="#gotoRef">gotoRef</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
 </tr><tr>
 <td><a href="#reset">reset</a></td>
@@ -26,8 +26,8 @@ This sets a `drawpos` reference back to the current user object.
 
 
 ------------------
-<a name="goto"></a>
-**{drawpos}:goto**({ntnptr}), returns Boolean
+<a name="gotoRef"></a>
+**{drawpos}:gotoRef**({ntnptr}), returns Boolean
 
 This moves a `drawpos` object to reference the drawing position for [ntnptr](ref.ntnptr.md), if it can be found. If the operation succeeds, the function will return true and
 the `drawpos` will reference the mew position. If `ntnptr` could not be found in the current drawing system, then the function returns false

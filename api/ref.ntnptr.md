@@ -7,7 +7,7 @@ The following methods are provided by the `ntnptr` object:
 <table>
 <tr>
 <td><a href="#find">find</a></td>
-<td><a href="#locate">goto</a></td>
+<td><a href="#gotoPos">gotoPos</a></td>
 <td><a href="#noteCount">noteCount</a></td>
 <td><a href="#notePos">notePos</a></td>
 </tr><tr>
@@ -35,8 +35,8 @@ This sets a `ntnptr` reference back to the current user object.
 
 
 ------------------
-<a name="goto"></a>
-**{ntnptr}:goto**(Reference)
+<a name="gotoPos"></a>
+**{ntnptr}:gotoPos**(Reference)
 
 This updates `ntnptr` to a new reference item.
 

@@ -8,30 +8,32 @@
 -- NewObjectSpec variable. You can search for this variable name to find each
 -- new object definition in the file below.
 local NewObjectSpec = '|User|...'
-
 local DefaultChordFontFace = nwc.hasTypeface("MusikChordSerif") and "MusikChordSerif" or "Arial"
 local DefaultChordFontSize = (DefaultChordFontFace == "MusikChordSerif") and 8 or 5
+local userObj = nwcdraw.user
+local nextNote = nwc.newRef("ntnptr")
+local nextNotePos = nwc.newRef("drawpos")
+local firstUser = nwc.newRef("ntnptr")
 
 local function setPenOpts(defStyle)
-	local penstyle = nwcuser.getUserProp("Pen") or (defStyle or "solid")
-	local penwidth = tonumber(nwcuser.getUserProp("Thickness:")) or 175
+	local penstyle = userObj:userProp("Pen") or (defStyle or "solid")
+	local penwidth = tonumber(userObj:userProp("Thickness:")) or 175
 	nwcdraw.setPen(penstyle, penwidth)
 end
 
 local function getSpan(defaultSpan)
 	defaultSpan = defaultSpan or 2
-	return tonumber(nwcuser.getUserProp("Span:") or defaultSpan)
+	return tonumber(userObj:userProp("Span:") or defaultSpan)
 end
 
 local function getFont(defaultFont)
 	defaultFont = defaultFont or "StaffItalic"
 
-	local useFont = nwcuser.getUserProp("Font:") 
+	local useFont = userObj:userProp("Font:") 
 
 	if not useFont then
-		local firstOfObj = nwcuser.find("first","user",nwcuser.getUserType())
-		if firstOfObj then
-			useFont = nwcuser.getUserProp(firstOfObj,"Font:") 
+		if firstUser:find("first","user",userObj:userType()) then
+			useFont = firstUser:userProp(firstOfObj,"Font:") 
 		end
 	end
 
@@ -42,16 +44,16 @@ local function getFont(defaultFont)
 	return useFont or defaultFont
 end
 
-local function allNotePos(itemOffset)
+local function allNotePos(noteobj)
 	local noteNum = 0
 	return function()
 		noteNum = noteNum+1
-		return nwcuser.getNotePos(itemOffset,noteNum)
+		return noteobj:notePos(noteNum)
 	end
 end
 
 local function getUserPoint(propName)
-	local userpt = nwcuser.getUserProp(propName) or "0,0"
+	local userpt = userObj:userProp(propName) or "0,0"
 	local x = tonumber(userpt:match("([%.%d]+),")) or 0
 	local y = tonumber(userpt:match(",([%.%-%d]+)")) or 0
 	return x,y
@@ -165,7 +167,7 @@ end
 NewObjectSpec = '|User|test.printsig1|Class:StaffSig'
 ------------------------------------------------------------------------------------
 local function printsig_Draw()
-	local t = nwcuser.getUserProp("Text") or nwcuser.getUserProp("Class") or "text"
+	local t = userObj:userProp("Text") or userObj:userProp("Class") or "text"
 	nwcdraw.setFontClass(getFont())
 	local w = nwcdraw.calcTextSize(t)
 
@@ -213,13 +215,13 @@ local function draw_test_boxtext()
 		return (x*math.cos(r) - y*math.sin(r)),((x*math.sin(r) + y*math.cos(r))*xyar)
 	end
 
-	local skipBox = nwcuser.getUserProp("Thickness:") == "0"
-	local angle = tonumber(nwcuser.getUserProp("Angle:")) or 0
+	local skipBox = userObj:userProp("Thickness:") == "0"
+	local angle = tonumber(userObj:userProp("Angle:")) or 0
 	nwcdraw.alignText("top","left")
-	nwcdraw.setTypeface(nwcuser.getUserProp("Typeface:") or "Arial")
-	nwcdraw.setFontSize(nwcuser.getUserProp("Size:"))
+	nwcdraw.setTypeface(userObj:userProp("Typeface:") or "Arial")
+	nwcdraw.setFontSize(userObj:userProp("Size:"))
 
-	local t = nwcuser.getUserProp("Text:")
+	local t = userObj:userProp("Text:")
 	local w,h = nwcdraw.calcTextSize(t)
 
 	setPenOpts()
@@ -238,7 +240,7 @@ local function draw_test_boxtext()
 	end
 
 	nwcdraw.moveTo(0,0)
-	if string.lower(nwcuser.getUserProp("Mode:") or "fill") == "stroke" then
+	if string.lower(userObj:userProp("Mode:") or "fill") == "stroke" then
 		nwcdraw.strokeText(t,angle)
 	else
 		nwcdraw.text(t,angle)
@@ -254,11 +256,18 @@ nwc.addUserObjType({
 NewObjectSpec = '|User|test.notelines'
 ------------------------------------------------------------------------------------
 local function draw_test_notelines()
-	local nextNote = nwcuser.find("next","note")
-	if not nextNote then return end
-
 	setPenOpts()
-	local xpos = nwcdraw.locate("item",nextNote)
+
+	nextNote:reset()
+	if not nextNote:find("next","note") then return end
+	if not nextNotePos:gotoRef(nextNote) then return end
+	local xpos,ypos = nextNotePos:xyAnchor()
+	--local xpos,ypos = nwc.addPairs(nextNotePos:xyAnchor(),-1,0)
+	print("XY:",nextNotePos:xyAnchor(),nextNotePos:xyAnchor())
+	print("XY+:",nextNotePos:xyAnchor(),9,8)
+	--print("pairs:",nwc.addPairs(nextNotePos:xyAnchor(),-1,0))
+	--print("test:",nwc.addPairs(4,2,4,-1))
+
 
 	for np in allNotePos(nextNote) do
 		nwcdraw.moveTo(0,0)
@@ -280,7 +289,7 @@ local function draw_test_freehand()
 
 	if (x2 == x1) and (y2 == y1) then return end
 
-	local drift = tonumber(nwcuser.getUserProp("drift")) or 0.25
+	local drift = tonumber(userObj:userProp("drift")) or 0.25
 	setPenOpts()
 	nwcdraw.setPen("solid",300)
 
@@ -366,13 +375,13 @@ nwc.addUserObjType({
 NewObjectSpec = '|User|test.slur|Span:[#1-32]2|Dir:[@SlurDirection]Upward|Pen:[@PenStyle]dash|Thickness:[#1-500]240|Arcpt:[@Coordinate]0.35,3|EndOffset:[@Coordinate]-0.3,2.0'
 ------------------------------------------------------------------------------------
 local function draw_testSlur()
-	local direction = nwcuser.getUserProp("Dir") or "Upward"
+	local direction = userObj:userProp("Dir") or "Upward"
 	local span = getSpan()
-	local arcpt = nwcuser.getUserProp("Arcpt") or "0.5,0"
+	local arcpt = userObj:userProp("Arcpt") or "0.5,0"
 	local arcpt_x = tonumber(arcpt:match("([%.%d]+),"))
 	local arcpt_Y = tonumber(arcpt:match(",([%.%-%d]+)"))
 	local x_dest,staffposTop,staffposBtm,objtype = nwcdraw.locate("note",span)
-	local endoffset = nwcuser.getUserProp("EndOffset")
+	local endoffset = userObj:userProp("EndOffset")
 	local target_y = staffposTop
 	
 	if (direction == "Downward") then target_y = staffposBtm end
@@ -449,7 +458,7 @@ local function getNoteBaseAndChordList(fullname)
 end
 
 local function draw_testChordFun()
-	local fullname = nwcuser.getUserProp("Name:")
+	local fullname = userObj:userProp("Name:")
 	local n,k = getNoteBaseAndChordList(fullname)
 	if not k then
 		fullname = "??"
@@ -467,7 +476,7 @@ local function draw_testChordFun()
 end
 
 local function play_testChordFun()
-	local fullname = nwcuser.getUserProp("Name:")
+	local fullname = userObj:userProp("Name:")
 	local n,k = getNoteBaseAndChordList(fullname)
 	if not k then return end
 	local span = getSpan(1)

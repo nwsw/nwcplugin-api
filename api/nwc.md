@@ -7,10 +7,14 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 <td><a href="#VERSION">VERSION</a></td>
 </tr><tr>
 <td><a href="#addUserObjType">addUserObjType</a></td>
-<td><a href="#debug">debug</a></td>
 <td><a href="#hasTypeface">hasTypeface</a></td>
-<td><a href="#memusage">memusage</a></td>
+<td><a href="#newRef">newRef</a></td>
 <td><a href="#sethook">sethook</a></td>
+</tr><tr>
+<td><a href="#churnCount">churnCount</a></td>
+<td><a href="#churnRate">churnRate</a></td>
+<td><a href="#debug">debug</a></td>
+<td><a href="#memusage">memusage</a></td>
 </tr>
 </table>
 
@@ -19,6 +23,21 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 **nwc.VERSION**
 
 This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well.
+
+
+---------------------------------
+<a name="newRef"></a>
+**nwc.newRef**('RefType'), Returns {RefObject}
+
+This creates a new reference object that can be used in an event hook to access existing NWC objects. 
+New reference objects must be created during plugin startup, and are reset each time they are used for the
+first time in an event hook function. References cannot be created during event hook execution, and their
+state is not maintained across event hook instances.
+
+The 'RefType' must be one of the following string values:
+
+ - '[ntnptr](ref.ntnptr.md)'
+ - '[drawpos](ref.drawpos.md)'
 
 
 ---------------------------------
@@ -62,9 +81,27 @@ This method can be used to identify if a particular font typeface is available o
 
 ---------------------------------
 <a name="memusage"></a>
-**nwc.memusage**()
+**nwc.memusage**(), Returns Integer
 
 This returns how much memory (in KB) is used by the Lua machine.
+
+
+---------------------------------
+<a name="churnCount"></a>
+**nwc.churnCount**(), Returns Integer
+
+This returns the count of new memory requests since the plugin engine was started.
+
+Note that printing or displaying this number will often generate memory churn when the number is converted to a string.
+
+
+---------------------------------
+<a name="churnRate"></a>
+**nwc.churnRate**(), Returns Number
+
+This returns a ratio of memory requests versus  plugin hook calls. Lower numbers are better.
+
+Note that printing or displaying this result will often generate memory churn when the number is converted to a string.
 
 
 ---------------------------------

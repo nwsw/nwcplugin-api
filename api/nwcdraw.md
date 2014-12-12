@@ -1,22 +1,25 @@
 # The `nwcdraw` Object
 Methods from the `nwcdraw` package can only be used within a `draw` or `width` hook, which are invoked by the NWC program.
 
-The following methods can be used from both the `draw` and `width` hooks:
+The following can be used from both the `draw` and `width` hooks:
 
 <table>
 <tr>
+<td><a href="#user">user</a></td>
+<td><a href="#userpos">userpos</a></td>
+</tr><tr>
 <td><a href="#calcTextSize">calcTextSize</a></td>
 <td><a href="#getAspectRatio">getAspectRatio</a></td>
 <td><a href="#getFontSize">getFontSize</a></td>
 <td><a href="#getFontStyle">getFontStyle</a></td>
-<td><a href="#getTarget">getTarget</a></td>
 </tr><tr>
+<td><a href="#getTarget">getTarget</a></td>
 <td><a href="#getTypeface">getTypeface</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
 <td><a href="#isDrawing">isDrawing</a></td>
 <td><a href="#setFont">setFont</a></td>
-<td><a href="#setFontClass">setFontClass</a></td>
 </tr><tr>
+<td><a href="#setFontClass">setFontClass</a></td>
 <td><a href="#setFontSize">setFontSize</a></td>
 <td><a href="#setFontStyle">setFontStyle</a></td>
 <td><a href="#setTypeface">setTypeface</a></td>
@@ -58,6 +61,20 @@ The draw hook has a two dimensional, floating point, coordinate system relative 
 ## Available Methods
 
 The following methods are available from the `nwcdraw` package:
+
+------------------
+<a name="user"></a>
+**nwcdraw.user**
+
+This is a [ntnptr](ref.ntnptr.md) reference, initially bound to the current user object.
+
+
+------------------
+<a name="userpos"></a>
+**nwcdraw.userpos**
+
+This is a [drawpos](ref.drawpos.md) reference, initially bound to the current user object.
+
 
 ------------------
 <a name="getAspectRatio"></a>

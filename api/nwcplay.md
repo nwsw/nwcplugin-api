@@ -5,6 +5,7 @@ Methods from the `nwcplay` object can only be used while running within a *play 
 <table>
 <tr>
 <td><a href="#PPQ">PPQ</a></td>
+<td><a href="#user">user</a></td>
 </tr><tr>
 <td><a href="#getBarLength">getBarLength</a></td>
 <td><a href="#getClef">getClef</a></td>
@@ -33,6 +34,13 @@ The following are available from the `nwcplay` object:
 **nwcplay.PPQ**
 
 This is a constant that expresses the Pulses Per Quarter Note used when rendering the notation to MIDI.
+
+
+------------------
+<a name="user"></a>
+**nwcplay.user**
+
+This is a [ntnptr](ref.ntnptr.md) reference, initially bound to the current user object.
 
 
 ------------------

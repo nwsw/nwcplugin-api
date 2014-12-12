@@ -8,8 +8,9 @@ The following methods are provided by the `drawpos` object:
 <tr>
 <td><a href="#gotoRef">gotoRef</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
-</tr><tr>
 <td><a href="#reset">reset</a></td>
+</tr><tr>
+<td><a href="#xyAnchor">xyAnchor</a></td>
 </tr>
 </table>
 
@@ -40,4 +41,11 @@ and the `drawpos` object is unchanged.
 
 This indicates if the current `drawpos` object has been automatically inserted into the current printed system. This will only be true when the drawing target is **print** and the
 `drawpos` reflects some kind of signature data that has been automatically inserted into the printed system.
+
+
+------------------
+<a name="xyAnchor"></a>
+**{drawpos}:xyAnchor**(), returns #X,#Y
+
+This returns the anchoring coordinate for the object at `{drawpos}`.
 

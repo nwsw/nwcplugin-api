@@ -8,14 +8,15 @@ The following methods are provided by the `ntnptr` object:
 <tr>
 <td><a href="#find">find</a></td>
 <td><a href="#gotoPos">gotoPos</a></td>
+<td><a href="#indexOffset">indexOffset</a></td>
 <td><a href="#noteCount">noteCount</a></td>
-<td><a href="#notePos">notePos</a></td>
 </tr><tr>
+<td><a href="#notePos">notePos</a></td>
 <td><a href="#notePitchPos">notePitchPos</a></td>
 <td><a href="#objType">objType</a></td>
 <td><a href="#propTable">propTable</a></td>
-<td><a href="#reset">reset</a></td>
 </tr><tr>
+<td><a href="#reset">reset</a></td>
 <td><a href="#staffPos">staffPos</a></td>
 <td><a href="#userProp">userProp</a></td>
 <td><a href="#userType">userType</a></td>
@@ -41,6 +42,13 @@ This sets a `ntnptr` reference back to the current user object.
 This updates `ntnptr` to a new reference item.
 
 The `Reference` paramater can be a [drawpos](ref.drawpos.md) object, or an offset index from the current user object.
+
+
+------------------
+<a name="indexOffset"></a>
+**{ntnptr}:indexOffset**(), Returns IntegerOffset
+
+This returns the offset index from the current user object.
 
 
 ---------------------------------

@@ -11,6 +11,7 @@ The following methods are provided by the `drawpos` object:
 <td><a href="#reset">reset</a></td>
 </tr><tr>
 <td><a href="#xyAnchor">xyAnchor</a></td>
+<td><a href="#xyTimeslot">xyTimeslot</a></td>
 </tr>
 </table>
 
@@ -48,4 +49,11 @@ This indicates if the current `drawpos` object has been automatically inserted i
 **{drawpos}:xyAnchor**(), returns #X,#Y
 
 This returns the anchoring coordinate for the object at `{drawpos}`.
+
+
+------------------
+<a name="xyTimeslot"></a>
+**{drawpos}:xyTimeslot**(), returns #X,#Y
+
+This returns the anchoring timeslot coordinate for the note or rest located at `{drawpos}`.
 

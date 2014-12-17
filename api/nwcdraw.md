@@ -6,7 +6,6 @@ The following can be used from both the `draw` and `width` hooks:
 <table>
 <tr>
 <td><a href="#user">user</a></td>
-<td><a href="#userpos">userpos</a></td>
 </tr><tr>
 <td><a href="#calcTextSize">calcTextSize</a></td>
 <td><a href="#getAspectRatio">getAspectRatio</a></td>
@@ -65,13 +64,6 @@ The following methods are available from the `nwcdraw` package:
 ------------------
 <a name="user"></a>
 **nwcdraw.user**
-
-This is a [ntnptr](ref.ntnptr.md) reference, initially bound to the current user object.
-
-
-------------------
-<a name="userpos"></a>
-**nwcdraw.userpos**
 
 This is a [drawpos](ref.drawpos.md) reference, initially bound to the current user object.
 

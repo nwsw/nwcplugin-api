@@ -6,12 +6,23 @@ The following methods are provided by the `drawpos` object:
 
 <table>
 <tr>
-<td><a href="#gotoRef">gotoRef</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
 <td><a href="#reset">reset</a></td>
 </tr><tr>
 <td><a href="#xyAnchor">xyAnchor</a></td>
 <td><a href="#xyTimeslot">xyTimeslot</a></td>
+</tr><tr>
+<td><a href="ref.ntnptr.md#find">find</a></td>
+<td><a href="ref.ntnptr.md#indexOffset">indexOffset</a></td>
+<td><a href="ref.ntnptr.md#noteCount">noteCount</a></td>
+<td><a href="ref.ntnptr.md#notePos">notePos</a></td>
+<td><a href="ref.ntnptr.md#notePitchPos">notePitchPos</a></td>
+</tr><tr>
+<td><a href="ref.ntnptr.md#objType">objType</a></td>
+<td><a href="ref.ntnptr.md#propTable">propTable</a></td>
+<td><a href="ref.ntnptr.md#staffPos">staffPos</a></td>
+<td><a href="ref.ntnptr.md#userProp">userProp</a></td>
+<td><a href="ref.ntnptr.md#userType">userType</a></td>
 </tr>
 </table>
 
@@ -25,15 +36,6 @@ The following methods are available from `drawpos`:
 **{drawpos}:reset**()
 
 This sets a `drawpos` reference back to the current user object.
-
-
-------------------
-<a name="gotoRef"></a>
-**{drawpos}:gotoRef**({ntnptr}), returns Boolean
-
-This moves a `drawpos` object to reference the drawing position for [ntnptr](ref.ntnptr.md), if it can be found. If the operation succeeds, the function will return true and
-the `drawpos` will reference the mew position. If `ntnptr` could not be found in the current drawing system, then the function returns false
-and the `drawpos` object is unchanged.
 
 
 ------------------

@@ -7,7 +7,6 @@ The following methods are provided by the `ntnptr` object:
 <table>
 <tr>
 <td><a href="#find">find</a></td>
-<td><a href="#gotoPos">gotoPos</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>
 <td><a href="#noteCount">noteCount</a></td>
 </tr><tr>
@@ -33,15 +32,6 @@ The following methods are available from `ntnptr`:
 **{ntnptr}:reset**()
 
 This sets a `ntnptr` reference back to the current user object.
-
-
-------------------
-<a name="gotoPos"></a>
-**{ntnptr}:gotoPos**(Reference)
-
-This updates `ntnptr` to a new reference item.
-
-The `Reference` paramater can be a [drawpos](ref.drawpos.md) object, or an offset index from the current user object.
 
 
 ------------------

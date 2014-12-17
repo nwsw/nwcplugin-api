@@ -258,18 +258,11 @@ NewObjectSpec = '|User|test.notelines'
 local function draw_test_notelines()
 	setPenOpts()
 
-	nextNote:reset()
-	if not nextNote:find("next","note") then return end
-	if not nextNotePos:gotoRef(nextNote) then return end
+	nextNotePos:reset()
+	if not nextNotePos:find("next","note") then return end
 	local xpos,ypos = nextNotePos:xyAnchor()
-	--local xpos,ypos = nwc.addPairs(nextNotePos:xyAnchor(),-1,0)
-	print("XY:",nextNotePos:xyAnchor(),nextNotePos:xyAnchor())
-	print("XY+:",nextNotePos:xyAnchor(),9,8)
-	--print("pairs:",nwc.addPairs(nextNotePos:xyAnchor(),-1,0))
-	--print("test:",nwc.addPairs(4,2,4,-1))
 
-
-	for np in allNotePos(nextNote) do
+	for np in allNotePos(nextNotePos) do
 		nwcdraw.moveTo(0,0)
 		nwcdraw.line(xpos,np)
 	end

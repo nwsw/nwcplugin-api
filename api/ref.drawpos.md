@@ -11,7 +11,13 @@ The following methods are provided by the `drawpos` object:
 </tr><tr>
 <td><a href="#xyAnchor">xyAnchor</a></td>
 <td><a href="#xyTimeslot">xyTimeslot</a></td>
-</tr><tr>
+</tr>
+</table>
+
+The following methods from [ref.ntnptr](ref.ntnptr.md) are also supported.
+
+<table>
+<tr>
 <td><a href="ref.ntnptr.md#find">find</a></td>
 <td><a href="ref.ntnptr.md#indexOffset">indexOffset</a></td>
 <td><a href="ref.ntnptr.md#noteCount">noteCount</a></td>

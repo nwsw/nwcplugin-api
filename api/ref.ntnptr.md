@@ -100,17 +100,21 @@ Note that unlike the **notePos** function, the position information contained in
 
 ---------------------------------
 <a name="find"></a>
-**{ntnptr}:find**('action','What',...), Returns Boolean
+**{ntnptr}:find**({Action},'What',...), Returns Boolean
 
-This method can be used to find other items on the same staff as the current object. The following values are supported for the 'action' field:
+This method can be used to find other items on the same staff as the current object. The following values are supported for the {Action} field:
 
- - **next**
+ - [ref.ntnptr](ref.ntnptr.md)
+   <br>Finds the `ntnptr` referenced object.
+ - [ref.drawpos](ref.drawpos.md)
+   <br>Finds the `drawpos` object.
+ - **'next'**
    <br>Finds the next match to the right of the current object.
- - **prior**
+ - **'prior'**
    <br>Finds the prior match to the left of the current object.
- - **first**
+ - **'first'**
    <br>Finds the first match from the start of the staff.
- - **last**
+ - **'last'**
    <br>Finds the last match from the end of the staff.
 
 The following values are supported for the 'What' field:

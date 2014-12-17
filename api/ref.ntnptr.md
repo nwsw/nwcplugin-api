@@ -131,12 +131,24 @@ The following values are supported for the 'What' field:
  - **noteOrRest**
    <br>This matches any note or rest item, including grace notes.
    
- - **bar**
-   <br>This matches any bar line.
-   
  - **noteAt**, #NotePosition
    <br>This matches any item that contains a note at the designated NotePosition.
 
+ - **bar**
+   <br>This matches any bar line.
+   
+ - **clef**
+   <br>This matches any clef.
+   
+ - **key**
+   <br>This matches any key signature.
+   
+ - **timesig**
+   <br>This matches any time signature.
+   
+ - **dynamic**
+   <br>This matches any dynamic.
+   
 If a match is found, then the `ntnptr` object is moved to this new position, and true is returned.
 
 If a match is not found, then the `ntnptr` object is unchanged, and false is returned.

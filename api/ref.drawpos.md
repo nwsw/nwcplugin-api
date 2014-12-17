@@ -7,10 +7,12 @@ The following methods are provided by the `drawpos` object:
 <table>
 <tr>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
+<td><a href="#isHidden">isHidden</a></td>
 <td><a href="#reset">reset</a></td>
 </tr><tr>
 <td><a href="#xyAnchor">xyAnchor</a></td>
 <td><a href="#xyTimeslot">xyTimeslot</a></td>
+<td><a href="#xyRight">xyRight</a></td>
 </tr>
 </table>
 
@@ -53,6 +55,13 @@ This indicates if the current `drawpos` object has been automatically inserted i
 
 
 ------------------
+<a name="isHidden"></a>
+**{drawpos}:isHidden**(), returns Boolean
+
+This indicates if the current `drawpos` object is hidden and will not be shown on the printed copy of the work.
+
+
+------------------
 <a name="xyAnchor"></a>
 **{drawpos}:xyAnchor**(), returns #X,#Y
 
@@ -65,3 +74,9 @@ This returns the anchoring coordinate for the object at `{drawpos}`.
 
 This returns the anchoring timeslot coordinate for the note or rest located at `{drawpos}`.
 
+
+------------------
+<a name="xyRight"></a>
+**{drawpos}:xyRight**(), returns #X,#Y
+
+This returns the right side egde coordinate for the position located at `{drawpos}`.

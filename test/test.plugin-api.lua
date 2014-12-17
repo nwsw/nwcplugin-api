@@ -10,7 +10,7 @@
 local NewObjectSpec = '|User|...'
 local DefaultChordFontFace = nwc.hasTypeface("MusikChordSerif") and "MusikChordSerif" or "Arial"
 local DefaultChordFontSize = (DefaultChordFontFace == "MusikChordSerif") and 8 or 5
-local userObj = nwcdraw.user
+local userObj = nwc.newRef("ntnptr")
 local nextNote = nwc.newRef("ntnptr")
 local nextNotePos = nwc.newRef("drawpos")
 local firstUser = nwc.newRef("ntnptr")
@@ -260,7 +260,7 @@ local function draw_test_notelines()
 
 	nextNotePos:reset()
 	if not nextNotePos:find("next","note") then return end
-	local xpos,ypos = nextNotePos:xyAnchor()
+	local xpos,ypos = nextNotePos:xyTimeslot()
 
 	for np in allNotePos(nextNotePos) do
 		nwcdraw.moveTo(0,0)

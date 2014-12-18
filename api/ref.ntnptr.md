@@ -100,7 +100,7 @@ Note that unlike the **notePos** function, the position information contained in
 
 ---------------------------------
 <a name="find"></a>
-**{ntnptr}:find**({Action},'What',...), Returns Boolean
+**{ntnptr}:find**({Action},['What',...]), Returns Boolean
 
 This method can be used to find other items on the same staff as the current object. The following values are supported for the {Action} field:
 
@@ -117,10 +117,13 @@ This method can be used to find other items on the same staff as the current obj
  - **'last'**
    <br>Finds the last match from the end of the staff.
 
-The following values are supported for the 'What' field:
+The following values are supported for the optional 'What' field:
 
  - **user**, ['UserObjType', 'UserPropertyLabel']
    <br>This finds a matching user object. If 'UserObjType' is indicated, then only user objects of this type will be matched. If 'UserPropertyLabel' is indicated, then only user objects that contain a value for this property will be matched.
+   
+ - **objType**, ['Type', ...]
+   <br>This finds a matching object type, as returned from the `objProp()` method. Multiple object type strings can be included in the method call, and this will match against any included type.
    
  - **duration**
    <br>This matches any non-grace note or rest items.

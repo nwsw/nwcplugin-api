@@ -7,6 +7,7 @@
 -- Each test object created by this file starts with a definition using this
 -- NewObjectSpec variable. You can search for this variable name to find each
 -- new object definition in the file below.
+
 local NewObjectSpec = '|User|...'
 local DefaultChordFontFace = nwc.hasTypeface("MusikChordSerif") and "MusikChordSerif" or "Arial"
 local DefaultChordFontSize = (DefaultChordFontFace == "MusikChordSerif") and 8 or 5
@@ -14,6 +15,9 @@ local userObj = nwc.newRef("ntnptr")
 local nextNote = nwc.newRef("ntnptr")
 local nextNotePos = nwc.newRef("drawpos")
 local firstUser = nwc.newRef("ntnptr")
+
+local function allobjfvalues(o,f) local i=0 return function() i = i+1 return f(o,i) end end
+local function allNotePos(noteobj) return allobjfvalues(noteobj,noteobj.notePos) end
 
 local function setPenOpts(defStyle)
 	local penstyle = userObj:userProp("Pen") or (defStyle or "solid")
@@ -33,7 +37,7 @@ local function getFont(defaultFont)
 
 	if not useFont then
 		if firstUser:find("first","user",userObj:userType()) then
-			useFont = firstUser:userProp(firstOfObj,"Font:") 
+			useFont = firstUser:userProp("Font:") 
 		end
 	end
 
@@ -42,14 +46,6 @@ local function getFont(defaultFont)
 	end
 
 	return useFont or defaultFont
-end
-
-local function allNotePos(noteobj)
-	local noteNum = 0
-	return function()
-		noteNum = noteNum+1
-		return noteobj:notePos(noteNum)
-	end
 end
 
 local function getUserPoint(propName)

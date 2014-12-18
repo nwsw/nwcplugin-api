@@ -10,6 +10,10 @@ The following methods are provided by the `drawpos` object:
 <td><a href="#isHidden">isHidden</a></td>
 <td><a href="#reset">reset</a></td>
 </tr><tr>
+<td><a href="#syllableCounter">syllableCounter</a></td>
+<td><a href="#barCounter">barCounter</a></td>
+<td><a href="#lyricSyllable">lyricSyllable</a></td>
+</tr><tr>
 <td><a href="#xyAnchor">xyAnchor</a></td>
 <td><a href="#xyTimeslot">xyTimeslot</a></td>
 <td><a href="#xyRight">xyRight</a></td>
@@ -59,6 +63,27 @@ This indicates if the current `drawpos` object has been automatically inserted i
 **{drawpos}:isHidden**(), returns Boolean
 
 This indicates if the current `drawpos` object is hidden and will not be shown on the printed copy of the work.
+
+
+------------------
+<a name="syllableCounter"></a>
+**{drawpos}:syllableCounter**(), Number
+
+This returns the lyric syllable counter for a note, or 0 for all other items.
+
+
+------------------
+<a name="barCounter"></a>
+**{drawpos}:barCounter**(), returns Number
+
+This returns the bar count for bar items, or 0 for all other items.
+
+
+------------------
+<a name="lyricSyllable"></a>
+**{drawpos}:lyricSyllable**(#LyricLine), returns String or Nil
+
+This returns the lyric text attached to a note, or Nil if no text exists. The #LyricLine number starts from 1.
 
 
 ------------------

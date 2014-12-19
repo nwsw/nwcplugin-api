@@ -11,10 +11,10 @@
 local NewObjectSpec = '|User|...'
 local DefaultChordFontFace = nwc.hasTypeface("MusikChordSerif") and "MusikChordSerif" or "Arial"
 local DefaultChordFontSize = (DefaultChordFontFace == "MusikChordSerif") and 8 or 5
-local userObj = nwc.newRef("ntnptr")
-local nextNote = nwc.newRef("ntnptr")
-local nextNotePos = nwc.newRef("drawpos")
-local firstUser = nwc.newRef("ntnptr")
+local userObj = nwc.ntnidx.new()
+local nextNote = nwc.ntnidx.new()
+local nextNotePos = nwc.drawpos.new()
+local firstUser = nwc.ntnidx.new()
 
 local function allobjfvalues(o,f) local i=0 return function() i = i+1 return f(o,i) end end
 local function allNotePos(noteobj) return allobjfvalues(noteobj,noteobj.notePos) end

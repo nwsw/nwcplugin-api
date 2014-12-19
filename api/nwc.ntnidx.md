@@ -1,11 +1,18 @@
-# `ntnptr` References
-This object type enables reference access to the notation items found within a staff. A `ntnptr` object must be declared during plugin startup initialization before it can be used in a hook function.
-This is done using the `nwc.newRef` method.
+# `ntnidx` References
+This object references notation items found within a staff. An existing instance is available as `nwc.ntnidx` in the `nwc` module.
+Additional `ntnidx` reference objects must be declared during the plugin `init` context.
+This is done using the <a href="#new">new</a> method:
 
-The following methods are provided by the `ntnptr` object:
+```Lua
+local myNotationPtr = nwc.ntnidx.new()
+```
+
+The following methods are provided in the `ntnidx` object:
 
 <table>
 <tr>
+<td><a href="#new">new</a></td>
+</tr><tr>
 <td><a href="#find">find</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>
 <td><a href="#noteCount">noteCount</a></td>
@@ -25,88 +32,97 @@ The following methods are provided by the `ntnptr` object:
 
 ## Available Methods
 
-The following methods are available from `ntnptr`:
+The following methods are available from `ntnidx`:
+
+------------------
+<a name="new"></a>
+**nwc.ntnidx.new**()
+
+This creates a new `ntnidx` reference, which can only be done during the plugin's `init` context.
+
+All `ntnidx` objects always reference the current user object when first used in an event hook.
+
 
 ------------------
 <a name="reset"></a>
-**{ntnptr}:reset**()
+**{ntnidx}:reset**()
 
-This sets a `ntnptr` reference back to the current user object.
+This sets a `ntnidx` reference back to the current user object.
 
 
 ------------------
 <a name="indexOffset"></a>
-**{ntnptr}:indexOffset**(), Returns IntegerOffset
+**{ntnidx}:indexOffset**(), Returns IntegerOffset
 
 This returns the offset index from the current user object.
 
 
 ---------------------------------
 <a name="objType"></a>
-**{ntnptr}:objType**(), Returns 'ObjType'
+**{ntnidx}:objType**(), Returns 'ObjType'
 
 This method returns the name of the current staff object.
 
 
 ------------------
 <a name="staffPos"></a>
-**{ntnptr}:staffPos**(), returns Number
+**{ntnidx}:staffPos**(), returns Number
 
 This returns the staff position of the object. This works best with expression and user objects.
 
 
 ---------------------------------
 <a name="propTable"></a>
-**{ntnptr}:propTable**(), Returns PropertyTable
+**{ntnidx}:propTable**(), Returns PropertyTable
 
 This method returns a table containing the nwctxt properties for the object.
 
 ---------------------------------
 <a name="userType"></a>
-**{ntnptr}:userType**(), Returns 'UserObjType'
+**{ntnidx}:userType**(), Returns 'UserObjType'
 
 This method returns the type of the current User object. If the item is not a User item, then Nil is returned.
 
 
 ---------------------------------
 <a name="userProp"></a>
-**{ntnptr}:userProp**('PropertyLabel'), Returns 'PropertyValue'
+**{ntnidx}:userProp**('PropertyLabel'), Returns 'PropertyValue'
 
 This returns the string value for any property that exists in the current user object, or Nil if this is not a User object.
 
 
 ---------------------------------
 <a name="noteCount"></a>
-**{ntnptr}:noteCount**(), Returns #NoteCount
+**{ntnidx}:noteCount**(), Returns #NoteCount
 
 This returns the number of notes found in the object.
 
 
 ---------------------------------
 <a name="notePos"></a>
-**{ntnptr}:notePos**(#NoteNumber), Returns #NotePosition
+**{ntnidx}:notePos**(#NoteNumber), Returns #NotePosition
 
-This returns the staff Y coordinate for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnptr}:noteCount()` note numbers. This function returns Nil if there is no such note number.
+This returns the staff Y coordinate for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnidx}:noteCount()` note numbers. This function returns Nil if there is no such note number.
 
 
 ---------------------------------
 <a name="notePitchPos"></a>
-**{ntnptr}:notePitchPos**(#NoteNumber), Returns 'PitchPosText'
+**{ntnidx}:notePitchPos**(#NoteNumber), Returns 'PitchPosText'
 
-This returns the PitchPos nwctxt for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnptr}:noteCount()`. This function returns Nil if there is no such note number.
+This returns the PitchPos nwctxt for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnidx}:noteCount()`. This function returns Nil if there is no such note number.
 
 Note that unlike the **notePos** function, the position information contained in the 'PitchPosText' is an absolute staff position, and would need to be normalized with a user object's current staff position when using it for drawing.
 
 
 ---------------------------------
 <a name="find"></a>
-**{ntnptr}:find**({Action},['What',...]), Returns Boolean
+**{ntnidx}:find**({Action},['What',...]), Returns Boolean
 
 This method can be used to find other items on the same staff as the current object. The following values are supported for the {Action} field:
 
- - [ref.ntnptr](ref.ntnptr.md)
-   <br>Finds the `ntnptr` referenced object.
- - [ref.drawpos](ref.drawpos.md)
+ - [nwc.ntnidx](nwc.ntnidx.md)
+   <br>Finds the `ntnidx` referenced object.
+ - [nwc.drawpos](nwc.drawpos.md)
    <br>Finds the `drawpos` object.
  - **'next'**
    <br>Finds the next match to the right of the current object.
@@ -152,6 +168,6 @@ The following values are supported for the optional 'What' field:
  - **dynamic**
    <br>This matches any dynamic.
    
-If a match is found, then the `ntnptr` object is moved to this new position, and true is returned.
+If a match is found, then the `ntnidx` object is moved to this new position, and true is returned.
 
-If a match is not found, then the `ntnptr` object is unchanged, and false is returned.
+If a match is not found, then the `ntnidx` object is unchanged, and false is returned.

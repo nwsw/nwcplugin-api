@@ -65,7 +65,7 @@ The following methods are available from the `nwcdraw` package:
 <a name="user"></a>
 **nwcdraw.user**
 
-This is a [drawpos](ref.drawpos.md) reference, initially bound to the current user object.
+This is a [nwc.drawpos](nwc.drawpos.md) reference, initially bound to the current user object.
 
 
 ------------------

@@ -40,7 +40,7 @@ This is a constant that expresses the Pulses Per Quarter Note used when renderin
 <a name="user"></a>
 **nwcplay.user**
 
-This is a [ntnptr](ref.ntnptr.md) reference, initially bound to the current user object.
+This is a [nwc.ntnidx](nwc.ntnidx.md) reference, initially bound to the current user object.
 
 
 ------------------

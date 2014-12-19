@@ -6,15 +6,19 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 <tr>
 <td><a href="#VERSION">VERSION</a></td>
 </tr><tr>
+<td><a href="#drawpos">drawpos</a></td>
+<td><a href="#ntnidx">ntnidx</a></td>
+</tr><tr>
 <td><a href="#addUserObjType">addUserObjType</a></td>
 <td><a href="#hasTypeface">hasTypeface</a></td>
-<td><a href="#newRef">newRef</a></td>
 <td><a href="#sethook">sethook</a></td>
 </tr><tr>
 <td><a href="#churnCount">churnCount</a></td>
 <td><a href="#churnRate">churnRate</a></td>
 <td><a href="#debug">debug</a></td>
 <td><a href="#memusage">memusage</a></td>
+</tr><tr>
+<td><a href="#runContext">runContext</a></td>
 </tr>
 </table>
 
@@ -26,18 +30,29 @@ This is a constant that indicates the current version of nwctxt when written to 
 
 
 ---------------------------------
-<a name="newRef"></a>
-**nwc.newRef**('RefType'), Returns {RefObject}
+<a name="ntnidx"></a>
+**nwc.ntnidx**
 
-This creates a new reference object that can be used in an event hook to access existing NWC objects. 
-New reference objects must be created during plugin startup, and are reset each time they are used for the
-first time in an event hook function. References cannot be created during event hook execution, and their
-state is not maintained across event hook instances.
+This is the default instance of a [ntnidx](nwc.ntnidx.md) reference object. It is used to reference an existing notation object in a NWC staff.
 
-The 'RefType' must be one of the following string values:
 
- - '[ntnptr](ref.ntnptr.md)'
- - '[drawpos](ref.drawpos.md)'
+---------------------------------
+<a name="drawpos"></a>
+**nwc.drawpos**
+
+This is the default instance of a [drawpos](nwc.drawpos.md) reference object. It is used to reference an existing notation drawing position while running a user `draw` or `width` hook.
+
+
+---------------------------------
+<a name="getRunContext"></a>
+**nwc.getRunContext**(), Returns 'Name'
+
+This returns a string description of the currently active context, which can be:
+
+- init
+- user:predraw
+- user:draw
+- user:play
 
 
 ---------------------------------

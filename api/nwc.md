@@ -10,6 +10,7 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 <td><a href="#ntnidx">ntnidx</a></td>
 </tr><tr>
 <td><a href="#addUserObjType">addUserObjType</a></td>
+<td><a href="#getRunContext">getRunContext</a></td>
 <td><a href="#hasTypeface">hasTypeface</a></td>
 <td><a href="#sethook">sethook</a></td>
 </tr><tr>
@@ -17,8 +18,6 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 <td><a href="#churnRate">churnRate</a></td>
 <td><a href="#debug">debug</a></td>
 <td><a href="#memusage">memusage</a></td>
-</tr><tr>
-<td><a href="#runContext">runContext</a></td>
 </tr>
 </table>
 

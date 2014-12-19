@@ -139,7 +139,7 @@ The following values are supported for the optional 'What' field:
    <br>This finds a matching user object. If 'UserObjType' is indicated, then only user objects of this type will be matched. If 'UserPropertyLabel' is indicated, then only user objects that contain a value for this property will be matched.
    
  - **objType**, ['Type', ...]
-   <br>This finds a matching object type, as returned from the `objProp()` method. Multiple object type strings can be included in the method call, and this will match against any included type.
+   <br>This finds a matching object type, as returned from the `objType()` method. Multiple object type strings can be included in the method call, and this will match against any included type.
    
  - **duration**
    <br>This matches any non-grace note or rest items.

@@ -114,7 +114,12 @@ This function returns multiple values:
 <a name="setFontClass"></a>
 **nwcdraw.setFontClass**('ClassName')
 
-This method can be used to set the current font for text to one of the predefined font classes. These are the same nwctxt labels as used in the Font: field of Text Expressions.
+This method can be used to set the current font for text to one of the predefined font classes, which include:
+
+- StaffSymbols, StaffCueSymbols
+- StaffItalic, StaffBold, StaffLyric
+- PageTitleText, PageText, PageSmallText
+- User1 through User6
 
 
 ------------------
@@ -162,9 +167,9 @@ This method can be used to change the style of the current font used for text. T
 
 ------------------
 <a name="calcTextSize"></a>
-**nwcdraw.calcTextSize**('MsgString'), returns #Width,#Height
+**nwcdraw.calcTextSize**('MsgString'), returns #Width,#Height,#Descent
 
-This method can be used to get the displayed size of text. 
+This method can be used to get the rendered size of the text. The #Descent is the distance to the baseline of the text.
 
 
 ------------------

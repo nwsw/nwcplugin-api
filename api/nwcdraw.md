@@ -35,13 +35,12 @@ The remaining methods can only be used from the `draw` hook (when nwcdraw.isDraw
 <td><a href="#ellipse">ellipse</a></td>
 <td><a href="#hintline">hintline</a></td>
 </tr><tr>
-<td><a href="#locate">locate</a></td>
 <td><a href="#line">line</a></td>
 <td><a href="#moveTo">moveTo</a></td>
 <td><a href="#rectangle">rectangle</a></td>
 <td><a href="#roundRect">roundRect</a></td>
-</tr><tr>
 <td><a href="#setPen">setPen</a></td>
+</tr><tr>
 <td><a href="#setWhiteout">setWhiteout</a></td>
 <td><a href="#strokeText">strokeText</a></td>
 <td><a href="#text">text</a></td>
@@ -94,20 +93,6 @@ This indicates if the draw hook is currently active. When not active, the width 
 **nwcdraw.isAutoInsert**(), returns Boolean
 
 This indicates if the current user object has been automatically inserted at the start of the current printed system. This will only be true when the drawing target is **print**.
-
-
-------------------
-<a name="locate"></a>
-**nwcdraw.locate**('ObjType', ['UserType'], [Count])
-
-This function is used to locate the relative position of other areas of the current staff. It is generally used to get the location of the next **item**, **note**, **bar**, or **user** object in the current staff. When locating a user object, you must specify the user object type. The Count is used to skip through multiple matching objects, and can be negative to locate behind the current object.
-
-This function returns multiple values:
-
-- the right side boundary of the target item
-- the current/upper position of the target item; bar locations always return the position of the current user object; chords return the highest note position
-- the current/lower position of the target item; bar locations always return the position of the current user object; chords return the lowest note position
-- the type of item that was located, which is one of 'item', 'note', 'bar', or 'user' (the requested item is not always found, so this indicates what was actually located)
 
 
 ------------------

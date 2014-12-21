@@ -101,9 +101,16 @@ This returns the bar count for bar items, or 0 for all other items.
 
 ------------------
 <a name="lyricSyllable"></a>
-**{drawpos}:lyricSyllable**(#LyricLine), returns String or Nil
+**{drawpos}:lyricSyllable**(#LyricLine,[#Offset]), returns 'Syllable','Separator'
 
-This returns the lyric text attached to a note, or Nil if no text exists. The #LyricLine number starts from 1.
+This returns lyric text (syllable and separator) attached to the current `drawpos`. #LyricLine number starts from 1.
+
+#Offset can optionally be used to get the current position's neighboring syllables, but the `drawpos` must itself maintain a valid non-zero lyric counter before this can be done.
+An #Offset of -1 will return the syllable and separator just before the current position, if one exists.
+
+Returns nil for 'Syllable' if the #LyricLine does not exist, or the drawpos is not eligible for a syllable (does not have a non-zero lyric counter).
+
+Returns nil for 'Separator' if none exists, such as for the last syllable and later empty syllables in a #LyricLine.
 
 
 ------------------
@@ -120,7 +127,7 @@ This returns the anchoring coordinate for the object at `{drawpos}`.
 This returns the anchoring coordinate and alignment for a lyric syllable in the designated #LyricRow at this `drawpos`.
 The 'Alignment' will be either **Left** or **Center**.
 
-Returns nil if the `drawpos`is not eligible for a lyric, or the #LyricRow is not found.
+Returns nil if the `drawpos`is not eligible for a lyric, or the #LyricRow does not exist.
 
 
 ------------------

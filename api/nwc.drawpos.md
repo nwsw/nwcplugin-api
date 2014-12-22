@@ -39,6 +39,18 @@ The following methods from [nwc.ntnidx](nwc.ntnidx.md) are also supported.
 <tr>
 <td><a href="nwc.ntnidx.md#find">find</a></td>
 <td><a href="nwc.ntnidx.md#indexOffset">indexOffset</a></td>
+<td><a href="nwc.ntnidx.md#isDotted">isDotted</a></td>
+<td><a href="nwc.ntnidx.md#isGrace">isGrace</a></td>
+<td><a href="nwc.ntnidx.md#isLyricPos">isLyricPos</a></td>
+</tr><tr>
+<td><a href="nwc.ntnidx.md#isMelisma">isMelisma</a></td>
+<td><a href="nwc.ntnidx.md#isMute">isMute</a></td>
+<td><a href="nwc.ntnidx.md#isSlurIn">isSlurIn</a></td>
+<td><a href="nwc.ntnidx.md#isSlurOut">isSlurOut</a></td>
+<td><a href="nwc.ntnidx.md#isTieIn">isTieIn</a></td>
+</tr><tr>
+<td><a href="nwc.ntnidx.md#isTieOut">isTieOut</a></td>
+<td><a href="nwc.ntnidx.md#isTriplet">isTriplet</a></td>
 <td><a href="nwc.ntnidx.md#noteCount">noteCount</a></td>
 <td><a href="nwc.ntnidx.md#notePos">notePos</a></td>
 <td><a href="nwc.ntnidx.md#notePitchPos">notePitchPos</a></td>

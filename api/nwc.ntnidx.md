@@ -12,17 +12,28 @@ The following methods are provided in the `ntnidx` object:
 <table>
 <tr>
 <td><a href="#new">new</a></td>
+<td><a href="#reset">reset</a></td>
 </tr><tr>
 <td><a href="#find">find</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>
-<td><a href="#noteCount">noteCount</a></td>
+<td><a href="#isDotted">isDotted</a></td>
+<td><a href="#isGrace">isGrace</a></td>
+<td><a href="#isLyricPos">isLyricPos</a></td>
 </tr><tr>
-<td><a href="#notePos">notePos</a></td>
-<td><a href="#notePitchPos">notePitchPos</a></td>
+<td><a href="#isMelisma">isMelisma</a></td>
+<td><a href="#isMute">isMute</a></td>
+<td><a href="#isSlurIn">isSlurIn</a></td>
+<td><a href="#isSlurOut">isSlurOut</a></td>
+<td><a href="#isTieIn">isTieIn</a></td>
+</tr><tr>
+<td><a href="#isTieOut">isTieOut</a></td>
+<td><a href="#isTriplet">isTriplet</a></td>
 <td><a href="#objType">objType</a></td>
-<td><a href="#propTable">propTable</a></td>
+<td><a href="#noteCount">noteCount</a></td>
+<td><a href="#notePos">notePos</a></td>
 </tr><tr>
-<td><a href="#reset">reset</a></td>
+<td><a href="#notePitchPos">notePitchPos</a></td>
+<td><a href="#propTable">propTable</a></td>
 <td><a href="#staffPos">staffPos</a></td>
 <td><a href="#userProp">userProp</a></td>
 <td><a href="#userType">userType</a></td>
@@ -69,6 +80,87 @@ This method returns the name of the current staff object.
 **{ntnidx}:staffPos**(), returns Number
 
 This returns the staff position of the object. This works best with expression and user objects.
+
+
+------------------
+<a name="isDotted"></a>
+**{ntnidx}:isDotted**([#NoteNumber]), returns #Number or false or nil
+
+If this is a note position and is dotted, then the number of dots are returned. Returns false is this note position is not dotted. 
+Returns nil if this is not a valid note or rest position.
+
+
+------------------
+<a name="isDotted"></a>
+**{ntnidx}:isDotted**([#NoteNumber]), returns #Number or false or nil
+
+If this is a note position and is dotted, then the number of dots are returned. Returns false is this note position is not dotted. 
+Returns nil if this is not a valid note or rest position.
+
+
+------------------
+<a name="isGrace"></a>
+**{ntnidx}:isGrace**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position is a grace note.
+
+
+------------------
+<a name="isLyricPos"></a>
+**{ntnidx}:isLyricPos**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position accepts attached lyric text.
+
+
+------------------
+<a name="isMelisma"></a>
+**{ntnidx}:isMelisma**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position accepts attached lyric text, and the position starts a melisma.
+
+
+------------------
+<a name="isMute"></a>
+**{ntnidx}:isMute**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position has been specifically muted by the user.
+
+
+------------------
+<a name="isSlurIn"></a>
+**{ntnidx}:isSlurIn**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position receives a built-in slur from earlier in the staff.
+
+
+------------------
+<a name="isSlurOut"></a>
+**{ntnidx}:isSlurOut**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position starts or extends a slur.
+
+
+------------------
+<a name="isTieIn"></a>
+**{ntnidx}:isTieIn**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position receives a note tie from earlier in the staff.
+
+
+------------------
+<a name="isTieOut"></a>
+**{ntnidx}:isTieOut**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position starts or extends a tie to the next note at its position.
+
+
+
+------------------
+<a name="isTriplet"></a>
+**{ntnidx}:isTriplet**([#NoteNumber]), returns 'TripletPosition' or false or nil
+
+Returns **First**, **Middle**, or **End** when a valid note position is part of a triplet grouping.
+Returns false when a valid note position is not part of a triplet.
 
 
 ---------------------------------

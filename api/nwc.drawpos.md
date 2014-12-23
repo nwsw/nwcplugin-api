@@ -33,35 +33,7 @@ The following methods are provided by the `drawpos` object:
 </tr>
 </table>
 
-The following methods from [nwc.ntnidx](nwc.ntnidx.md) are also supported.
-
-<table>
-<tr>
-<td><a href="nwc.ntnidx.md#find">find</a></td>
-<td><a href="nwc.ntnidx.md#indexOffset">indexOffset</a></td>
-<td><a href="nwc.ntnidx.md#isDotted">isDotted</a></td>
-<td><a href="nwc.ntnidx.md#isGrace">isGrace</a></td>
-<td><a href="nwc.ntnidx.md#isLyricPos">isLyricPos</a></td>
-</tr><tr>
-<td><a href="nwc.ntnidx.md#isMelisma">isMelisma</a></td>
-<td><a href="nwc.ntnidx.md#isMute">isMute</a></td>
-<td><a href="nwc.ntnidx.md#isSlurIn">isSlurIn</a></td>
-<td><a href="nwc.ntnidx.md#isSlurOut">isSlurOut</a></td>
-<td><a href="nwc.ntnidx.md#isTieIn">isTieIn</a></td>
-</tr><tr>
-<td><a href="nwc.ntnidx.md#isTieOut">isTieOut</a></td>
-<td><a href="nwc.ntnidx.md#isTriplet">isTriplet</a></td>
-<td><a href="nwc.ntnidx.md#noteCount">noteCount</a></td>
-<td><a href="nwc.ntnidx.md#notePos">notePos</a></td>
-<td><a href="nwc.ntnidx.md#notePitchPos">notePitchPos</a></td>
-</tr><tr>
-<td><a href="nwc.ntnidx.md#objType">objType</a></td>
-<td><a href="nwc.ntnidx.md#propTable">propTable</a></td>
-<td><a href="nwc.ntnidx.md#staffPos">staffPos</a></td>
-<td><a href="nwc.ntnidx.md#userProp">userProp</a></td>
-<td><a href="nwc.ntnidx.md#userType">userType</a></td>
-</tr>
-</table>
+All of the information retrieval methods from [nwc.ntnidx](nwc.ntnidx.md#methodlist) are also supported.
 
 
 ## Available Methods
@@ -115,14 +87,14 @@ This returns the bar count for bar items, or 0 for all other items.
 <a name="lyricSyllable"></a>
 **{drawpos}:lyricSyllable**(#LyricLine,[#Offset]), returns 'Syllable','Separator'
 
-This returns lyric text (syllable and separator) attached to the current `drawpos`. #LyricLine number starts from 1.
+This returns lyric text (syllable and separator) attached to the current `drawpos`. The `LyricLine` number starts from 1.
 
-#Offset can optionally be used to get the current position's neighboring syllables, but the `drawpos` must itself maintain a valid non-zero lyric counter before this can be done.
-An #Offset of -1 will return the syllable and separator just before the current position, if one exists.
+`Offset` can optionally be used to get the current position's neighboring syllables, but the `drawpos` must itself maintain a valid non-zero lyric counter before this can be done.
+An `Offset` of -1 will return the syllable and separator just before the current position, if one exists.
 
-Returns nil for 'Syllable' if the #LyricLine does not exist, or the drawpos is not eligible for a syllable (does not have a non-zero lyric counter).
+Returns nil for 'Syllable' if the `#LyricLine` does not exist, or the drawpos is not eligible for a syllable (does not have a non-zero lyric counter).
 
-Returns nil for 'Separator' if none exists, such as for the last syllable and later empty syllables in a #LyricLine.
+Returns nil for 'Separator' if none exists, such as for the last syllable and later empty syllables in a `LyricLine`.
 
 
 ------------------

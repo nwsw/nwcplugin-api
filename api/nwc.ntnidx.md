@@ -8,6 +8,7 @@ local myNotationPtr = nwc.ntnidx.new()
 ```
 
 The following methods are provided in the `ntnidx` object:
+<a name="methodlist"></a>
 
 <table>
 <tr>
@@ -15,26 +16,30 @@ The following methods are provided in the `ntnidx` object:
 <td><a href="#reset">reset</a></td>
 </tr><tr>
 <td><a href="#find">find</a></td>
+<td><a href="#durationBase">durationBase</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>
 <td><a href="#isDotted">isDotted</a></td>
 <td><a href="#isGrace">isGrace</a></td>
-<td><a href="#isLyricPos">isLyricPos</a></td>
 </tr><tr>
+<td><a href="#isLyricPos">isLyricPos</a></td>
 <td><a href="#isMelisma">isMelisma</a></td>
 <td><a href="#isMute">isMute</a></td>
 <td><a href="#isSlurIn">isSlurIn</a></td>
 <td><a href="#isSlurOut">isSlurOut</a></td>
-<td><a href="#isTieIn">isTieIn</a></td>
 </tr><tr>
+<td><a href="#isSplitVoice">isSplitVoice</a></td>
+<td><a href="#isTieIn">isTieIn</a></td>
 <td><a href="#isTieOut">isTieOut</a></td>
 <td><a href="#isTriplet">isTriplet</a></td>
 <td><a href="#objType">objType</a></td>
+</tr><tr>
 <td><a href="#noteCount">noteCount</a></td>
 <td><a href="#notePos">notePos</a></td>
-</tr><tr>
 <td><a href="#notePitchPos">notePitchPos</a></td>
 <td><a href="#propTable">propTable</a></td>
 <td><a href="#staffPos">staffPos</a></td>
+</tr><tr>
+<td><a href="#stemDir">stemDir</a></td>
 <td><a href="#userProp">userProp</a></td>
 <td><a href="#userType">userType</a></td>
 </tr>
@@ -80,6 +85,14 @@ This method returns the name of the current staff object.
 **{ntnidx}:staffPos**(), returns Number
 
 This returns the staff position of the object. This works best with expression and user objects.
+
+
+------------------
+<a name="durationBase"></a>
+**{ntnidx}:durationBase**([#NoteNumber]), returns 'Duration' or nil
+
+Returns the note position's named duration.
+Returns nil if this is not a valid note or rest position.
 
 
 ------------------
@@ -138,6 +151,13 @@ Returns **true** when a valid note position receives a built-in slur from earlie
 **{ntnidx}:isSlurOut**([#NoteNumber]), returns Boolean or nil
 
 Returns **true** when a valid note position starts or extends a slur.
+
+
+------------------
+<a name="isSplitVoice"></a>
+**{ntnidx}:isSplitVoice**([#NoteNumber]), returns Boolean or nil
+
+Returns **true** when a valid note position contains dual voicing, such as a split stem chord or a rest chord.
 
 
 ------------------
@@ -204,6 +224,13 @@ This returns the staff Y coordinate for the given NoteNumber. The NoteNumber mus
 This returns the PitchPos nwctxt for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnidx}:noteCount()`. This function returns Nil if there is no such note number.
 
 Note that unlike the **notePos** function, the position information contained in the 'PitchPosText' is an absolute staff position, and would need to be normalized with a user object's current staff position when using it for drawing.
+
+
+---------------------------------
+<a name="stemDir"></a>
+**{ntnidx}:stemDir**(#NoteNumber), Returns `-1` or `1` or `nil`
+
+This returns a number indicating the stem direction for any valid note position. This returns what is essentially a voicing direction for rests and notes without an actual stem.
 
 
 ---------------------------------

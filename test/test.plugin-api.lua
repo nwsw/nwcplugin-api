@@ -19,6 +19,45 @@ local firstUser = nwc.ntnidx.new()
 local function allobjfvalues(o,f) local i=0 return function() i = i+1 return f(o,i) end end
 local function allNotePos(noteobj) return allobjfvalues(noteobj,noteobj.notePos) end
 
+---------------------------------------------------------------------------------------------------------
+-- You can use this function to help in migrating to the new nwc.ntnidx and nwc.drawpos system,
+-- which no longer offers a nwcdraw.locate method. To use it, replace all 'nwcdraw.locate' calls
+-- with a call to 'nwcdraw_locate'
+local function nwcdraw_locate(ObjType,parm2,parm3)
+	local user = nwcdraw.user
+	local foundIt = true
+	local objfind = string.lower(ObjType)
+	local p2find = (objfind == "user") and parm2
+	local count = (p2find and parm3 or parm2) or 1
+	local countinc = (count > 0) and 1 or -1
+	local dirfind = (count > 0) and "next" or "prior"
+
+	if objfind == "item" then objfind = nil end
+	if not p2find then p2find = nil end
+
+	while foundIt and not (count == 0) do
+		foundIt = user:find(dirfind,objfind,p2find)
+		count = count - countinc
+	end
+
+	if not foundIt then
+		user:find((countinc < 0) and "first" or "last")
+	end
+
+	local x,y = user:xyRight()
+	local y2 = y
+	local retName = (foundIt and ObjType) or string.lower(user:objType())
+
+	local noteCount = user:noteCount()
+	if noteCount > 0 then
+		y = user:notePos(1)
+		y2 = user:notePos(noteCount)
+	end
+
+	return x,y,y2,retName
+end
+---------------------------------------------------------------------------------------------------------
+
 local function setPenOpts(defStyle)
 	local penstyle = userObj:userProp("Pen") or (defStyle or "solid")
 	local penwidth = tonumber(userObj:userProp("Thickness:")) or 175
@@ -295,14 +334,14 @@ NewObjectSpec = '|User|test.tracenotespan|Span:[#2-32]2'
 ------------------------------------------------------------------------------------
 local function draw_test_tracenotespan()
 	local span = getSpan()
-	local targetx,ytop,ybtm,termtype = nwcdraw.locate("note",span)
+	local targetx,ytop,ybtm,termtype = nwcdraw_locate("note",span)
 
 	setPenOpts()
 
 	if span > 1 then
 		local pts = {}
 		for i=1,span do
-			targetx,ytop,ybtm,termtype = nwcdraw.locate("note",i)
+			targetx,ytop,ybtm,termtype = nwcdraw_locate("note",i)
 			table.insert(pts,{targetx,ytop})
 		end
 			
@@ -337,7 +376,7 @@ NewObjectSpec = '|User|test.8va|Span:[#1-32]2|Pen:[@PenStyle]dash|Thickness:[#1-
 ------------------------------------------------------------------------------------
 local function draw_test8va()
 	local span = getSpan()
-	local targetx,ytop,ybtm,termtype = nwcdraw.locate("note",span)
+	local targetx,ytop,ybtm,termtype = nwcdraw_locate("note",span)
 
 	nwcdraw.alignText("top","left")
 
@@ -369,7 +408,7 @@ local function draw_testSlur()
 	local arcpt = userObj:userProp("Arcpt") or "0.5,0"
 	local arcpt_x = tonumber(arcpt:match("([%.%d]+),"))
 	local arcpt_Y = tonumber(arcpt:match(",([%.%-%d]+)"))
-	local x_dest,staffposTop,staffposBtm,objtype = nwcdraw.locate("note",span)
+	local x_dest,staffposTop,staffposBtm,objtype = nwcdraw_locate("note",span)
 	local endoffset = userObj:userProp("EndOffset")
 	local target_y = staffposTop
 	
@@ -459,7 +498,7 @@ local function draw_testChordFun()
 
 	local span = getSpan()
 	if span > 1 then
-		local w = nwcdraw.locate("note",span)
+		local w = nwcdraw_locate("note",span)
 		nwcdraw.hintline(w)
 	end
 end

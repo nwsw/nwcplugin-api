@@ -89,10 +89,12 @@ This returns the bar count for bar items, or 0 for all other items.
 
 This returns lyric text (syllable and separator) attached to the current `drawpos`. The `LyricLine` number starts from 1.
 
-`Offset` can optionally be used to get the current position's neighboring syllables, but the `drawpos` must itself maintain a valid non-zero lyric counter before this can be done.
-An `Offset` of -1 will return the syllable and separator just before the current position, if one exists.
+This method cannot be used on positions that have `isAutoInsert()` as true.
 
-Returns nil for 'Syllable' if the `#LyricLine` does not exist, or the drawpos is not eligible for a syllable (does not have a non-zero lyric counter).
+`Offset` can optionally be used to get the current position's neighboring syllables. An `Offset` of -1 will return the text and separator just before the current position.
+An `Offset` of 1 will return the lyric text just after the current position. The lyric does not have to actually be visible in the current drawing canvas.
+
+Returns nil for 'Syllable' if the `#LyricLine` does not exist, or the drawpos is not eligible for a syllable and no `Offset` was specified.
 
 Returns nil for 'Separator' if none exists, such as for the last syllable and later empty syllables in a `LyricLine`.
 
@@ -106,12 +108,15 @@ This returns the anchoring coordinate for the object at `{drawpos}`.
 
 ------------------
 <a name="xyLyric"></a>
-**{drawpos}:xyLyric**(#LyricRow), returns #X,#Y,'Alignment'
+**{drawpos}:xyLyric**(#LyricRow), returns #X,#Y,['Alignment']
 
 This returns the anchoring coordinate and alignment for a lyric syllable in the designated #LyricRow at this `drawpos`.
 The 'Alignment' will be either **Left** or **Center**.
 
-Returns nil if the `drawpos`is not eligible for a lyric, or the #LyricRow does not exist.
+If the current `drawpos` does not actually have any attached lyric text, then it returns the X,Y coordinate of the lyric row below the position. Alignment is not returned
+in this circumstance.
+
+Returns nil if the #LyricRow does not exist.
 
 
 ------------------

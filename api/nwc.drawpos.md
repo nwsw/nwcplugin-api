@@ -113,7 +113,7 @@ This returns the anchoring coordinate for the object at `{drawpos}`.
 This returns the anchoring coordinate and alignment for a lyric syllable in the designated #LyricRow at this `drawpos`.
 The 'Alignment' will be either **Left** or **Center**.
 
-If the current `drawpos` does not actually have any attached lyric text, then it returns the X,Y coordinate of the lyric row below the position. Alignment is not returned
+If the current `drawpos` is not eligible for lyric text, then this function returns the X,Y coordinate in the lyric row just below the position. Alignment is not returned
 in this circumstance.
 
 Returns nil if the #LyricRow does not exist.

@@ -31,14 +31,15 @@ The following methods are provided in the `ntnidx` object:
 <td><a href="#isTieIn">isTieIn</a></td>
 <td><a href="#isTieOut">isTieOut</a></td>
 <td><a href="#isTriplet">isTriplet</a></td>
-<td><a href="#objType">objType</a></td>
-</tr><tr>
 <td><a href="#noteCount">noteCount</a></td>
+</tr><tr>
 <td><a href="#notePos">notePos</a></td>
 <td><a href="#notePitchPos">notePitchPos</a></td>
+<td><a href="#objProp">objProp</a></td>
+<td><a href="#objType">objType</a></td>
 <td><a href="#propTable">propTable</a></td>
-<td><a href="#staffPos">staffPos</a></td>
 </tr><tr>
+<td><a href="#staffPos">staffPos</a></td>
 <td><a href="#stemDir">stemDir</a></td>
 <td><a href="#userProp">userProp</a></td>
 <td><a href="#userType">userType</a></td>
@@ -78,6 +79,13 @@ This returns the offset index from the current user object.
 **{ntnidx}:objType**(), Returns 'ObjType'
 
 This method returns the name of the current staff object.
+
+
+---------------------------------
+<a name="objProp"></a>
+**{ntnidx}:objProp**('PropertyName'), Returns 'PropertyValue'
+
+This returns the nwctxt property value for the current object, or Nil if this property would not appear in the nwctxt depiction of the object.
 
 
 ------------------

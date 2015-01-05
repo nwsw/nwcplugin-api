@@ -1,7 +1,7 @@
-# The `nwcdraw` Object
-Methods from the `nwcdraw` package can only be used within a `draw` or `width` hook, which are invoked by the NWC program.
+# The `nwcdraw` Package
+The `nwcdraw` package provides utility functions for use by a user object's `width` and `draw` event methods.
 
-The following can be used from both the `draw` and `width` hooks:
+The following functions are available in both the `width` and `draw` events:
 
 <table>
 <tr>
@@ -25,7 +25,7 @@ The following can be used from both the `draw` and `width` hooks:
 </tr>
 </table>
 
-The remaining methods can only be used from the `draw` hook (when nwcdraw.isDrawing returns true):
+These remaining functions can only be used from the `draw` event method (when `nwcdraw.isDrawing()` returns true):
 
 <table>
 <tr>
@@ -51,16 +51,19 @@ The remaining methods can only be used from the `draw` hook (when nwcdraw.isDraw
 </tr>
 </table>
 
+------------------
 ## About Drawing Coordinates
 
-The draw hook has a two dimensional, floating point, coordinate system relative to its current position in the staff. The point (0,0) is the base point for the object. The **x dimension** uses a notehead width resolution, much like the Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects. Therefore, a coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the user object anchor position.
+The `draw` event has a two dimensional, floating point, coordinate system relative to its current position in the staff. 
+The point (0,0) is the base point for the object. The **x dimension** uses a notehead width resolution, much like the
+Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects.
+A coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the user object's
+anchor position.
 
-
-## Available Methods
-
-The following methods are available from the `nwcdraw` package:
 
 ------------------
+## Package Details
+
 <a name="user"></a>
 **nwcdraw.user**
 

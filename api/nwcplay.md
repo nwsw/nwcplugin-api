@@ -1,6 +1,11 @@
-# The `nwcplay` Object
+# The `nwcplay` Package
 
-Methods from the `nwcplay` object can only be used while running within a *play hook* called by the NWC program. The following items are available from the `nwcplay` package:
+The `nwcplay` package can only be used while running within a user object's `play` event method.
+The `play` event utilizes a Song Position Pointer and a MIDI buffer to capture a performance
+using MIDI events. The Song Position Pointer uses a Pulses per Quarter Note (PPQ) constant as
+the basis for an item's length/duration into the performance sequence.
+
+The following are available:
 
 <table>
 <tr>
@@ -20,16 +25,9 @@ Methods from the `nwcplay` object can only be used while running within a *play 
 </table>
 
 
-## About Play Song Position
-
-The `play` hook utilizes a Song Position Pointer and a MIDI buffer to create a performance using MIDI events. The Song Position Pointer uses a Pulses per Quarter Note (PPQ) constant as the basis for an item's length/duration into the performance sequence.
-
-## Available Methods
-
-The following are available from the `nwcplay` object:
-
-
 ------------------
+## Package Details
+
 <a name="PPQ"></a>
 **nwcplay.PPQ**
 

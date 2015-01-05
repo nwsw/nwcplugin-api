@@ -1,4 +1,4 @@
-# The NoteWorthy Composer User Object Plugin API
+# NWC User Object Plugin API
 
 ## User Object Type Naming Conventions
 Starting in version 2.75, NoteWorthy Composer includes support for a new User object type. These objects include a sub-type which can

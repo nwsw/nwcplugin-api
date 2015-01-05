@@ -1,6 +1,6 @@
 # The `nwc` Object
 
-The `nwc` object provides setup and initialization methods for hooking into the *NoteWorthy Composer* system. These include:
+The `nwc` object provides initialization and debugging methods for use the *NoteWorthy Composer* plugin system. These include:
 
 <table>
 <tr>
@@ -9,15 +9,13 @@ The `nwc` object provides setup and initialization methods for hooking into the 
 <td><a href="#drawpos">drawpos</a></td>
 <td><a href="#ntnidx">ntnidx</a></td>
 </tr><tr>
-<td><a href="#addUserObjType">addUserObjType</a></td>
-<td><a href="#getRunContext">getRunContext</a></td>
-<td><a href="#hasTypeface">hasTypeface</a></td>
-<td><a href="#sethook">sethook</a></td>
-</tr><tr>
 <td><a href="#churnCount">churnCount</a></td>
 <td><a href="#churnRate">churnRate</a></td>
 <td><a href="#debug">debug</a></td>
 <td><a href="#memusage">memusage</a></td>
+</tr><tr>
+<td><a href="#getRunContext">getRunContext</a></td>
+<td><a href="#hasTypeface">hasTypeface</a></td>
 </tr>
 </table>
 
@@ -39,7 +37,7 @@ This is the default instance of a [ntnidx](nwc.ntnidx.md) reference object. It i
 <a name="drawpos"></a>
 **nwc.drawpos**
 
-This is the default instance of a [drawpos](nwc.drawpos.md) reference object. It is used to reference an existing notation drawing position while running a user `draw` or `width` hook.
+This is the default instance of a [drawpos](nwc.drawpos.md) reference object. It is used to reference an existing notation drawing position while running a user object's `width` and `draw` methods.
 
 
 ---------------------------------
@@ -52,38 +50,6 @@ This returns a string description of the currently active context, which can be:
 - user:predraw
 - user:draw
 - user:play
-
-
----------------------------------
-<a name="sethook"></a>
-**nwc.sethook**('HookType',...)
-
-This enables a script to hook into existing events or areas of NWC. Possible HookType values include:
-
- - "**userdraw**" -> 'UserObjType', *Lua-function*
-   <br>This enables a local drawing function found in the script to use methods from the nwcdraw package to render any user objects that use this object type.
-   
- - "**userplay**" -> 'UserObjType', *Lua-function*
-   <br>This enables a local play function, which can use methods from the nwcplay package to send custom MIDI messages for this object type.
-
-
----------------------------------
-<a name="addUserObjType"></a>
-**nwc.addUserObjType**({UserObjectSpecTable})
-  
-This enables the creation of a new user object type. The UserObjectSpecTable supports the following keys:
-
-- **spec** = 'Object_nwctxt'
-<br>The spec key should provide a string that depicts the user object as it should exist initially when added to a staff.
-  
-- **width** = *Lua-function*
-<br>This is the `width` predraw hook function that can be used to increase the horizontal space allotted to a user object. This hook can only be set from here.
-  
-- **draw** = *Lua-function*
-<br>This is the userdraw hook function.
-  
-- **play** = *Lua-function*
-<br>This is the userplay hook function.
 
 
 ---------------------------------
@@ -113,7 +79,7 @@ Note that printing or displaying this number will often generate memory churn wh
 <a name="churnRate"></a>
 **nwc.churnRate**(), Returns Number
 
-This returns a ratio of memory requests versus  plugin hook calls. Lower numbers are better.
+This returns a ratio of memory requests versus  plugin method calls. Lower numbers are better.
 
 Note that printing or displaying this result will often generate memory churn when the number is converted to a string.
 

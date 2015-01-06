@@ -10,7 +10,7 @@ Additional `drawpos` reference objects can be declared during plugin `init` via 
 local myDrawPos = nwc.drawpos.new()
 ```
 
-Any `drawpos` object must be used in `user:predraw` or `user:draw` contexts. They are not active on other contexts.
+Any `drawpos` object can only be used in `user,predraw` or `user,draw` contexts. They are not active in any other context.
 
 The following methods are provided by the `drawpos` object:
 
@@ -26,10 +26,14 @@ The following methods are provided by the `drawpos` object:
 <td><a href="#barCounter">barCounter</a></td>
 <td><a href="#lyricSyllable">lyricSyllable</a></td>
 </tr><tr>
+<td><a href="#xyAlignAnchor">xyAlignAnchor</a></td>
 <td><a href="#xyAnchor">xyAnchor</a></td>
 <td><a href="#xyLyric">xyLyric</a></td>
-<td><a href="#xyTimeslot">xyTimeslot</a></td>
 <td><a href="#xyRight">xyRight</a></td>
+</tr><tr>
+<td><a href="#xyStemAnchor">xyStemAnchor</a></td>
+<td><a href="#xyStemTip">xyStemTip</a></td>
+<td><a href="#xyTimeslot">xyTimeslot</a></td>
 </tr>
 </table>
 
@@ -100,6 +104,12 @@ Returns nil for 'Separator' if none exists, such as for the last syllable and la
 
 
 ------------------
+<a name="xyAlignAnchor"></a>
+**{drawpos}:xyAlignAnchor**([#Direction]), returns #X,#Y
+
+This returns a boundary alignment coordinate for the object at `{drawpos}`. The optional `Direction` can be +1 or -1, which indicates the upper (+1) or lower (-1) boundary alignment position should be returned.
+
+------------------
 <a name="xyAnchor"></a>
 **{drawpos}:xyAnchor**(), returns #X,#Y
 
@@ -117,6 +127,20 @@ If the current `drawpos` is not eligible for lyric text, then this function retu
 in this circumstance.
 
 Returns nil if the #LyricRow does not exist.
+
+
+------------------
+<a name="xyStemAnchor"></a>
+**{drawpos}:xyStemAnchor**([#Direction]), returns #X,#Y
+
+This returns the anchoring stem position for a note object at `{drawpos}`. The optional `Direction` can be +1, 0, or -1, which indicates the direction of the requested stem. An unspecified or zero `Direction` will return the dominant/default stem. If the current `drawpos` does not have a matching stem, then `nil` is returned.
+
+
+------------------
+<a name="xyStemTip"></a>
+**{drawpos}:xyStemTip**([#Direction]), returns #X,#Y
+
+When a note object at `{drawpos}` has a stem matching the indicated `Direction`, then the stem's end-point coordinate is returned. As with the `xyStemAnchor` function, the optional `Direction` can be +1, 0, or -1, which indicates the direction of the requested stem. An unspecified or zero `Direction` will return the dominant/default stem. If the current `drawpos` does not have a matching stem, then `nil` is returned.
 
 
 ------------------

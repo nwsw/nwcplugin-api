@@ -42,14 +42,17 @@ This is the default instance of a [drawpos](nwc.drawpos.md) reference object. It
 
 ---------------------------------
 <a name="getRunContext"></a>
-**nwc.getRunContext**(), Returns 'Name'
+**nwc.getRunContext**(), Returns 'context1','context2'
 
-This returns a string description of the currently active context, which can be:
+This returns a value pair that generally reveals the packages that are available in the currently running context. The possible returns pairs include:
 
-- init
-- user:predraw
-- user:draw
-- user:play
+| Return Pair | Description |
+| --------------- | -------------------- |
+| 'init', **nil** | This is generally used while a script is being compiled and loaded into the NWC environment. The [nwc](nwc.md) package is available. |
+| 'nwcuser', 'edit' | This is the context used for the `create` and `spin` event methods in `nwcuser`. Available packages include [nwc](nwc.md) and  [nwc.ntnidx](nwc.ntnidx.md). |
+| 'nwcuser', 'predraw' | This is the context used for the `nwcuser` `width` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and some parts of [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
+| 'nwcuser', 'draw' | This is the context used for the `nwcuser` `draw` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
+| 'nwcuser', 'play' | This is the context used for the `nwcuser` `play` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcplay](nwcplay.md). |
 
 
 ---------------------------------

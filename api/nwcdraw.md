@@ -16,11 +16,12 @@ The following functions are available in both the `width` and `draw` events:
 <td><a href="#getTypeface">getTypeface</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
 <td><a href="#isDrawing">isDrawing</a></td>
-<td><a href="#setFont">setFont</a></td>
 </tr><tr>
+<td><a href="#setFont">setFont</a></td>
 <td><a href="#setFontClass">setFontClass</a></td>
 <td><a href="#setFontSize">setFontSize</a></td>
 <td><a href="#setFontStyle">setFontStyle</a></td>
+</tr><tr>
 <td><a href="#setTypeface">setTypeface</a></td>
 </tr>
 </table>

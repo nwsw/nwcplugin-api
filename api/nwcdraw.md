@@ -54,11 +54,8 @@ These remaining functions can only be used from the `draw` event method (when `n
 ------------------
 ## About Drawing Coordinates
 
-The `draw` event has a two dimensional, floating point, coordinate system relative to its current position in the staff. 
-The point (0,0) is the base point for the object. The **x dimension** uses a notehead width resolution, much like the
-Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects.
-A coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the user object's
-anchor position.
+The `draw` event has a two dimensional, floating point, coordinate system relative to its current position in the staff. The point (0,0) is the base point for the object. The **x dimension** uses a notehead width resolution, much like the
+Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects. A coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the user object's anchor position.
 
 
 ------------------
@@ -74,7 +71,7 @@ This is a [nwc.drawpos](nwc.drawpos.md) reference, initially bound to the curren
 <a name="getAspectRatio"></a>
 **nwcdraw.getAspectRatio**(), returns #X-DividedBy-Y
 
-This provides an aspect ratio that can be used to normalize the X and Y coordinates within the userdraw function. 
+This provides an aspect ratio that can be used to normalize the X and Y coordinates within the `nwcdraw` system. 
 
 
 ------------------
@@ -95,7 +92,7 @@ This indicates if the draw hook is currently active. When not active, the width 
 <a name="isAutoInsert"></a>
 **nwcdraw.isAutoInsert**(), returns Boolean
 
-This indicates if the current user object has been automatically inserted at the start of the current printed system. This will only be true when the drawing target is **print**.
+This indicates if the current user object has been automatically inserted at the start of the current system. When the drawing target is `print`, an auto-inserted drawing position will typically be at the start of the system staff. When in `edit` or `view` targets, the auto-inserted drawing position will typically be off screen (not visible to the user).
 
 
 ------------------
@@ -267,15 +264,15 @@ For a circle, one of the dimensions must either be normalized using **nwcdraw.ge
 
 This starts a new figure which should be captured as a new path. While rendering into a path, only the line, curve, bezier, rectangle, roundRect and ellipse functions should be used. When the figure has been constructed, you should use **endPath** to close and render the path.
 
-The following will create and fill a rectangle:
+The following will create and fill a triangle:
 
 ```lua
-function fillRect(x1,y1,x2,y2)
+function fillTriangle(x1,y1,x2,y2,x3,y3)
 	nwcdraw.moveTo(x1,y1)
 	nwcdraw.beginPath()
-	nwcdraw.line(x2,y1)
 	nwcdraw.line(x2,y2)
-	nwcdraw.line(x1,y2)
+	nwcdraw.line(x3,y3)
+	nwcdraw.line(x1,y1)
 	nwcdraw.closeFigure()
 	nwcdraw.endPath("fill")
 end

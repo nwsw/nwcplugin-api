@@ -1,4 +1,4 @@
--- Version 0.0
+-- Version 0.1
 
 --[[----------------------------------------------------------------
 HelloWorld
@@ -39,7 +39,7 @@ end
 local drawpos = nwcdraw.user
 --
 local function do_draw()
-	local msg = drawpos:objProp('Text')
+	local msg = drawpos:objProp('Text') or ''
 	local n = math.max(1,tonumber(drawpos:objProp('Size')) or 3)
 
 	nwcdraw.setFontClass('StaffBold')

@@ -5,8 +5,8 @@
 |StaffInstrument|Trans:0|DynVel:10,30,45,60,75,92,108,127
 |Lyrics|Placement:Bottom|Align:Standard Rules|Offset:0
 |Lyric1|Text:"one two three four five six-ty-seven eight\n"
-|Lyric2|Text:"one two three four five six sev-en eight\n"
-|Lyric3|Text:"one two three four five six-ty-seven eight\n"
+|Lyric2|Text:"one-two three four five six sev-en eight\n"
+|Lyric3|Text:"one_two three four five six-ty-seven eight\n"
 |Lyric4|Text:"one two three four five six-ty-seven eight\n"
 |Lyric5|Text:"one two three four five six-ty-seven eight\n"
 |Lyric6|Text:"one two three four five six-ty-seven eight\n"
@@ -14,17 +14,18 @@
 |Lyric8|Text:"one two three four five six-ty-seven eight\n"
 |Clef|Type:Treble
 |TimeSig|Signature:2/4
-|Chord|Dur:4th|Pos:5,6,9|Opts:Stem=Up,XAccSpace=2,XNoteSpace=2|Dur2:Half|Pos2:b0,#1
-|User|xyAnalyzer.demo|Pos:12|Method:xyTimeslot|Parm1:1|Color:1
+|Chord|Dur:4th,Slur|Pos:5,6,9|Opts:Stem=Up,XAccSpace=2,XNoteSpace=2|Dur2:Half|Pos2:b0,#1
+|User|xyAnalyzer.demo|Pos:8.5|Method:xyLyric|Parm1:2|Color:1
+|Spacer|Width:475
 |Rest|Dur:4th|Opts:Stem=Down
 |Bar
 |RestChord|Dur:4th|Opts:Stem=Down,ArticulationsOnStem|Dur2:4th|Pos2:3,4,6
 |User|xyAnalyzer.demo|Pos:12|Method:xyAlignAnchor|Parm1:nil|Color:1
 |Rest|Dur:4th|Opts:Stem=Down,VertOffset=7
-|User|xyAnalyzer.demo|Pos:12|Method:xyAlignAnchor|Parm1:nil|Color:1
+|User|xyAnalyzer.demo|Pos:18|Method:xyAlignAnchor|Parm1:nil|Color:1
 |Bar
 |Note|Dur:8th,Slur|Pos:-4|Opts:Stem=Up,Beam=First
-|User|xyAnalyzer.demo|Pos:12|Method:xyAlignAnchor|Parm1:nil|Color:1
+|User|xyAnalyzer.demo|Pos:8|Method:xyAlignAnchor|Parm1:nil|Color:1
 |Note|Dur:8th,Slur|Pos:-1|Opts:Stem=Up,Beam
 |Note|Dur:8th,Slur|Pos:-2|Opts:Stem=Up,Beam
 |Note|Dur:8th|Pos:-3|Opts:Stem=Up,Beam=End
@@ -33,7 +34,7 @@
 |Note|Dur:4th|Pos:-3|Opts:Stem=Up
 |Bar
 |Note|Dur:4th,Slur|Pos:-3|Opts:Stem=Up
-|User|xyAnalyzer.demo|Pos:12|Method:xyAlignAnchor|Parm1:nil|Color:1
+|User|xyAnalyzer.demo|Pos:7.5|Method:xyAlignAnchor|Parm1:nil|Color:1
 |Note|Dur:4th|Pos:-3|Opts:Stem=Up
 |Bar
 |Note|Dur:4th|Pos:-3|Opts:Stem=Up
@@ -45,25 +46,28 @@
 |Clef|Type:Treble
 |TimeSig|Signature:2/4
 |Chord|Dur:16th|Pos:0|Opts:Stem=Up,Beam=First|Dur2:8th|Pos2:-6,-5
-|User|xyAnalyzer.demo|Pos:-19.5|Method:xyAnchor|Parm1:nil|Color:1
+|User|xyAnalyzer.demo|Pos:-17|Method:xyStemAnchor|Parm1:-1|Color:1
 |Note|Dur:16th|Pos:2|Opts:Stem=Up,Beam
-|User|xyAnalyzer.demo|Pos:-19.5|Method:xyAnchor|Parm1:nil|Color:1
+|User|xyAnalyzer.demo|Pos:-26|Method:xyAlignAnchor|Parm1:+1|Color:1
 |Chord|Dur:16th|Pos:0,b1,4|Opts:Stem=Up,Beam|Dur2:8th|Pos2:-4
-|User|xyAnalyzer.demo|Pos:-19.5|Method:xyAnchor|Parm1:1|Color:1
+|User|xyAnalyzer.demo|Pos:-34.5|Method:xyStemAnchor|Parm1:0|Color:1
 |Note|Dur:16th|Pos:6|Opts:Stem=Up,Beam=End
-|Chord|Dur:4th|Pos:-3,-2,0
-|User|xyAnalyzer.demo|Pos:-19.5|Method:xyAlignAnchor|Parm1:nil|Color:1
+|Chord|Dur:4th|Pos:-3,-2,0|Opts:Stem=Down
+|User|xyAnalyzer.demo|Pos:-13|Method:xyStemAnchor|Parm1:0|Color:1
 |Bar
-|Chord|Dur:4th|Pos:-16,-15,-12
-|User|xyAnalyzer.demo|Pos:-19.5|Method:xyAlignAnchor|Parm1:nil|Color:1
+|Spacer|Width:500
+|Chord|Dur:4th|Pos:-12|Opts:Stem=Down|Dur2:4th|Pos2:-12,-11
+|User|xyAnalyzer.demo|Pos:-20.5|Method:xyStemTip|Parm1:+1|Color:1
+|Spacer|Width:175
 |Chord|Dur:4th|Pos:-15|Opts:Stem=Down|Dur2:4th|Pos2:9
-|User|xyAnalyzer.demo|Pos:-19.5|Method:xyAlignAnchor|Parm1:nil|Color:1
+|User|xyAnalyzer.demo|Pos:-2.5|Method:xyStemAnchor|Parm1:nil|Color:1
 |Bar
 |Rest|Dur:Whole|Opts:Stem=Up
 |Bar
 |Rest|Dur:Whole|Opts:Stem=Up
 |Bar
 |Rest|Dur:Whole|Opts:Stem=Up
+|User|xyAnalyzer.demo|Pos:-10|Method:xyAlignAnchor|Parm1:+1|Color:1
 |Bar
 |Rest|Dur:Whole|Opts:Stem=Up
 !NoteWorthyComposer-End

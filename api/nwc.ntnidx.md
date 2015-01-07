@@ -14,31 +14,31 @@ The following methods are provided in the `ntnidx` object:
 <tr>
 <td><a href="#new">new</a></td>
 <td><a href="#reset">reset</a></td>
-</tr><tr>
 <td><a href="#find">find</a></td>
 <td><a href="#durationBase">durationBase</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>
+<td><a href="#isBeamed">isBeamed</a></td>
 <td><a href="#isDotted">isDotted</a></td>
-<td><a href="#isGrace">isGrace</a></td>
 </tr><tr>
+<td><a href="#isGrace">isGrace</a></td>
 <td><a href="#isLyricPos">isLyricPos</a></td>
 <td><a href="#isMelisma">isMelisma</a></td>
 <td><a href="#isMute">isMute</a></td>
 <td><a href="#isSlurIn">isSlurIn</a></td>
-<td><a href="#isSlurOut">isSlurOut</a></td>
 </tr><tr>
+<td><a href="#isSlurOut">isSlurOut</a></td>
 <td><a href="#isSplitVoice">isSplitVoice</a></td>
 <td><a href="#isTieIn">isTieIn</a></td>
 <td><a href="#isTieOut">isTieOut</a></td>
 <td><a href="#isTriplet">isTriplet</a></td>
-<td><a href="#noteCount">noteCount</a></td>
 </tr><tr>
+<td><a href="#noteCount">noteCount</a></td>
 <td><a href="#notePos">notePos</a></td>
 <td><a href="#notePitchPos">notePitchPos</a></td>
 <td><a href="#objProp">objProp</a></td>
 <td><a href="#objType">objType</a></td>
-<td><a href="#propTable">propTable</a></td>
 </tr><tr>
+<td><a href="#propTable">propTable</a></td>
 <td><a href="#staffPos">staffPos</a></td>
 <td><a href="#stemDir">stemDir</a></td>
 <td><a href="#userProp">userProp</a></td>
@@ -101,6 +101,14 @@ This returns the staff position of the object. This works best with expression a
 
 Returns the note position's named duration.
 Returns nil if this is not a valid note or rest position.
+
+
+------------------
+<a name="isBeamed"></a>
+**{ntnidx}:isBeamed**([#NoteNumber]), returns 'BeamPosition' or false or nil
+
+Returns **First**, **Middle**, or **End** when a valid note position is part of a beamed group.
+Returns false when a valid note position is not part of a beam.
 
 
 ------------------

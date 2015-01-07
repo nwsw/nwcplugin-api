@@ -72,8 +72,12 @@ This is a [nwc.drawpos](nwc.drawpos.md) reference, initially bound to the curren
 <a name="getAspectRatio"></a>
 **nwcdraw.getAspectRatio**(), returns #X-DividedBy-Y
 
-This provides an aspect ratio that can be used to normalize the X and Y coordinates within the `nwcdraw` system. 
+This provides an aspect ratio that can be used to normalize the X and Y coordinates within the `nwcdraw` system.
 
+```lua
+local cx = 0.3
+local cy = cx*nwcdraw.getAspectRatio()
+```
 
 ------------------
 <a name="getTarget"></a>

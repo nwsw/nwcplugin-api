@@ -1,17 +1,15 @@
--- Version 0.20
+-- Version 0.21
 
 --[[----------------------------------------------------------------
 xyAnalyzer.demo
 
-This is a demonstration script. It spinds through the {drawpos}:xy
+This is a demonstration script. It spins through the {drawpos}:xy
 methods, showing the coordinate that each returns for the drawpos
-just before it.
+just preceding it.
 --]]----------------------------------------------------------------
 
 -- our object type is passed into the script
 local userObjTypeName = ...
-
-local EXTRAWIDTH = 2
 
 local function getMatchingTableEntry(t, fval)
 	for i, v in ipairs(t) do
@@ -79,9 +77,11 @@ local function do_draw()
 	if not m_func then return end
 
 	if p1 then m = m..'('..p1..')' else m = m..'()' end
+
+	nwcdraw.setFont("Courier New",3)
 	local w,h = nwcdraw.calcTextSize(m)
 
-	if not nwcdraw.isDrawing() then return w + EXTRAWIDTH end
+	if not nwcdraw.isDrawing() then return nwcdraw.calcTextSize('WWW') end
 
 	nwcdraw.alignText('bottom','right')
 

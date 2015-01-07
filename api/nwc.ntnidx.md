@@ -106,7 +106,7 @@ Returns nil if this is not a valid note or rest position.
 
 ------------------
 <a name="isBeamed"></a>
-**{ntnidx}:isBeamed**([#NoteNumber]), returns 'BeamPosition' or false or nil
+**{ntnidx}:isBeamed**([#NoteNumber]), returns 'BeamStatus' or false or nil
 
 Returns **First**, **Middle**, or **End** when a valid note position is part of a beamed group.
 Returns false when a valid note position is not part of a beam.

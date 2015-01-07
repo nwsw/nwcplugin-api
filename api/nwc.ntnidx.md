@@ -14,6 +14,7 @@ The following methods are provided in the `ntnidx` object:
 <tr>
 <td><a href="#new">new</a></td>
 <td><a href="#reset">reset</a></td>
+</tr><tr>
 <td><a href="#find">find</a></td>
 <td><a href="#durationBase">durationBase</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>

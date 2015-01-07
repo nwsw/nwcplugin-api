@@ -1,4 +1,4 @@
--- Version 0.11
+-- Version 0.20
 
 --[[----------------------------------------------------------------
 xyAnalyzer.demo
@@ -21,7 +21,18 @@ local function getMatchingTableEntry(t, fval)
 end
 
 --------------------------------------------------------------------
-local validMethods = {"xyAnchor","xyTimeslot","xyLyric","xyRight","xyAlignAnchor","xyStemAnchor","xyStemTip"}
+local validMethods = {'xyAnchor','xyTimeslot','xyLyric','xyRight','xyAlignAnchor','xyStemAnchor','xyStemTip'}
+local validDirections = {'nil','-1','+1'}
+local validLyricNumber = {'1','2','3','4'}
+local validParm1 = {
+	xyAnchor = validDirections,
+	xyTimeslot = validDirections,
+	xyLyric = validLyricNumber,
+	xyRight = validDirections,
+	xyAlignAnchor = validDirections,
+	xyStemAnchor = validDirections,
+	xyStemTip = validDirections,
+	}
 
 local function do_create(t)
 	t.Method = validMethods[1]
@@ -30,17 +41,18 @@ local function do_create(t)
 end
 
 local function do_spin(t,d)
-	local p1 = (tonumber(t.Parm1) or -2) + d
+	local m = t.Method or validMethods[1]
+	local p1 = t.Parm1
+	local p1valid = validParm1[m] or validParm1.xyAnchor
+	local i = getMatchingTableEntry(p1valid,p1) or 1
 
-	if (p1 < 2) and (p1 > -3) then
-		t.Parm1 = (p1 == -2) and 'nil' or p1
+	i = i + d
+	if p1valid[i] then
+		t.Parm1 = p1valid[i]
 		return
 	end
 
-	t.Parm1 = (p1 < -2) and 1 or 'nil'
-
-	local m = t.Method or validMethods[1]
-	local i = getMatchingTableEntry(validMethods,m)
+	i = getMatchingTableEntry(validMethods,m)
 	i = i + ((d > 0) and 1 or -1)
 
 	if i < 1 then
@@ -50,6 +62,8 @@ local function do_spin(t,d)
 	end
 
 	t.Method = validMethods[i]
+	p1valid = validParm1[t.Method] 
+	t.Parm1 = (d > 0) and p1valid[1] or p1valid[#p1valid]
 end
 
 --------------------------------------------------------------------
@@ -74,13 +88,17 @@ local function do_draw()
 	if dpos:find("prior") then
 		nwcdraw.text(m)
 
-		local x,y = m_func(dpos,p1)
+		local x,y,v3 = m_func(dpos,p1)
 		if x then
 			local cx = 0.3
 			local cy = cx*nwcdraw.getAspectRatio()
 			nwcdraw.moveTo(0,0)
 			nwcdraw.hintline(x,y)
 			nwcdraw.ellipse(cx,cy)
+			if v3 then
+				nwcdraw.moveTo(0,-h)
+				nwcdraw.text(v3)
+			end
 		else
 			nwcdraw.moveTo(0,-h)
 			nwcdraw.text('(nil)')
@@ -92,6 +110,6 @@ end
 return {
 	create	= do_create,
 	spin	= do_spin,
-	width = do_draw,
-	draw = do_draw,
+	width	= do_draw,
+	draw	= do_draw,
 	}

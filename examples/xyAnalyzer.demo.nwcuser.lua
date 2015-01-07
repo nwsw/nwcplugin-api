@@ -1,4 +1,4 @@
--- Version 0.1
+-- Version 0.11
 
 --[[----------------------------------------------------------------
 xyAnalyzer.demo
@@ -25,10 +25,20 @@ local validMethods = {"xyAnchor","xyTimeslot","xyLyric","xyRight","xyAlignAnchor
 
 local function do_create(t)
 	t.Method = validMethods[1]
-	t.Parm1 = 0
+
+	t.Parm1 = 'nil' -- tonumber() will make this nil in the draw method
 end
 
 local function do_spin(t,d)
+	local p1 = (tonumber(t.Parm1) or -2) + d
+
+	if (p1 < 2) and (p1 > -3) then
+		t.Parm1 = (p1 == -2) and 'nil' or p1
+		return
+	end
+
+	t.Parm1 = (p1 < -2) and 1 or 'nil'
+
 	local m = t.Method or validMethods[1]
 	local i = getMatchingTableEntry(validMethods,m)
 	i = i + ((d > 0) and 1 or -1)
@@ -66,9 +76,11 @@ local function do_draw()
 
 		local x,y = m_func(dpos,p1)
 		if x then
+			local cx = 0.3
+			local cy = cx*nwcdraw.getAspectRatio()
 			nwcdraw.moveTo(0,0)
 			nwcdraw.hintline(x,y)
-			nwcdraw.ellipse(0.33,.75)
+			nwcdraw.ellipse(cx,cy)
 		else
 			nwcdraw.moveTo(0,-h)
 			nwcdraw.text('(nil)')

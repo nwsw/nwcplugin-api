@@ -1,4 +1,4 @@
--- Version 0.21
+-- Version 0.22
 
 --[[----------------------------------------------------------------
 xyAnalyzer.demo
@@ -69,9 +69,9 @@ local user = nwcdraw.user
 local dpos = nwc.drawpos
 local idx = nwc.ntnidx
 --
-local function do_draw()
-	local m = user:userProp('Method') or validMethods[1]
-	local p1 = tonumber(user:userProp('Parm1'))
+local function do_draw(t)
+	local m = t.Method or validMethods[1]
+	local p1 = tonumber(t.Parm1)
 
 	local m_func = dpos[m]
 	if not m_func then return end

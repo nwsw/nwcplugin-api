@@ -20,29 +20,27 @@ will always include a `.nw` extension to uniquely identify them.
 
 ## Event Methods - Hooking into NWC
 
-Each user object type's Lua script must return an event method table that will be used to subclass all NWC User objects
-that share the matching `<Object-Type-Name>`. This should be done at the end of the plugin's script:
+Each user object type's Lua script must return an event method table that will be used to subclass all NWC User objects that share the matching `<Object-Type-Name>`. This should be done at the end of the plugin's script:
 
 ```Lua
 return {
 	create	= local function(t) end,
 	spin	= local function(t,dir) end,
-	play	= local function() end,
-	width	= local function() return 0 end,
-	draw	= local function() end
+	play	= local function(t) end,
+	width	= local function(t) return 0 end,
+	draw	= local function(t) end
 	}
 ```
 
-This method table is used as an event dispatch mechanism which forwards the listed events into the user object's plugin module.
-The supported event methods which can be optionally subclassed by a user object plugin include:
+This method table is used as an event dispatch mechanism which forwards the listed events into the user object's plugin module. The supported event methods which can be optionally subclassed by a user object plugin include:
 
 | Method    | Parameters | Event    |
 |:---------:|:----------:|:-------------- |
 |  create   | **t**      | A new object of this type is being added to the staff. Parameter `t` provides read/write access to the properties for this user object. |
 |  spin     | **t**<br>**dir** | The user applies a '+'/'-' increment/decrement operation against the user object while in the editor. Parameter `t` provides read/write access to the properties for this user object. Parameter `dir` is 1 or -1 to indicate the direction of the spin action.|
-|  play     | **nil** | The staff notation is being compiled into a performance using a buffered sequence of MIDI events. |
-|  width    | **nil** | The user object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the user object. |
-|  draw     | **nil** | The user object needs to be rendered into a window or onto a printed page. |
+|  play     | **t** | The staff notation is being compiled into a performance using a buffered sequence of MIDI events. Parameter `t` provides read access to the properties for this user object. |
+|  width    | **t** | The user object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the user object. Parameter `t` provides read access to the properties for this user object. |
+|  draw     | **t** | The user object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this user object. |
 
 ## Support Packages
 

@@ -1,4 +1,4 @@
--- Version 0.1
+-- Version 0.2
 
 --[[----------------------------------------------------------------
 HelloWorld
@@ -29,18 +29,17 @@ end
 --------------------------------------------------------------------
 -- the 'play' method is called whenever our notatation is compiled into a
 -- midi performance
-local function do_play()
+local function do_play(t)
 	-- we don't play anything back here
 end
 
 --------------------------------------------------------------------
 -- the 'width' and 'draw' methods are combined here, and are used in the
 -- formatting and display of our object on the NWC staff
-local drawpos = nwcdraw.user
 --
-local function do_draw()
-	local msg = drawpos:objProp('Text') or ''
-	local n = math.max(1,tonumber(drawpos:objProp('Size')) or 3)
+local function do_draw(t)
+	local msg = t.Text or ''
+	local n = math.max(1,tonumber(t.Size) or 3)
 
 	nwcdraw.setFontClass('StaffBold')
 	nwcdraw.setFontSize(n)

@@ -5,6 +5,7 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 <table>
 <tr>
 <td><a href="#VERSION">VERSION</a></td>
+<td><a href='#txt'>txt</a></td>
 </tr><tr>
 <td><a href="#drawpos">drawpos</a></td>
 <td><a href="#ntnidx">ntnidx</a></td>
@@ -92,3 +93,52 @@ Note that printing or displaying this result will often generate memory churn wh
 **nwc.debug**('Message',...)
 
 This directs a message to the debug console. You can also use `print` to do the same thing.
+
+---------------------------------
+<a name="txt"></a>
+**nwc.txt**
+
+This is a collection of commonly used text data types used by NoteWorthy Composer. It can be iterated by a script to discover all of its contents. The following script yields the results table below:
+
+```Lua
+print('| nwc.txt | Contains |')
+print('|:--------:|:---------|')
+for typname,typtable in pairs(nwc.txt) do
+	local out = {}
+	for _,v in pairs(typtable) do table.insert(out,v) end
+	print('| `'..typname..'` | ',table.concat(out,', '),' |')
+end
+```
+
+| nwc.txt | Contains |
+|:--------:|:---------|
+| `DynamicVariance` |  Crescendo, Decrescendo, Diminuendo, Rinforzando, Sforzando  |
+| `BarLineType` |  Single, Double, BrokenSingle, BrokenDouble, SectionOpen, SectionClose, LocalRepeatOpen, LocalRepeatClose, MasterRepeatOpen, MasterRepeatClose, Transparent  |
+| `DynamicLevels` |  ppp, pp, p, mp, mf, f, ff, fff  |
+| `NoteScale` |  A, B, C, D, E, F, G  |
+| `Lyric2NoteAlignment` |  Start of Accidental/Note, Standard Rules  |
+| `ExpressionJustify` |  Left, Center, Right  |
+| `TieDir` |  Default, Upward, Downward  |
+| `ObjLabels` |  Clef, Key, Bar, Ending, Instrument, TimeSig, Tempo, Dynamic, Note, Rest, Chord, SustainPedal, Flow, MPC, TempoVariance, DynamicVariance, PerformanceStyle, Text, RestChord, ChordName, Spacer, RestMultiBar, Boundary, Marker, User  |
+| `ClefType` |  Treble, Bass, Alto, Tenor, Percussion  |
+| `LyricAlignment` |  Bottom, Top  |
+| `NoteConnectState` |  None, First, Middle, End  |
+| `TextExpressionFonts` |  StaffSymbols, StaffCueSymbols, StaffItalic, StaffBold, StaffLyric, PageTitleText, PageText, PageSmallText, User1, User2, User3, User4, User5, User6  |
+| `SpecialSignatures` |  Standard, Common, AllaBreve  |
+| `MPCStyle` |  Absolute, Linear Sweep  |
+| `OctaveShift` |  None, Octave Up, Octave Down  |
+| `TempoBase` |  Eighth, Eighth Dotted, Quarter, Quarter Dotted, Half, Half Dotted  |
+| `BoundaryTypes` |  Reset, NewSize, Collapse, EndCollapse, Gap, NewSystem  |
+| `PerformanceStyle` |  Ad Libitum, Animato, Cantabile, Con brio, Dolce, Espressivo, Grazioso, Legato, Maestoso, Marcato, Meno mosso, Poco a poco, Più mosso, Semplice, Simile, Solo, Sostenuto, Sotto Voce, Staccato, Subito, Tenuto, Tutti, Volta Subito  |
+| `TempoVariance` |  Breath Mark, Caesura, Fermata, Accelerando, Allargando, Rallentando, Ritardando, Ritenuto, Rubato, Stringendo  |
+| `MPCControllers` |  tempo, vol, pan, bc, pitch, mod, foot, portamento, datamsb, bal, exp, fx1, fx2, reverb, tremolo, chorus, detune, phaser  |
+| `ExpressionPlacement` |  BestFit, BestFitForward, AsStaffSignature, AtNextNote  |
+| `StaffLabelStyles` |  None, First System, Top Systems, All Systems  |
+| `StaffEndBarLineType` |  Section Close, Master Repeat Close, Single, Double, Open (hidden)  |
+| `AttachLyricSyllable` |  Default, Always, Never  |
+| `SustainPedalStatus` |  Down, Released  |
+| `ItemVisibility` |  Default, Always, TopStaff, SingleStaff, MultiStaff, Never  |
+| `ItemColor` |  Default, Highlight 1, Highlight 2, Highlight 3, Highlight 4, Highlight 5, Highlight 6, Highlight 7  |
+| `NoteDuration` |  Whole, Half, Quarter, Eighth, Sixteenth, Thirtysecond, Sixtyfourth  |
+| `MeasureNumStyles` |  None, Plain, Circled, Boxed  |
+| `FlowDirTypes` |  Coda, Segno, Fine, ToCoda, DaCapo, DCalCoda, DCalFine, DalSegno, DSalCoda, DSalFine  |

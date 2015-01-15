@@ -14,6 +14,7 @@ The following methods are provided in the `ntnidx` object:
 <tr>
 <td><a href="#new">new</a></td>
 <td><a href="#reset">reset</a></td>
+<td><a href="#compareOps">&lt; &lt;= &gt; &gt;= ==</a></td>
 </tr><tr>
 <td><a href="#find">find</a></td>
 <td><a href="#durationBase">durationBase</a></td>
@@ -67,6 +68,29 @@ All `ntnidx` objects always reference the current user object when first used in
 
 This sets a `ntnidx` reference back to the current user object.
 
+
+------------------
+<a name="compareOps"></a>
+**{ntnidx}:(operators) &lt; &lt;= &gt; &gt;= ==**, Returns Boolean
+
+`ntnidx` and `drawpos` objects can be compared using the standard operators. An object is *less than* other objects when it is located earlier in the staff.
+
+```lua
+local idx1 = nwc.ntnidx.new()
+local idx2 = nwc.ntnidx.new()
+
+...
+
+if idx1 < idx2 then
+	-- idx1 is located before idx2 on the staff
+end
+
+...
+
+if idx2 > 0 then
+	-- idx2 is located after the currently active user object
+end
+```
 
 ------------------
 <a name="indexOffset"></a>

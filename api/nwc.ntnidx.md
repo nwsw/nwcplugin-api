@@ -43,6 +43,7 @@ The following methods are provided in the `ntnidx` object:
 <td><a href="#staffPos">staffPos</a></td>
 <td><a href="#stemDir">stemDir</a></td>
 <td><a href="#userProp">userProp</a></td>
+</tr><tr>
 <td><a href="#userType">userType</a></td>
 </tr>
 </table>

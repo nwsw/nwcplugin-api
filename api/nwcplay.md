@@ -1,9 +1,6 @@
 # The `nwcplay` Package
 
-The `nwcplay` package can only be used while running within a user object's `play` event method.
-The `play` event utilizes a Song Position Pointer and a MIDI buffer to capture a performance
-using MIDI events. The Song Position Pointer uses a Pulses per Quarter Note (PPQ) constant as
-the basis for an item's length/duration into the performance sequence.
+The `nwcplay` package can only be used while running within a user object's `play` event method. The `play` event utilizes a Song Position Pointer and a memory buffer to capture a performance using MIDI events. The Song Position Pointer uses a Pulses per Quarter Note (PPQ) constant as the basis for an item's length/duration into the performance sequence.
 
 The following are available:
 
@@ -18,7 +15,6 @@ The following are available:
 <td><a href="#getTimeSig">getTimeSig</a></td>
 <td><a href="#getTransposition">getTransposition</a></td>
 </tr><tr>
-<td><a href="#locate">locate</a></td>
 <td><a href="#midi">midi</a></td>
 <td><a href="#note">note</a></td>
 </tr>
@@ -66,7 +62,7 @@ This returns the time signature at the current play back position.
 <a name="getBarLength"></a>
 **nwcplay.getBarLength**(), Returns #SongPulses
 
-This returns the total song pulses contained in the current measure/bar.
+This returns the total song pulses contained in the current measure.
 
 
 ------------------
@@ -74,18 +70,6 @@ This returns the total song pulses contained in the current measure/bar.
 **nwcplay.getNoteVelocity**(), Returns #Velocity
 
 This returns the default note velocity at the current play back position.
-
-
-------------------
-<a name="locate"></a>
-**nwcplay.locate**('ObjType', ['UserType'], [Count])
-
-This function is used to locate the the play time offset to adjacent items in the current staff. It is generally used to get the song position of the next **item**, **note**, **bar**, or **user** object in the current staff. When locating a user object, you must specify the user object type. The Count is used to skip through multiple matching objects, and can be negative to locate behind the current object.
-
-This function returns multiple values:
-
-- the play back duration to the item
-- the type of item that was located, which is one of 'item', 'note', 'bar', or 'user' (the requested item is not always found, so this indicates what was actually located)
 
 
 ------------------
@@ -103,4 +87,4 @@ This adds a midi message into the performance relative to the current time posit
 
 The command must be a valid, non-sysex midi command number, or one of the following command names: noteOff, noteOn, keyAftertouch, controller, patch, channelAftertouch, or pitchBend.
 
-If midiData2 is not provided, then it will be zero in the message.
+If midiData2 is not provided, then it will be zero.

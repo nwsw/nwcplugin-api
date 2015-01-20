@@ -5,6 +5,7 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 <table>
 <tr>
 <td><a href="#VERSION">VERSION</a></td>
+<td><a href='#txt'>txt</a></td>
 </tr><tr>
 <td><a href="#drawpos">drawpos</a></td>
 <td><a href="#ntnidx">ntnidx</a></td>
@@ -42,14 +43,17 @@ This is the default instance of a [drawpos](nwc.drawpos.md) reference object. It
 
 ---------------------------------
 <a name="getRunContext"></a>
-**nwc.getRunContext**(), Returns 'Name'
+**nwc.getRunContext**(), Returns 'context1','context2'
 
-This returns a string description of the currently active context, which can be:
+This returns a value pair that generally reveals the packages that are available in the currently running context. The possible returns pairs include:
 
-- init
-- user:predraw
-- user:draw
-- user:play
+| Returns | Description |
+|:---------------:| -------------------- |
+| `init`<br>**nil** | This is generally used while a script is being compiled and loaded into the NWC environment. The [nwc](nwc.md) package is available. |
+| `user`<br>`edit` | This is the context used for the `create` and `spin` event methods in `nwcuser`. Available packages include [nwc](nwc.md) and  [nwc.ntnidx](nwc.ntnidx.md). |
+| `user`<br>`predraw` | This is the context used for the `width` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and some parts of [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
+| `user`<br>`draw` | This is the context used for the `draw` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
+| `user`<br>`play` | This is the context used for the `play` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcplay](nwcplay.md). |
 
 
 ---------------------------------
@@ -89,3 +93,55 @@ Note that printing or displaying this result will often generate memory churn wh
 **nwc.debug**('Message',...)
 
 This directs a message to the debug console. You can also use `print` to do the same thing.
+
+---------------------------------
+<a name="txt"></a>
+**nwc.txt**
+
+This is a collection of commonly used text data types used by NoteWorthy Composer. It can be iterated by a script to discover all of its contents. The following script yields the results table below:
+
+```Lua
+print('| nwc.txt | Contains |')
+print('|:--------:|:---------|')
+local typnames = {}
+for typname in pairs(nwc.txt) do table.insert(typnames,typname) end
+table.sort(typnames)
+for i,typname in ipairs(typnames) do
+	local out = {}
+	for _,v in pairs(nwc.txt[typname]) do table.insert(out,v) end
+	print('| `'..typname..'` | ',table.concat(out,', '),' |')
+end
+```
+
+| nwc.txt | Contains |
+|:--------:|:---------|
+| `AttachLyricSyllable` |  Default, Always, Never  |
+| `BarLineType` |  Single, Double, BrokenSingle, BrokenDouble, SectionOpen, SectionClose, LocalRepeatOpen, LocalRepeatClose, MasterRepeatOpen, MasterRepeatClose, Transparent  |
+| `BoundaryTypes` |  Reset, NewSize, Collapse, EndCollapse, Gap, NewSystem  |
+| `ClefType` |  Treble, Bass, Alto, Tenor, Percussion  |
+| `DynamicLevels` |  ppp, pp, p, mp, mf, f, ff, fff  |
+| `DynamicVariance` |  Crescendo, Decrescendo, Diminuendo, Rinforzando, Sforzando  |
+| `ExpressionJustify` |  Left, Center, Right  |
+| `ExpressionPlacement` |  BestFit, BestFitForward, AsStaffSignature, AtNextNote  |
+| `FlowDirTypes` |  Coda, Segno, Fine, ToCoda, DaCapo, DCalCoda, DCalFine, DalSegno, DSalCoda, DSalFine  |
+| `ItemColor` |  Default, Highlight 1, Highlight 2, Highlight 3, Highlight 4, Highlight 5, Highlight 6, Highlight 7  |
+| `ItemVisibility` |  Default, Always, TopStaff, SingleStaff, MultiStaff, Never  |
+| `Lyric2NoteAlignment` |  Start of Accidental/Note, Standard Rules  |
+| `LyricAlignment` |  Bottom, Top  |
+| `MPCControllers` |  tempo, vol, pan, bc, pitch, mod, foot, portamento, datamsb, bal, exp, fx1, fx2, reverb, tremolo, chorus, detune, phaser  |
+| `MPCStyle` |  Absolute, Linear Sweep  |
+| `MeasureNumStyles` |  None, Plain, Circled, Boxed  |
+| `NoteConnectState` |  None, First, Middle, End  |
+| `NoteDuration` |  Whole, Half, Quarter, Eighth, Sixteenth, Thirtysecond, Sixtyfourth  |
+| `NoteScale` |  A, B, C, D, E, F, G  |
+| `ObjLabels` |  Clef, Key, Bar, Ending, Instrument, TimeSig, Tempo, Dynamic, Note, Rest, Chord, SustainPedal, Flow, MPC, TempoVariance, DynamicVariance, PerformanceStyle, Text, RestChord, ChordName, Spacer, RestMultiBar, Boundary, Marker, User  |
+| `OctaveShift` |  None, Octave Up, Octave Down  |
+| `PerformanceStyle` |  Ad Libitum, Animato, Cantabile, Con brio, Dolce, Espressivo, Grazioso, Legato, Maestoso, Marcato, Meno mosso, Poco a poco, Più mosso, Semplice, Simile, Solo, Sostenuto, Sotto Voce, Staccato, Subito, Tenuto, Tutti, Volta Subito  |
+| `SpecialSignatures` |  Standard, Common, AllaBreve  |
+| `StaffEndBarLineType` |  Section Close, Master Repeat Close, Single, Double, Open (hidden)  |
+| `StaffLabelStyles` |  None, First System, Top Systems, All Systems  |
+| `SustainPedalStatus` |  Down, Released  |
+| `TempoBase` |  Eighth, Eighth Dotted, Quarter, Quarter Dotted, Half, Half Dotted  |
+| `TempoVariance` |  Breath Mark, Caesura, Fermata, Accelerando, Allargando, Rallentando, Ritardando, Ritenuto, Rubato, Stringendo  |
+| `TextExpressionFonts` |  StaffSymbols, StaffCueSymbols, StaffItalic, StaffBold, StaffLyric, PageTitleText, PageText, PageSmallText, User1, User2, User3, User4, User5, User6  |
+| `TieDir` |  Default, Upward, Downward  |

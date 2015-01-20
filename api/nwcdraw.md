@@ -16,11 +16,12 @@ The following functions are available in both the `width` and `draw` events:
 <td><a href="#getTypeface">getTypeface</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
 <td><a href="#isDrawing">isDrawing</a></td>
-<td><a href="#setFont">setFont</a></td>
 </tr><tr>
+<td><a href="#setFont">setFont</a></td>
 <td><a href="#setFontClass">setFontClass</a></td>
 <td><a href="#setFontSize">setFontSize</a></td>
 <td><a href="#setFontStyle">setFontStyle</a></td>
+</tr><tr>
 <td><a href="#setTypeface">setTypeface</a></td>
 </tr>
 </table>
@@ -54,11 +55,8 @@ These remaining functions can only be used from the `draw` event method (when `n
 ------------------
 ## About Drawing Coordinates
 
-The `draw` event has a two dimensional, floating point, coordinate system relative to its current position in the staff. 
-The point (0,0) is the base point for the object. The **x dimension** uses a notehead width resolution, much like the
-Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects.
-A coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the user object's
-anchor position.
+The `draw` event has a two dimensional, floating point, coordinate system relative to its current position in the staff. The point (0,0) is the base point for the object. The **x dimension** uses a notehead width resolution, much like the
+Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects. A coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the user object's anchor position.
 
 
 ------------------
@@ -74,8 +72,12 @@ This is a [nwc.drawpos](nwc.drawpos.md) reference, initially bound to the curren
 <a name="getAspectRatio"></a>
 **nwcdraw.getAspectRatio**(), returns #X-DividedBy-Y
 
-This provides an aspect ratio that can be used to normalize the X and Y coordinates within the userdraw function. 
+This provides an aspect ratio that can be used to normalize the X and Y coordinates within the `nwcdraw` system.
 
+```lua
+local cx = 0.3
+local cy = cx*nwcdraw.getAspectRatio()
+```
 
 ------------------
 <a name="getTarget"></a>
@@ -86,16 +88,16 @@ This indicates the drawing target, which will be one of the following: **edit**,
 
 ------------------
 <a name="isDrawing"></a>
-**nwcdraw.isDrawing**(), returns Boolean
+**nwcdraw.isDrawing**(), returns Boolean or nil
 
-This indicates if the draw hook is currently active. When not active, the width predraw hook is being called and no physical drawing functions may legally be invoked.
+This indicates if the `draw` event is currently active. If neither `draw` nor `width` is currently active, then this returns nil.
 
 
 ------------------
 <a name="isAutoInsert"></a>
 **nwcdraw.isAutoInsert**(), returns Boolean
 
-This indicates if the current user object has been automatically inserted at the start of the current printed system. This will only be true when the drawing target is **print**.
+This indicates if the current user object has been automatically inserted at the start of the current system. When the drawing target is `print`, an auto-inserted drawing position will typically be at the start of the system staff. When in `edit` or `view` targets, the auto-inserted drawing position will typically be off screen (not visible to the user).
 
 
 ------------------
@@ -185,7 +187,7 @@ This will render the text using the current pen. The #RotationAngle is the same 
 <a name="setPen"></a>
 **nwcdraw.setPen**('PenStyle',#ThicknessMicrons)
 
-The PenStyle can be one of 'solid', 'dot', or 'dash'. The ThicknessMicrons sets the line thiickness in microns.
+The PenStyle can be one of 'solid', 'dot', or 'dash'. The ThicknessMicrons sets the line thickness in microns.
 
 
 ------------------
@@ -267,15 +269,15 @@ For a circle, one of the dimensions must either be normalized using **nwcdraw.ge
 
 This starts a new figure which should be captured as a new path. While rendering into a path, only the line, curve, bezier, rectangle, roundRect and ellipse functions should be used. When the figure has been constructed, you should use **endPath** to close and render the path.
 
-The following will create and fill a rectangle:
+The following will create and fill a triangle:
 
 ```lua
-function fillRect(x1,y1,x2,y2)
+function fillTriangle(x1,y1,x2,y2,x3,y3)
 	nwcdraw.moveTo(x1,y1)
 	nwcdraw.beginPath()
-	nwcdraw.line(x2,y1)
 	nwcdraw.line(x2,y2)
-	nwcdraw.line(x1,y2)
+	nwcdraw.line(x3,y3)
+	nwcdraw.line(x1,y1)
 	nwcdraw.closeFigure()
 	nwcdraw.endPath("fill")
 end

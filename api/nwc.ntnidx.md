@@ -1,7 +1,5 @@
 # `ntnidx` References
-This object references notation items found within a staff. An existing instance is available as `nwc.ntnidx` in the `nwc` module.
-Additional `ntnidx` reference objects must be declared during the plugin `init` context.
-This is done using the <a href="#new">new</a> method:
+This object references notation items found within a staff. An existing instance is available as `nwc.ntnidx` in the `nwc` module. Additional `ntnidx` reference objects must be declared during the plugin `init` context. This is done using the <a href="#new">new</a> method:
 
 ```Lua
 local myNotationPtr = nwc.ntnidx.new()
@@ -14,34 +12,38 @@ The following methods are provided in the `ntnidx` object:
 <tr>
 <td><a href="#new">new</a></td>
 <td><a href="#reset">reset</a></td>
+<td><a href="#compareOps">&lt; &lt;= &gt; &gt;= ==</a></td>
 </tr><tr>
 <td><a href="#find">find</a></td>
 <td><a href="#durationBase">durationBase</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>
+<td><a href="#isBeamed">isBeamed</a></td>
 <td><a href="#isDotted">isDotted</a></td>
-<td><a href="#isGrace">isGrace</a></td>
 </tr><tr>
+<td><a href="#isGrace">isGrace</a></td>
 <td><a href="#isLyricPos">isLyricPos</a></td>
 <td><a href="#isMelisma">isMelisma</a></td>
 <td><a href="#isMute">isMute</a></td>
 <td><a href="#isSlurIn">isSlurIn</a></td>
-<td><a href="#isSlurOut">isSlurOut</a></td>
 </tr><tr>
+<td><a href="#isSlurOut">isSlurOut</a></td>
 <td><a href="#isSplitVoice">isSplitVoice</a></td>
 <td><a href="#isTieIn">isTieIn</a></td>
 <td><a href="#isTieOut">isTieOut</a></td>
 <td><a href="#isTriplet">isTriplet</a></td>
-<td><a href="#noteCount">noteCount</a></td>
 </tr><tr>
+<td><a href="#noteCount">noteCount</a></td>
 <td><a href="#notePos">notePos</a></td>
 <td><a href="#notePitchPos">notePitchPos</a></td>
 <td><a href="#objProp">objProp</a></td>
 <td><a href="#objType">objType</a></td>
-<td><a href="#propTable">propTable</a></td>
 </tr><tr>
+<td><a href="#propTable">propTable</a></td>
+<td><a href="#sppOffset">sppOffset</a></td>
 <td><a href="#staffPos">staffPos</a></td>
 <td><a href="#stemDir">stemDir</a></td>
 <td><a href="#userProp">userProp</a></td>
+</tr><tr>
 <td><a href="#userType">userType</a></td>
 </tr>
 </table>
@@ -68,10 +70,40 @@ This sets a `ntnidx` reference back to the current user object.
 
 
 ------------------
+<a name="compareOps"></a>
+**{ntnidx}:(operators) &lt; &lt;= &gt; &gt;= ==**, Returns Boolean
+
+`ntnidx` and `drawpos` objects can be compared using the standard operators. An object is *less than* other objects when it is located earlier in the staff.
+
+```lua
+local idx1 = nwc.ntnidx.new()
+local idx2 = nwc.ntnidx.new()
+
+...
+
+if idx1 < idx2 then
+	-- idx1 is located before idx2 on the staff
+end
+
+...
+
+if idx2 > 0 then
+	-- idx2 is located after the currently active user object
+end
+```
+
+------------------
 <a name="indexOffset"></a>
 **{ntnidx}:indexOffset**(), Returns IntegerOffset
 
 This returns the offset index from the current user object.
+
+
+------------------
+<a name="sppOffset"></a>
+**{ntnidx}:sppOffset**(), Returns IntegerOffset
+
+This returns the relative song position pointer offset from the current user object. This value is suitable for use in [nwcplay](nwcplay.md) functions. This value will be negative when the current `ntnidx` is behind the current anchoring index.
 
 
 ---------------------------------
@@ -104,82 +136,87 @@ Returns nil if this is not a valid note or rest position.
 
 
 ------------------
-<a name="isDotted"></a>
-**{ntnidx}:isDotted**([#NoteNumber]), returns #Number or false or nil
+<a name="isBeamed"></a>
+**{ntnidx}:isBeamed**([#NoteNumber]), returns 'BeamStatus' or false or `nil
 
-If this is a note position and is dotted, then the number of dots are returned. Returns false is this note position is not dotted. 
-Returns nil if this is not a valid note or rest position.
+Returns **First**, **Middle**, or **End** when a valid note position is part of a beamed group. Returns `false` when a valid note position is not part of a beam.
 
 
 ------------------
 <a name="isDotted"></a>
 **{ntnidx}:isDotted**([#NoteNumber]), returns #Number or false or nil
 
-If this is a note position and is dotted, then the number of dots are returned. Returns false is this note position is not dotted. 
-Returns nil if this is not a valid note or rest position.
+If this is a note position and is dotted, then the number of dots are returned. Returns `false` if this note position is not dotted. Returns nil if this is not a valid note or rest position.
+
+
+------------------
+<a name="isDotted"></a>
+**{ntnidx}:isDotted**([#NoteNumber]), returns #Number or false or nil
+
+If this is a note position and is dotted, then the number of dots are returned. Returns `false` if this note position is not dotted. Returns nil if this is not a valid note or rest position.
 
 
 ------------------
 <a name="isGrace"></a>
 **{ntnidx}:isGrace**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position is a grace note.
+Returns `true` when a valid note position is a grace note.
 
 
 ------------------
 <a name="isLyricPos"></a>
 **{ntnidx}:isLyricPos**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position accepts attached lyric text.
+Returns `true` when a valid note position accepts attached lyric text.
 
 
 ------------------
 <a name="isMelisma"></a>
 **{ntnidx}:isMelisma**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position accepts attached lyric text, and the position starts a melisma.
+Returns `true` when a valid note position accepts attached lyric text, and the position starts a melisma.
 
 
 ------------------
 <a name="isMute"></a>
 **{ntnidx}:isMute**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position has been specifically muted by the user.
+Returns `true` when a valid note position has been specifically muted by the user.
 
 
 ------------------
 <a name="isSlurIn"></a>
 **{ntnidx}:isSlurIn**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position receives a built-in slur from earlier in the staff.
+Returns `true` when a valid note position receives a built-in slur from earlier in the staff.
 
 
 ------------------
 <a name="isSlurOut"></a>
 **{ntnidx}:isSlurOut**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position starts or extends a slur.
+Returns `true` when a valid note position starts or extends a slur.
 
 
 ------------------
 <a name="isSplitVoice"></a>
 **{ntnidx}:isSplitVoice**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position contains dual voicing, such as a split stem chord or a rest chord.
+Returns `true` when a valid note position contains dual voicing, such as a split stem chord or a rest chord.
 
 
 ------------------
 <a name="isTieIn"></a>
 **{ntnidx}:isTieIn**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position receives a note tie from earlier in the staff.
+Returns `true` when a valid note position receives a note tie from earlier in the staff.
 
 
 ------------------
 <a name="isTieOut"></a>
 **{ntnidx}:isTieOut**([#NoteNumber]), returns Boolean or nil
 
-Returns **true** when a valid note position starts or extends a tie to the next note at its position.
+Returns `true` when a valid note position starts or extends a tie to the next note at its position.
 
 
 
@@ -187,8 +224,7 @@ Returns **true** when a valid note position starts or extends a tie to the next 
 <a name="isTriplet"></a>
 **{ntnidx}:isTriplet**([#NoteNumber]), returns 'TripletPosition' or false or nil
 
-Returns **First**, **Middle**, or **End** when a valid note position is part of a triplet grouping.
-Returns false when a valid note position is not part of a triplet.
+Returns **First**, **Middle**, or **End** when a valid note position is part of a triplet grouping. Returns `false` when a valid note position is not part of a triplet.
 
 
 ---------------------------------
@@ -201,14 +237,14 @@ This method returns a table containing the nwctxt properties for the object.
 <a name="userType"></a>
 **{ntnidx}:userType**(), Returns 'UserObjType'
 
-This method returns the type of the current User object. If the item is not a User item, then Nil is returned.
+This method returns the type of the current User object. If the item is not a User item, then `nil` is returned.
 
 
 ---------------------------------
 <a name="userProp"></a>
 **{ntnidx}:userProp**('PropertyLabel'), Returns 'PropertyValue'
 
-This returns the string value for any property that exists in the current user object, or Nil if this is not a User object.
+This returns the string value for any property that exists in the current User object, or `nil` if this is not a User object.
 
 
 ---------------------------------
@@ -222,30 +258,30 @@ This returns the number of notes found in the object.
 <a name="notePos"></a>
 **{ntnidx}:notePos**(#NoteNumber), Returns #NotePosition
 
-This returns the staff Y coordinate for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnidx}:noteCount()` note numbers. This function returns Nil if there is no such note number.
+This returns the staff Y coordinate for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through [{ntnidx}:noteCount()](#noteCount) note numbers. This function returns `nil` if there is no such note number.
 
 
 ---------------------------------
 <a name="notePitchPos"></a>
 **{ntnidx}:notePitchPos**(#NoteNumber), Returns 'PitchPosText'
 
-This returns the PitchPos nwctxt for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through `{ntnidx}:noteCount()`. This function returns Nil if there is no such note number.
+This returns the PitchPos nwctxt for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through [{ntnidx}:noteCount()](#noteCount). This function returns `nil` if there is no such note number.
 
-Note that unlike the **notePos** function, the position information contained in the 'PitchPosText' is an absolute staff position, and would need to be normalized with a user object's current staff position when using it for drawing.
+Unlike the `notePos` function, the position information contained in the `PitchPosText` uses an absolute staff position, and would need to be normalized with a user object's current staff position when drawing.
 
 
 ---------------------------------
 <a name="stemDir"></a>
-**{ntnidx}:stemDir**(#NoteNumber), Returns `-1` or `1` or `nil`
+**{ntnidx}:stemDir**(#NoteNumber), Returns -1,1, or nil
 
 This returns a number indicating the stem direction for any valid note position. This returns what is essentially a voicing direction for rests and notes without an actual stem.
 
 
 ---------------------------------
 <a name="find"></a>
-**{ntnidx}:find**({Action},['What',...]), Returns Boolean
+**{ntnidx}:find**(Action,['What',...]), Returns Boolean
 
-This method can be used to find other items on the same staff as the current object. The following values are supported for the {Action} field:
+This method can be used to find other items on the same staff as the current object. The following values are supported for the `Action` field:
 
  - [nwc.ntnidx](nwc.ntnidx.md)
    <br>Finds the `ntnidx` referenced object.
@@ -295,6 +331,6 @@ The following values are supported for the optional 'What' field:
  - **dynamic**
    <br>This matches any dynamic.
    
-If a match is found, then the `ntnidx` object is moved to this new position, and true is returned.
+If a match is found, then the `ntnidx` object is moved to this new position, and `true` is returned.
 
-If a match is not found, then the `ntnidx` object is unchanged, and false is returned.
+If a match is not found, then the `ntnidx` object is unchanged, and `false` is returned.

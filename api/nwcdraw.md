@@ -88,9 +88,9 @@ This indicates the drawing target, which will be one of the following: **edit**,
 
 ------------------
 <a name="isDrawing"></a>
-**nwcdraw.isDrawing**(), returns Boolean
+**nwcdraw.isDrawing**(), returns Boolean or nil
 
-This indicates if the draw hook is currently active. When not active, the width predraw hook is being called and no physical drawing functions may legally be invoked.
+This indicates if the `draw` event is currently active. If neither `draw` nor `width` is currently active, then this returns nil.
 
 
 ------------------
@@ -187,7 +187,7 @@ This will render the text using the current pen. The #RotationAngle is the same 
 <a name="setPen"></a>
 **nwcdraw.setPen**('PenStyle',#ThicknessMicrons)
 
-The PenStyle can be one of 'solid', 'dot', or 'dash'. The ThicknessMicrons sets the line thiickness in microns.
+The PenStyle can be one of 'solid', 'dot', or 'dash'. The ThicknessMicrons sets the line thickness in microns.
 
 
 ------------------

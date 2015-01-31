@@ -53,6 +53,7 @@ This returns a value pair that generally reveals the packages that are available
 | `user`<br>`edit` | This is the context used for the `create` and `spin` event methods in `nwcuser`. Available packages include [nwc](nwc.md) and  [nwc.ntnidx](nwc.ntnidx.md). |
 | `user`<br>`predraw` | This is the context used for the `width` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and some parts of [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
 | `user`<br>`draw` | This is the context used for the `draw` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
+| `user`<br>`vplay` | This is the context used for the `transpose` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and read-only parts of [nwcplay](nwcplay.md). |
 | `user`<br>`play` | This is the context used for the `play` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcplay](nwcplay.md). |
 
 

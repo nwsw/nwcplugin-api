@@ -48,6 +48,8 @@ The following support packages are available for use by the user object plugin, 
 
 - [nwc](nwc.md)
 
+- [nwcui](nwcui.md)
+
 - [nwcplay](nwcplay.md)
 
 - [nwcdraw](nwcdraw.md) 

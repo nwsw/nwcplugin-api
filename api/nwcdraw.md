@@ -166,7 +166,7 @@ This method can be used to get the rendered size of the text. The #Descent is th
 <a name="alignText"></a>
 **nwcdraw.alignText**('VertAlign','HorizAlign')
 
-This method sets the current alignment mode for drawing text. VertAlign must be one of 'top', 'baseline', or 'bottom'. HorizAlign must be one of 'left', 'center', or 'right'.
+This method sets the current alignment mode for drawing text. VertAlign must be one of 'top', 'middle', 'baseline', or 'bottom'. HorizAlign must be one of 'left', 'center', or 'right'.
 
 
 ------------------

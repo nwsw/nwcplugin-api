@@ -12,6 +12,9 @@ The following functions are available in both the `width` and `draw` events:
 <td><a href="#getFontSize">getFontSize</a></td>
 <td><a href="#getFontStyle">getFontStyle</a></td>
 </tr><tr>
+<td><a href="#getPageCounter">getPageCounter</a></td>
+<td><a href="#getSystemCounter">getSystemCounter</a></td>
+</tr><tr>
 <td><a href="#getTarget">getTarget</a></td>
 <td><a href="#getTypeface">getTypeface</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
@@ -49,6 +52,7 @@ These remaining functions can only be used from the `draw` event method (when `n
 <td><a href="#beginPath">beginPath</a></td>
 <td><a href="#closeFigure">closeFigure</a></td>
 <td><a href="#endPath">endPath</a></td>
+<td><a href="#width">width</a></td>
 </tr>
 </table>
 
@@ -133,6 +137,19 @@ This method can be used to set a new font for text. The Size is in Y coordinates
 <a name="getFontStyle"></a>
 **nwcdraw.getFontStyle**(), Returns 'Style'
 
+
+------------------
+<a name="getPageCounter"></a>
+**nwcdraw.getPageCounter**(), Returns #Number
+
+This returns the current page counter. In edit mode, this always returns 1. When printing, this returns the target page number, starting with 1.
+
+
+------------------
+<a name="getSystemCounter"></a>
+**nwcdraw.getSystemCounter**(), Returns #Number
+
+This returns the current system counter. In edit mode, this always returns 1. When printing, this returns the target system number, starting with 1.
 
 ------------------
 <a name="setTypeface"></a>
@@ -299,3 +316,10 @@ This closes and renders the current path. The RenderMode should be one of:
 - "fill" to alternately paint the figure's interior
 - "stroke" to render the figure using the current pen
 - "strokeandfill" to do both (this is the default)
+
+
+------------------
+<a name="width"></a>
+**nwcdraw.width**(), Returns #Size
+
+This return the staff width reserved for the current user object.

@@ -25,6 +25,7 @@ The following methods are provided by the `drawpos` object:
 <td><a href="#syllableCounter">syllableCounter</a></td>
 <td><a href="#barCounter">barCounter</a></td>
 <td><a href="#lyricSyllable">lyricSyllable</a></td>
+<td><a href="#width">width</a></td>
 </tr><tr>
 <td><a href="#xyAlignAnchor">xyAlignAnchor</a></td>
 <td><a href="#xyAnchor">xyAnchor</a></td>
@@ -101,6 +102,13 @@ An `Offset` of 1 will return the lyric text just after the current position. The
 Returns nil for 'Syllable' if the `#LyricLine` does not exist, or the drawpos is not eligible for a syllable and no `Offset` was specified.
 
 Returns nil for 'Separator' if none exists, such as for the last syllable and later empty syllables in a `LyricLine`.
+
+
+------------------
+<a name="width"></a>
+**{drawpos}:width**(), returns #Width
+
+This returns the width of the current drawpos. 
 
 
 ------------------

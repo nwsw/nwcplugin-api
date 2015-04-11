@@ -4,8 +4,10 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 
 <table>
 <tr>
-<td><a href="#VERSION">VERSION</a></td>
 <td><a href='#txt'>txt</a></td>
+<td><a href="#VERSION">VERSION</a></td>
+<td><a href="#VERSIONTEXT">VERSIONTEXT</a></td>
+<td><a href="#VERSIONKEY">VERSIONTEXT</a></td>
 </tr><tr>
 <td><a href="#drawpos">drawpos</a></td>
 <td><a href="#ntnidx">ntnidx</a></td>
@@ -26,7 +28,21 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 <a name="VERSION"></a>
 **nwc.VERSION**
 
-This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well.
+This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well, but VERSIONKEY will uniquely identify the sepcific instance of a program version.
+
+
+---------------------------------
+<a name="VERSIONTEXT"></a>
+**nwc.VERSIONTEXT**
+
+This is a constant that provides the user readable version text for the program. 
+
+
+---------------------------------
+<a name="VERSIONKEY"></a>
+**nwc.VERSIONKEY**
+
+This is a constant that uniquely identifies the current plugin API. It uses a series of version numbers, separated by dots, with each subsequent number being a more minor version indicator. There can be up to five version point release indicators, such as `2.74.97.35.1`.
 
 
 ---------------------------------

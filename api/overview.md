@@ -44,6 +44,35 @@ This method table is used as an event dispatch mechanism which forwards the list
 |  width    | **t** | The user object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the user object. Parameter `t` provides read access to the properties for this user object. |
 |  draw     | **t** | The user object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this user object. |
 
+## Object Field Spec - Defining Object Parameters
+
+Although not required, it is recommended that an object's event method table return an additional `spec` entry. This is used to document the custom properties supported by the user object plugin, and to filter the values returned to the script for these properties.
+
+The `spec` table should list all of the possible fields that are supported by the user object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
+
+```Lua
+local obj_spec = {
+	field1 = {type='bool',default=true},
+	field2 = {type='int',default=0,min=0,max=100},
+	field3 = {type='float',default=0.0,min=-5.0,max=5.0},
+	field4 = {type='text',default='mytext'},
+	field5 = {type='enum',default='Quarter',list=nwc.txt.NoteDuration},
+	field6 = {type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
+ }
+```
+
+The `obj_spec` should be included in the table returned by the plugin:
+
+```Lua
+return {
+	spec = obj_spec,
+	create = do_create,
+	...
+ }
+```
+
+When this is done, all property values for a user object of this type will be filtered through the lens of its `spec` table. If a property does not exist in the object, then the `default` value from the spec will be returned. For properties of type `bool`, any of the following case insensitive values will result in a true return value: `y, yes, true, 1`. Any other value will yield false. Numeric values (`int` or `float`) that are out of range will return the `min` or `max`, depending on which extreme was exceeded. For `enum` fields, the `default` will be returned if the current property value is not found in the enumerated list. The list is case sensitive.
+
 ## Support Packages
 
 The following support packages are available for use by the user object plugin, depending on which event method is currently executing in context:

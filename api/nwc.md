@@ -7,7 +7,7 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 <td><a href='#txt'>txt</a></td>
 <td><a href="#VERSION">VERSION</a></td>
 <td><a href="#VERSIONTEXT">VERSIONTEXT</a></td>
-<td><a href="#VERSIONKEY">VERSIONTEXT</a></td>
+<td><a href="#VERSIONKEY">VERSIONKEY</a></td>
 </tr><tr>
 <td><a href="#drawpos">drawpos</a></td>
 <td><a href="#ntnidx">ntnidx</a></td>

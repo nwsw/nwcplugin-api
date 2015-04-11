@@ -17,6 +17,8 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 </tr><tr>
 <td><a href="#getRunContext">getRunContext</a></td>
 <td><a href="#hasTypeface">hasTypeface</a></td>
+<td><a href="#isset">isset</a></td>
+<td><a href="#rawget">rawget</a></td>
 </tr>
 </table>
 
@@ -62,6 +64,20 @@ This returns a value pair that generally reveals the packages that are available
 **nwc.hasTypeface**('font-typeface'), Returns Boolean
 
 This method can be used to identify if a particular font typeface is available on the system before trying to use it. For best performance, it is recommended that this action be done within the plugin startup code.
+
+
+---------------------------------
+<a name="isset"></a>
+**nwc.isset**(t,'PropertyName'), Returns Boolean
+
+This method can be used to determine if a user object property is currently defined in the object referenced by `t`, which is passed into a user object's event method.
+
+
+---------------------------------
+<a name="rawget"></a>
+**nwc.rawget**(t,'PropertyName'), Returns 'PropertyValue'
+
+This method can be used to retrieve the raw value of a property found in  user object's property table `t`. This method can be used to bypass the user object's `spec` table.
 
 
 ---------------------------------

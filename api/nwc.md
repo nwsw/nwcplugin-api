@@ -140,9 +140,7 @@ local typnames = {}
 for typname in pairs(nwc.txt) do table.insert(typnames,typname) end
 table.sort(typnames)
 for i,typname in ipairs(typnames) do
-	local out = {}
-	for _,v in pairs(nwc.txt[typname]) do table.insert(out,v) end
-	print('| `'..typname..'` | ',table.concat(out,', '),' |')
+	print('| `'..typname..'` | ',tostring(nwc.txt[typname]),' |')
 end
 ```
 
@@ -152,6 +150,10 @@ end
 | `BarLineType` |  Single, Double, BrokenSingle, BrokenDouble, SectionOpen, SectionClose, LocalRepeatOpen, LocalRepeatClose, MasterRepeatOpen, MasterRepeatClose, Transparent  |
 | `BoundaryTypes` |  Reset, NewSize, Collapse, EndCollapse, Gap, NewSystem  |
 | `ClefType` |  Treble, Bass, Alto, Tenor, Percussion  |
+| `DrawFillStyle` |  fill, stroke, strokeandfill  |
+| `DrawPenStyle` |  solid, dot, dash  |
+| `DrawTextAlign` |  left, center, right  |
+| `DrawTextVAlign` |  top, middle, baseline, bottom  |
 | `DynamicLevels` |  ppp, pp, p, mp, mf, f, ff, fff  |
 | `DynamicVariance` |  Crescendo, Decrescendo, Diminuendo, Rinforzando, Sforzando  |
 | `ExpressionJustify` |  Left, Center, Right  |
@@ -170,6 +172,7 @@ end
 | `ObjLabels` |  Clef, Key, Bar, Ending, Instrument, TimeSig, Tempo, Dynamic, Note, Rest, Chord, SustainPedal, Flow, MPC, TempoVariance, DynamicVariance, PerformanceStyle, Text, RestChord, ChordName, Spacer, RestMultiBar, Boundary, Marker, User  |
 | `OctaveShift` |  None, Octave Up, Octave Down  |
 | `PerformanceStyle` |  Ad Libitum, Animato, Cantabile, Con brio, Dolce, Espressivo, Grazioso, Legato, Maestoso, Marcato, Meno mosso, Poco a poco, Più mosso, Semplice, Simile, Solo, Sostenuto, Sotto Voce, Staccato, Subito, Tenuto, Tutti, Volta Subito  |
+| `PlayMidiCmds` |  noteOff, noteOn, keyAftertouch, controller, patch, channelAftertouch, pitchBend  |
 | `SpecialSignatures` |  Standard, Common, AllaBreve  |
 | `StaffEndBarLineType` |  Section Close, Master Repeat Close, Single, Double, Open (hidden)  |
 | `StaffLabelStyles` |  None, First System, Top Systems, All Systems  |

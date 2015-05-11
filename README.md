@@ -7,4 +7,4 @@ For those interested in testing the current NWC 2.75 plugin mechanism, you proba
 
 The latest beta preview edition of NoteWorthy Composer 2.75 can be found here:
 
-[NoteWorthy Composer Version 2.75 Beta Release](https://forum.noteworthysoftware.com/?topic=8776.0)
+[NoteWorthy Composer Version 2.75 Beta Release](https://forum.noteworthycomposer.com/?topic=8776)

@@ -4,8 +4,10 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 
 <table>
 <tr>
-<td><a href="#VERSION">VERSION</a></td>
 <td><a href='#txt'>txt</a></td>
+<td><a href="#VERSION">VERSION</a></td>
+<td><a href="#VERSIONTEXT">VERSIONTEXT</a></td>
+<td><a href="#VERSIONKEY">VERSIONKEY</a></td>
 </tr><tr>
 <td><a href="#drawpos">drawpos</a></td>
 <td><a href="#ntnidx">ntnidx</a></td>
@@ -17,6 +19,8 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 </tr><tr>
 <td><a href="#getRunContext">getRunContext</a></td>
 <td><a href="#hasTypeface">hasTypeface</a></td>
+<td><a href="#isset">isset</a></td>
+<td><a href="#rawget">rawget</a></td>
 </tr>
 </table>
 
@@ -24,7 +28,21 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 <a name="VERSION"></a>
 **nwc.VERSION**
 
-This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well.
+This is a constant that indicates the current version of nwctxt when written to a file. It should generallly indicate the current program version as well, but VERSIONKEY will uniquely identify the sepcific instance of a program version.
+
+
+---------------------------------
+<a name="VERSIONTEXT"></a>
+**nwc.VERSIONTEXT**
+
+This is a constant that provides the user readable version text for the program. 
+
+
+---------------------------------
+<a name="VERSIONKEY"></a>
+**nwc.VERSIONKEY**
+
+This is a constant that uniquely identifies the current plugin API. It uses a series of version numbers, separated by dots, with each subsequent number being a more minor version indicator. There can be up to five version point release indicators, such as `2.74.97.35.1`.
 
 
 ---------------------------------
@@ -53,6 +71,7 @@ This returns a value pair that generally reveals the packages that are available
 | `user`<br>`edit` | This is the context used for the `create` and `spin` event methods in `nwcuser`. Available packages include [nwc](nwc.md) and  [nwc.ntnidx](nwc.ntnidx.md). |
 | `user`<br>`predraw` | This is the context used for the `width` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and some parts of [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
 | `user`<br>`draw` | This is the context used for the `draw` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
+| `user`<br>`vplay` | This is the context used for the `transpose` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and read-only parts of [nwcplay](nwcplay.md). |
 | `user`<br>`play` | This is the context used for the `play` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcplay](nwcplay.md). |
 
 
@@ -61,6 +80,20 @@ This returns a value pair that generally reveals the packages that are available
 **nwc.hasTypeface**('font-typeface'), Returns Boolean
 
 This method can be used to identify if a particular font typeface is available on the system before trying to use it. For best performance, it is recommended that this action be done within the plugin startup code.
+
+
+---------------------------------
+<a name="isset"></a>
+**nwc.isset**(t,'PropertyName'), Returns Boolean
+
+This method can be used to determine if a user object property is currently defined in the object referenced by `t`, which is passed into a user object's event method.
+
+
+---------------------------------
+<a name="rawget"></a>
+**nwc.rawget**(t,'PropertyName'), Returns 'PropertyValue'
+
+This method can be used to retrieve the raw value of a property found in  user object's property table `t`. This method can be used to bypass the user object's `spec` table.
 
 
 ---------------------------------
@@ -107,9 +140,7 @@ local typnames = {}
 for typname in pairs(nwc.txt) do table.insert(typnames,typname) end
 table.sort(typnames)
 for i,typname in ipairs(typnames) do
-	local out = {}
-	for _,v in pairs(nwc.txt[typname]) do table.insert(out,v) end
-	print('| `'..typname..'` | ',table.concat(out,', '),' |')
+	print('| `'..typname..'` | ',tostring(nwc.txt[typname]),' |')
 end
 ```
 
@@ -119,6 +150,10 @@ end
 | `BarLineType` |  Single, Double, BrokenSingle, BrokenDouble, SectionOpen, SectionClose, LocalRepeatOpen, LocalRepeatClose, MasterRepeatOpen, MasterRepeatClose, Transparent  |
 | `BoundaryTypes` |  Reset, NewSize, Collapse, EndCollapse, Gap, NewSystem  |
 | `ClefType` |  Treble, Bass, Alto, Tenor, Percussion  |
+| `DrawFillStyle` |  fill, stroke, strokeandfill  |
+| `DrawPenStyle` |  solid, dot, dash  |
+| `DrawTextAlign` |  left, center, right  |
+| `DrawTextVAlign` |  top, middle, baseline, bottom  |
 | `DynamicLevels` |  ppp, pp, p, mp, mf, f, ff, fff  |
 | `DynamicVariance` |  Crescendo, Decrescendo, Diminuendo, Rinforzando, Sforzando  |
 | `ExpressionJustify` |  Left, Center, Right  |
@@ -137,6 +172,7 @@ end
 | `ObjLabels` |  Clef, Key, Bar, Ending, Instrument, TimeSig, Tempo, Dynamic, Note, Rest, Chord, SustainPedal, Flow, MPC, TempoVariance, DynamicVariance, PerformanceStyle, Text, RestChord, ChordName, Spacer, RestMultiBar, Boundary, Marker, User  |
 | `OctaveShift` |  None, Octave Up, Octave Down  |
 | `PerformanceStyle` |  Ad Libitum, Animato, Cantabile, Con brio, Dolce, Espressivo, Grazioso, Legato, Maestoso, Marcato, Meno mosso, Poco a poco, Più mosso, Semplice, Simile, Solo, Sostenuto, Sotto Voce, Staccato, Subito, Tenuto, Tutti, Volta Subito  |
+| `PlayMidiCmds` |  noteOff, noteOn, keyAftertouch, controller, patch, channelAftertouch, pitchBend  |
 | `SpecialSignatures` |  Standard, Common, AllaBreve  |
 | `StaffEndBarLineType` |  Section Close, Master Repeat Close, Single, Double, Open (hidden)  |
 | `StaffLabelStyles` |  None, First System, Top Systems, All Systems  |

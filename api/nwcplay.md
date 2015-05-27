@@ -13,6 +13,7 @@ The following are available:
 <td><a href="#getChannel">getChannel</a></td>
 <td><a href="#getClef">getClef</a></td>
 <td><a href="#getNoteVelocity">getNoteVelocity</a></td>
+</tr><tr>
 <td><a href="#getPort">getPort</a></td>
 <td><a href="#getTimeSig">getTimeSig</a></td>
 <td><a href="#getTransposition">getTransposition</a></td>

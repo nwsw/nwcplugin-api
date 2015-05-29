@@ -93,7 +93,7 @@ This method can be used to determine if a user object property is currently defi
 <a name="rawget"></a>
 **nwc.rawget**(t,'PropertyName'), Returns 'PropertyValue'
 
-This method can be used to retrieve the raw value of a property found in  user object's property table `t`. This method can be used to bypass the user object's `spec` table.
+This method can be used to retrieve the raw value of a property found in  user object's property table `t`. This method can be used to bypass the user object's `spec` table. This also works for `ntnidx` user object refences.
 
 
 ---------------------------------

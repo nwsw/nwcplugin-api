@@ -246,7 +246,7 @@ This method returns the type of the current User object. If the item is not a Us
 <a name="userProp"></a>
 **{ntnidx}:userProp**('PropertyLabel'), Returns 'PropertyValue'
 
-This returns the string value for any property that exists in the current User object, or `nil` if this is not a User object.
+This returns the value for any custom property that exists in the current User object, or `nil` if this is not a User object. If the reference object's `userType` matches the current user object, then this value is filtered through the object's `spec` table.
 
 
 ---------------------------------

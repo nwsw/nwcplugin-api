@@ -5,6 +5,8 @@ This object references notation items found within a staff. An existing instance
 local myNotationPtr = nwc.ntnidx.new()
 ```
 
+> Care should be taken when sharing global object instances across multiple event methods, such as using the same object references between `create`, `draw`, and `width` events. These events can run concurrently while `nwcui` methods are invoked. For this reason, object references used across calls to `nwcui` methods should not be shared with other event handlers.
+
 The following methods are provided in the `ntnidx` object:
 <a name="methodlist"></a>
 

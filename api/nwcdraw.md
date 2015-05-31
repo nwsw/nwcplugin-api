@@ -12,6 +12,7 @@ The following functions are available in both the `width` and `draw` events:
 <td><a href="#getFontSize">getFontSize</a></td>
 <td><a href="#getFontStyle">getFontStyle</a></td>
 </tr><tr>
+<td><a href="#getMicrons">getMicrons</a></td>
 <td><a href="#getPageCounter">getPageCounter</a></td>
 <td><a href="#getSystemCounter">getSystemCounter</a></td>
 </tr><tr>
@@ -83,6 +84,13 @@ This provides an aspect ratio that can be used to normalize the X and Y coordina
 local cx = 0.3
 local cy = cx*nwcdraw.getAspectRatio()
 ```
+
+------------------
+<a name="getMicrons"></a>
+**nwcdraw.getMicrons**([#Width],[#Height]), returns #XMicrons,#YMicrons
+
+This can be used to measure a width and or height value and return the result in microns. Width and Height will default to 1.0 if not specified.
+
 
 ------------------
 <a name="getTarget"></a>

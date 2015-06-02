@@ -12,8 +12,9 @@ The following are available:
 <td><a href="#getBarLength">getBarLength</a></td>
 <td><a href="#getChannel">getChannel</a></td>
 <td><a href="#getClef">getClef</a></td>
-<td><a href="#getNoteVelocity">getNoteVelocity</a></td>
+<td><a href="#getNoteNumber">getNoteNumber</a></td>
 </tr><tr>
+<td><a href="#getNoteVelocity">getNoteVelocity</a></td>
 <td><a href="#getPort">getPort</a></td>
 <td><a href="#getTimeSig">getTimeSig</a></td>
 <td><a href="#getTransposition">getTransposition</a></td>
@@ -45,6 +46,15 @@ This is a [nwc.ntnidx](nwc.ntnidx.md) reference, initially bound to the current 
 **nwcplay.getClef**(), Returns 'ClefType'
 
 This returns the active clef at the current play back position.
+
+
+------------------
+<a name="getNoteNumber"></a>
+**nwcplay.getNoteNumber**([StaffPos]), Returns #NoteNumber
+
+This returns the MIDI note number for the current position on the staff, based on the currently active clef, key, bar accidentals, and transposition. It accepts an offset index relative to the current user object's staff position which defaults to 0 (the current user object's position).
+
+The `StaffPos` can also be a `nwctxt` specification, as returned by [ntnidx:notePitchPos()](nwc.ntnidx.md#notePitchPos).
 
 
 ------------------

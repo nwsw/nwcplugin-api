@@ -38,7 +38,7 @@ These remaining functions can only be used from the `draw` event method (when `n
 <td><a href="#bezier">bezier</a></td>
 <td><a href="#curve">curve</a></td>
 <td><a href="#ellipse">ellipse</a></td>
-<td><a href="#getPageMargin">getPageMargin</a></td>
+<td><a href="#getPageRect">getPageRect</a></td>
 </tr><tr>
 <td><a href="#hintline">hintline</a></td>
 <td><a href="#line">line</a></td>
@@ -155,8 +155,8 @@ This returns the current page counter. In edit mode, this always returns 1. When
 
 
 ------------------
-<a name="getPageMargin"></a>
-**nwcdraw.getPageMargin**(), Returns #Left,#Top,#Right,#Bottom
+<a name="getPageRect"></a>
+**nwcdraw.getPageRect**(), Returns #Left,#Top,#Right,#Bottom
 
 During a printer-based `draw` event, this returns the left, top, right, and bottom coordinates of the current page, as controlled by the page margins. In edit mode, this just returns the bounding area of the current user object.
 

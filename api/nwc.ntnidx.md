@@ -5,6 +5,8 @@ This object references notation items found within a staff. An existing instance
 local myNotationPtr = nwc.ntnidx.new()
 ```
 
+> Care should be taken when sharing global object instances across multiple event methods, such as using the same object references between `create`, `draw`, and `width` events. These events can run concurrently while `nwcui` methods are invoked. For this reason, object references used across calls to `nwcui` methods should not be shared with other event handlers.
+
 The following methods are provided in the `ntnidx` object:
 <a name="methodlist"></a>
 
@@ -244,7 +246,7 @@ This method returns the type of the current User object. If the item is not a Us
 <a name="userProp"></a>
 **{ntnidx}:userProp**('PropertyLabel'), Returns 'PropertyValue'
 
-This returns the string value for any property that exists in the current User object, or `nil` if this is not a User object.
+This returns the value for any custom property that exists in the current User object, or `nil` if this is not a User object. If the reference object's `userType` matches the current user object, then this value is filtered through the object's `spec` table.
 
 
 ---------------------------------

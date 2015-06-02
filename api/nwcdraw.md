@@ -12,6 +12,7 @@ The following functions are available in both the `width` and `draw` events:
 <td><a href="#getFontSize">getFontSize</a></td>
 <td><a href="#getFontStyle">getFontStyle</a></td>
 </tr><tr>
+<td><a href="#getMicrons">getMicrons</a></td>
 <td><a href="#getPageCounter">getPageCounter</a></td>
 <td><a href="#getSystemCounter">getSystemCounter</a></td>
 </tr><tr>
@@ -37,14 +38,15 @@ These remaining functions can only be used from the `draw` event method (when `n
 <td><a href="#bezier">bezier</a></td>
 <td><a href="#curve">curve</a></td>
 <td><a href="#ellipse">ellipse</a></td>
-<td><a href="#hintline">hintline</a></td>
+<td><a href="#getPageRect">getPageRect</a></td>
 </tr><tr>
+<td><a href="#hintline">hintline</a></td>
 <td><a href="#line">line</a></td>
 <td><a href="#moveTo">moveTo</a></td>
 <td><a href="#rectangle">rectangle</a></td>
 <td><a href="#roundRect">roundRect</a></td>
-<td><a href="#setPen">setPen</a></td>
 </tr><tr>
+<td><a href="#setPen">setPen</a></td>
 <td><a href="#setWhiteout">setWhiteout</a></td>
 <td><a href="#strokeText">strokeText</a></td>
 <td><a href="#text">text</a></td>
@@ -82,6 +84,13 @@ This provides an aspect ratio that can be used to normalize the X and Y coordina
 local cx = 0.3
 local cy = cx*nwcdraw.getAspectRatio()
 ```
+
+------------------
+<a name="getMicrons"></a>
+**nwcdraw.getMicrons**([#Width],[#Height]), returns #XMicrons,#YMicrons
+
+This can be used to measure a width and or height value and return the result in microns. Width and Height will default to 1.0 if not specified.
+
 
 ------------------
 <a name="getTarget"></a>
@@ -143,6 +152,13 @@ This method can be used to set a new font for text. The Size is in Y coordinates
 **nwcdraw.getPageCounter**(), Returns #Number
 
 This returns the current page counter. In edit mode, this always returns 1. When printing, this returns the target page number, starting with 1.
+
+
+------------------
+<a name="getPageRect"></a>
+**nwcdraw.getPageRect**(), Returns #Left,#Top,#Right,#Bottom
+
+During a printer-based `draw` event, this returns the left, top, right, and bottom coordinates of the current page, as controlled by the page margins. In edit mode, this just returns the bounding area of the current user object.
 
 
 ------------------

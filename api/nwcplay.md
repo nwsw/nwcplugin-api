@@ -1,6 +1,6 @@
 # The `nwcplay` Package
 
-The `nwcplay` package can only be used while running within a user object's `play` event method. The `play` event utilizes a Song Position Pointer and a memory buffer to capture a performance using MIDI events. The Song Position Pointer uses a Pulses per Quarter Note (PPQ) constant as the basis for an item's length/duration into the performance sequence.
+The `nwcplay` package is available during `play` and `transpose` events. The `play` event utilizes a Song Position Pointer and a memory buffer to capture a performance using MIDI events. The Song Position Pointer uses a Pulses per Quarter Note (PPQ) constant as the basis for an item's length/duration into the performance sequence.
 
 The following are available:
 
@@ -10,8 +10,12 @@ The following are available:
 <td><a href="#user">user</a></td>
 </tr><tr>
 <td><a href="#getBarLength">getBarLength</a></td>
+<td><a href="#getChannel">getChannel</a></td>
 <td><a href="#getClef">getClef</a></td>
+<td><a href="#getNoteNumber">getNoteNumber</a></td>
+</tr><tr>
 <td><a href="#getNoteVelocity">getNoteVelocity</a></td>
+<td><a href="#getPort">getPort</a></td>
 <td><a href="#getTimeSig">getTimeSig</a></td>
 <td><a href="#getTransposition">getTransposition</a></td>
 </tr><tr>
@@ -42,6 +46,29 @@ This is a [nwc.ntnidx](nwc.ntnidx.md) reference, initially bound to the current 
 **nwcplay.getClef**(), Returns 'ClefType'
 
 This returns the active clef at the current play back position.
+
+
+------------------
+<a name="getNoteNumber"></a>
+**nwcplay.getNoteNumber**([StaffPos]), Returns #NoteNumber
+
+This returns the MIDI note number for the current position on the staff, based on the currently active clef, key, bar accidentals, and transposition. It accepts an offset index relative to the current user object's staff position which defaults to 0 (the current user object's position).
+
+The `StaffPos` can also be a `nwctxt` specification, as returned by [ntnidx:notePitchPos()](nwc.ntnidx.md#notePitchPos).
+
+
+------------------
+<a name="getChannel"></a>
+**nwcplay.getChannel**(), Returns #Channel
+
+This returns the current 0 based MIDI channel number.
+
+
+------------------
+<a name="getPort"></a>
+**nwcplay.getPort**(), Returns #Port
+
+This returns the current 0 based MIDI port.
 
 
 ------------------

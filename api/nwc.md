@@ -79,7 +79,7 @@ This returns a value pair that generally reveals the packages that are available
 <a name="hasTypeface"></a>
 **nwc.hasTypeface**('font-typeface'), Returns Boolean
 
-This method can be used to identify if a particular font typeface is available on the system before trying to use it. For best performance, it is recommended that this action be done within the plugin startup code.
+This method can be used to identify if a particular font typeface is available on the system before trying to use it. For best performance, it is recommended that this action be done within the plugin startup code. When the plugin is running in the Viewer, this method will trigger a dynamic load of eligible typefaces.
 
 
 ---------------------------------

@@ -15,8 +15,10 @@ The following are available:
 <td><a href="#getNoteNumber">getNoteNumber</a></td>
 </tr><tr>
 <td><a href="#getNoteVelocity">getNoteVelocity</a></td>
+<td><a href="#getPerfStyle">getPerfStyle</a></td>
 <td><a href="#getPort">getPort</a></td>
 <td><a href="#getTimeSig">getTimeSig</a></td>
+</tr><tr>
 <td><a href="#getTransposition">getTransposition</a></td>
 </tr><tr>
 <td><a href="#midi">midi</a></td>
@@ -46,6 +48,13 @@ This is a [nwc.ntnidx](nwc.ntnidx.md) reference, initially bound to the current 
 **nwcplay.getClef**(), Returns 'ClefType'
 
 This returns the active clef at the current play back position.
+
+
+------------------
+<a name="getPerfStyle"></a>
+**nwcplay.getPerfStyle**(), Returns 'PerfStyle'
+
+This returns the currently active performance style.
 
 
 ------------------

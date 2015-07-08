@@ -73,6 +73,8 @@ return {
 
 When this is done, all property values for a user object of this type will be filtered through the lens of its `spec` table. If a property does not exist in the object, then the `default` value from the spec will be returned. For properties of type `bool`, any of the following case insensitive values will result in a true return value: `y, yes, true, 1`. Any other value will yield false. Numeric values (`int` or `float`) that are out of range will return the `min` or `max`, depending on which extreme was exceeded. For `enum` fields, the `default` will be returned if the current property value is not found in the enumerated list. The list is case sensitive.
 
+The object's `spec` table is also utilized when an object is right clicked from the editor. A property menu is generated from the definitions found in the table, making `bool` and `enum` properties changeable from within the menu.
+
 ## Support Packages
 
 The following support packages are available for use by the user object plugin, depending on which event method is currently executing in context:

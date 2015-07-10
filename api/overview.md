@@ -54,7 +54,7 @@ The `spec` table should list all of the possible fields that are supported by th
 local obj_spec = {
 	field1 = {type='bool',default=true},
 	field2 = {type='int',default=0,min=0,max=100},
-	field3 = {type='float',default=0.0,min=-5.0,max=5.0},
+	field3 = {type='float',default=0.0,min=-5.0,max=5.0,step=0.1},
 	field4 = {type='text',default='mytext'},
 	field5 = {type='enum',default='Quarter',list=nwc.txt.NoteDuration},
 	field6 = {type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},

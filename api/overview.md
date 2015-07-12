@@ -103,9 +103,9 @@ local testspec  = {
 
 The `click` handler must be a local Lua function that accepts three parameters:
 
-1) the object `t` which provides read/write access to the target object (if required)
-2) the `fieldName` from the `spec` table
-3) the `enumValue` is the user clicked value from `list` table for `enum` fields, otherwise it is `nil`
+1. the object `t` which provides read/write access to the target object (if required)
+2. the `fieldName` from the `spec` table
+3. the `enumValue` is the user clicked value from `list` table for `enum` fields, otherwise it is `nil`
 
 The `click` handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is cancelled by the user while in a `click` function, any changes made to the object are ignored.
 

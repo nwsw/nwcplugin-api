@@ -1,12 +1,13 @@
 # The `nwcui` Package
 
-The `nwcui` package can only be used while running within a user object's `create` event method.
+The `nwcui` package can only be used while running within a user object's `create` and `click` event methods.
 
 The following are available:
 
 <table>
 <tr>
 <td><a href="#askbox">askbox</a></td>
+<td><a href="#fontdlg">fontdlg</a></td>
 <td><a href="#msgbox">msgbox</a></td>
 <td><a href="#prompt">prompt</a></td>
 </tr>
@@ -63,3 +64,10 @@ Supported `datatype` strings:
 
 The user is given the opportunity to cancel the current operation, which results in `nil` being returned. No further action should be taken by the script when this is returned.
 
+------------------
+<a name="fontdlg"></a>
+**nwcui.fontdlg**('Typeface',#size,'Style'), Returns 'Typeface',#size,'Style' or nil
+
+Shows a font dialog to the user. A font's typeface, size and style are accepted on input, and returned on output (when confirmed by the user).
+
+The return `Size` parameter is 25% of the point size requested by the user. The style string is suitable for use in [nwcdraw.setFont](nwcdraw.md#setFont).

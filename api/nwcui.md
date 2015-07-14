@@ -60,6 +60,7 @@ Supported `datatype` strings:
 
 - "*" indicates a text response
 - "#" indicates a numeric/integer response; the range can be specified in brackets (e.g. "#[-2,5]" supports values from -2 through 5)
+- "@" indicates a coordinate vector; the maximum range for the x and y value pairs can be specified in brackets (e.g. "@([0,5],[-5,5])" indicates a coordinate where X cannot be less than zero, and Y cannot be less than -5); both and X and Y value are accepted as input data, and returned from this function
 - "|" indicates a list of items, each separated by a vertical bar (e.g. "|Note|Bar|Rest" contains a list of three elements)
 
 The user is given the opportunity to cancel the current operation, which results in `nil` being returned. No further action should be taken by the script when this is returned.

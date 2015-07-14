@@ -246,7 +246,7 @@ This method returns the type of the current User object. If the item is not a Us
 <a name="userProp"></a>
 **{ntnidx}:userProp**('PropertyLabel'), Returns 'PropertyValue'
 
-This returns the value for any custom property that exists in the current User object, or `nil` if this is not a User object. If the reference object's `userType` matches the current user object, then this value is filtered through the object's `spec` table.
+This returns the value for any custom property that exists in the current User object, or `nil` if this is not a User object. This value is filtered through the object's `spec` table.
 
 
 ---------------------------------
@@ -301,7 +301,7 @@ This method can be used to find other items on the same staff as the current obj
 The following values are supported for the optional 'What' field:
 
  - **user**, ['UserObjType', 'UserPropertyLabel']
-   <br>This finds a matching user object. If 'UserObjType' is indicated, then only user objects of this type will be matched. If 'UserPropertyLabel' is indicated, then only user objects that contain a value for this property will be matched.
+   <br>This finds a matching user object. If 'UserObjType' is indicated, then only user objects of this type will be matched. If 'UserPropertyLabel' is indicated, then only user objects that contain a value for this property will be matched. The object's static `spec` table is not used in this process.
    
  - **objType**, ['Type', ...]
    <br>This finds a matching object type, as returned from the `objType()` method. Multiple object type strings can be included in the method call, and this will match against any included type.

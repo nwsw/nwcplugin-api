@@ -51,18 +51,17 @@ Although not required, it is recommended that an object's event method table ret
 
 - document the custom properties supported by the user object plugin
 - filter the values returned to the script for these properties
-- define a `click` handler that allows the script to control how a field is updated when accessed from the editor's right click menu
 
-The `spec` table should list all of the possible fields that are supported by the user object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
+The `spec` table should list all of the possible fields (16 fields maximum) that are supported by the user object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
 
 ```Lua
 local obj_spec = {
-	field1 = {type='bool',default=true},
-	field2 = {type='int',default=0,min=0,max=100},
-	field3 = {type='float',default=0.0,min=-5.0,max=5.0,step=0.1},
-	field4 = {type='text',default='mytext'},
-	field5 = {type='enum',default='Quarter',list=nwc.txt.NoteDuration},
-	field6 = {type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
+	{id='field1',type='bool',default=true},
+	{id='field2',type='int',default=0,min=0,max=100},
+	{id='field3',type='float',default=0.0,min=-5.0,max=5.0,step=0.1},
+	{id='field4',type='text',default='mytext'},
+	{id='field5',type='enum',default='Quarter',list=nwc.txt.NoteDuration},
+	{id='field6',type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
  }
 ```
 
@@ -95,9 +94,9 @@ local function doClick(t,fieldName,enumValue)
 end
 
 local testspec  = {
-	TestOptions = { type='enum', default=false, list=listTestOptions, click=doClick },
-	TestCmd = { type='text', click=doClick },
-	x1 = {type='float',default=0, min=-5, max=5, step=0 },
+	{ id='TestOptions', type='enum', default=false, list=listTestOptions, click=doClick },
+	{ id='TestCmd', type='text', click=doClick },
+	{ id='x1', type='float',default=0, min=-5, max=5, step=0 },
 	}
 ```
 

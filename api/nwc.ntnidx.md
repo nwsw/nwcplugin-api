@@ -17,10 +17,20 @@ The following methods are provided in the `ntnidx` object:
 <td><a href="#compareOps">&lt; &lt;= &gt; &gt;= ==</a></td>
 </tr><tr>
 <td><a href="#find">find</a></td>
+<td><a href="#articulationCount">articulationCount</a></td>
 <td><a href="#durationBase">durationBase</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>
+</tr><tr>
 <td><a href="#isBeamed">isBeamed</a></td>
 <td><a href="#isDotted">isDotted</a></td>
+<td><a href="#isCresc">isCresc</a></td>
+<td><a href="#isDecresc">isDecresc</a></td>
+</tr><tr>
+<td><a href="#isAccented">isAccented</a></td>
+<td><a href="#isMarcato">isMarcato</a></td>
+<td><a href="#isStaccatissimo">isStaccatissimo</a></td>
+<td><a href="#isStaccato">isStaccato</a></td>
+<td><a href="#isTenuto">isTenuto</a></td>
 </tr><tr>
 <td><a href="#isGrace">isGrace</a></td>
 <td><a href="#isLyricPos">isLyricPos</a></td>
@@ -220,6 +230,61 @@ Returns `true` when a valid note position receives a note tie from earlier in th
 
 Returns `true` when a valid note position starts or extends a tie to the next note at its position.
 
+
+------------------
+<a name="isCresc"></a>
+**{ntnidx}:isCresc**([#NoteNumber]), returns Boolean or nil
+
+Returns `true` when a valid note position has been marked with Cresc.
+
+
+------------------
+<a name="isDecresc"></a>
+**{ntnidx}:isDecresc**([#NoteNumber]), returns Boolean or nil
+
+Returns `true` when a valid note position has been marked with Decresc.
+
+
+------------------
+<a name="articulationCount"></a>
+**{ntnidx}:--**([#NoteNumber]), returns Number or nil
+
+When on a valid note position, this returns the number of articulations found .
+
+
+------------------
+<a name="isAccented"></a>
+**{ntnidx}:isAccented**([#NoteNumber]), returns Boolean or nil
+
+Returns `true` when a valid note position has been marked with an Accent.
+
+
+------------------
+<a name="isMarcato"></a>
+**{ntnidx}:isMarcato**([#NoteNumber]), returns Boolean or nil
+
+Returns `true` when a valid note position has been marked with Marcato.
+
+
+------------------
+<a name="isStaccatissimo"></a>
+**{ntnidx}:isStaccatissimo**([#NoteNumber]), returns Boolean or nil
+
+Returns `true` when a valid note position has been marked with Staccatissimo.
+
+
+------------------
+<a name="isStaccato"></a>
+**{ntnidx}:isStaccato**([#NoteNumber]), returns Boolean or nil
+
+Returns `true` when a valid note position has been marked with Staccato.
+
+
+------------------
+<a name="isTenuto"></a>
+**{ntnidx}:isTenuto**([#NoteNumber]), returns Boolean or nil
+
+Returns `true` when a valid note position has been marked with Tenuto.
 
 
 ------------------

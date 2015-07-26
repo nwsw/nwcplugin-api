@@ -247,7 +247,7 @@ Returns `true` when a valid note position has been marked with Decresc.
 
 ------------------
 <a name="articulationCount"></a>
-**{ntnidx}:--**([#NoteNumber]), returns Number or nil
+**{ntnidx}:articulationCount**([#NoteNumber]), returns Number or nil
 
 When on a valid note position, this returns the number of articulations found .
 

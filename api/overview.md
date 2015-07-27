@@ -68,7 +68,7 @@ local obj_spec = {
 Some additional notes about the field types:
 
 - The `label`value is optional. When provided, it will be used in the NWC property sheet.
-- When not specified, the default `min` and `max` values is -1000 to 1000 for all numeric fields.
+- When not specified, the default `min` is -1000 and default `max` is 1000.
 
 The `obj_spec` should be included in the table returned by the plugin:
 

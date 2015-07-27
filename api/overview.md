@@ -56,14 +56,16 @@ The `spec` table should list all of the possible fields (16 fields maximum) that
 
 ```Lua
 local obj_spec = {
-	{id='field1',type='bool',default=true},
+	{id='field1',label='Enable field&1',type='bool',default=true},
 	{id='field2',type='int',default=0,min=0,max=100},
 	{id='field3',type='float',default=0.0,min=-5.0,max=5.0,step=0.1},
 	{id='field4',type='text',default='mytext'},
-	{id='field5',type='enum',default='Quarter',list=nwc.txt.NoteDuration},
-	{id='field6',type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
+	{id='field5',label='What duration',type='enum',default='Quarter',list=nwc.txt.NoteDuration},
+	{id='field6',label='Select from list',type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
  }
 ```
+
+The `label` associated with each `spec` entry is optional. When provided, it will be used in the NWC property sheet.
 
 The `obj_spec` should be included in the table returned by the plugin:
 
@@ -98,7 +100,7 @@ menu1List = {'subCommand 1','subCommand 2','subCommand 3','subCommand 4','subCom
 obj_menu = {
 	{type='choice',name='Menu Command 1',default=nil,list=menu1List,action=doMenu1Command},
 	{type='separator'},
-	{type='command',name='Menu Command 2...',action=doMenu2Command},
+	{type='command',name='Menu Command 2...',action=doMenu2Command,data={custom1='anything'}},
  }
 ```
 
@@ -112,7 +114,7 @@ return {
  }
 ```
 
-The `menu` handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is cancelled by the user while in a `menu` function, any changes made to the object are ignored.
+The `action` handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is canceled by the user while in a `action` function, any changes made to the object are ignored. A custom 'data' field can be included in any `menu` table entry, and can be assigned any values that might be needed in the `action` function.
 
 ## Support Packages
 

@@ -45,26 +45,30 @@ This method table is used as an event dispatch mechanism which forwards the list
 |  width    | **t** | The user object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the user object. Parameter `t` provides read access to the properties for this user object. |
 |  draw     | **t** | The user object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this user object. |
 
-## Object Field Spec - Defining Object Parameters
+## The `spec` Table - Defining Object Properties
 
 Although not required, it is recommended that an object's event method table return an additional `spec` entry. This is used to:
 
-- document the custom properties supported by the user object plugin
+- document the properties supported by the user object plugin
 - filter the values returned to the script for these properties
-- define a `click` handler that allows the script to control how a field is updated when accessed from the editor's right click menu
 
-The `spec` table should list all of the possible fields that are supported by the user object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
+The `spec` table should list all of the possible fields (16 fields maximum) that are supported by the user object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
 
 ```Lua
 local obj_spec = {
-	field1 = {type='bool',default=true},
-	field2 = {type='int',default=0,min=0,max=100},
-	field3 = {type='float',default=0.0,min=-5.0,max=5.0,step=0.1},
-	field4 = {type='text',default='mytext'},
-	field5 = {type='enum',default='Quarter',list=nwc.txt.NoteDuration},
-	field6 = {type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
+	{id='field1',label='Enable field&1',type='bool',default=true},
+	{id='field2',type='int',default=0,min=0,max=100},
+	{id='field3',type='float',default=0.0,min=-5.0,max=5.0,step=0.1},
+	{id='field4',type='text',default='mytext'},
+	{id='field5',label='What duration',type='enum',default='Quarter',list=nwc.txt.NoteDuration},
+	{id='field6',label='Select from list',type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
  }
 ```
+
+Some additional notes about the field types:
+
+- The `label`value is optional. When provided, it will be used in the NWC property sheet.
+- When not specified, the default `min` is -1000 and default `max` is 1000.
 
 The `obj_spec` should be included in the table returned by the plugin:
 
@@ -76,38 +80,44 @@ return {
  }
 ```
 
-When this is done, all property values for a user object of this type will be filtered through the lens of its `spec` table. If a property does not exist in the object, then the `default` value from the spec will be returned. For properties of type `bool`, any of the following case insensitive values will result in a true return value: `y, yes, true, 1`. Any other value will yield false. Numeric values (`int` or `float`) that are out of range will return the `min` or `max`, depending on which extreme was exceeded. For `enum` fields, the `default` will be returned if the current property value is not found in the enumerated list. The list is case sensitive.
+When this is done, all property values for a user object of this type will be filtered through the lens of its `spec` table. If a property does not exist in the object, then the `default` value from the spec will be returned. For properties of type `bool`, any of the following case insensitive values will result in a true return value: `y, yes, true, 1`. Any other value will yield false. Numeric values (`int` or `float`) that are out of range will return the `min` or `max`, depending on which extreme was exceeded. For `enum` fields, the `default` will be returned if the current property value is not found in the enumerated list. The list is generally case sensitive, but you should not use duplicate values of differing case.
 
-The object's `spec` table is also utilized when an object is right clicked from the editor. A property menu is generated from the definitions found in the table, making `bool` and `enum` properties changeable from within the menu.
+## The `menu` Table - Custom Command Actions
+An object's event method table can return an additional `menu` entry. This is used to construct a context menu when an object's anchor is right clicked in the editor. It is also accessible when the object is selected by itself in the editor. Each active menu entry includes an `action` handler that implements the given command.
 
-## The `click` Handler
-The actual action associated with each menu item can be implemented by the script. This is done by adding a `click` handler for the field's definition in the `spec` table:
+The following example demonstrates the available types that are supported by the `menu` table:
 
 ```Lua
-local listTestOptions = {'Configure Spin...', 'Assign New Font...','Change x1'}
+local obj_menu, menu1List
 
-local function doClick(t,fieldName,enumValue)
-	nwcui.msgbox('doClick(t,"'..fieldName..'",'..(enumValue and ('"'..enumValue..'"') or 'nil')..')')
-
-	if enumValue and enumValue:match("x1") then
-		t.x1 = t.x1 + 0.25
-	end
+local function doMenu1Command(t,menuIndex,submenuIndex)
+	print('Menu1 Clicked',obj_menu[menuIndex].name,obj_menu[menuIndex].list[submenuIndex])
 end
 
-local testspec  = {
-	TestOptions = { type='enum', default=false, list=listTestOptions, click=doClick },
-	TestCmd = { type='text', click=doClick },
-	x1 = {type='float',default=0, min=-5, max=5, step=0 },
-	}
+local function doMenu2Command(t,menuIndex)
+	print('Menu2 Clicked',obj_menu[menuIndex].name)
+end
+
+menu1List = {'subCommand 1','subCommand 2','subCommand 3','subCommand 4','subCommand 5'}
+
+obj_menu = {
+	{type='choice',name='Menu Command 1',default=nil,list=menu1List,action=doMenu1Command},
+	{type='separator'},
+	{type='command',name='Menu Command 2...',action=doMenu2Command,data={custom1='anything'}},
+ }
 ```
 
-The `click` handler must be a local Lua function that accepts three parameters:
+The `obj_menu` should be included in the table returned by the plugin:
 
-1. the object `t` which provides read/write access to the target object (if required)
-2. the `fieldName` from the `spec` table
-3. the `enumValue` is the user clicked value from `list` table for `enum` fields, otherwise it is `nil`
+```Lua
+return {
+	spec = obj_spec,
+	menu = obj_menu,
+	...
+ }
+```
 
-The `click` handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is cancelled by the user while in a `click` function, any changes made to the object are ignored.
+The `action` handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is canceled by the user while in a `action` function, any changes made to the object are ignored. A custom 'data' field can be included in any `menu` table entry, and can be assigned any values that might be needed in the `action` function.
 
 ## Support Packages
 

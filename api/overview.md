@@ -83,41 +83,46 @@ return {
 When this is done, all property values for a user object of this type will be filtered through the lens of its `spec` table. If a property does not exist in the object, then the `default` value from the spec will be returned. For properties of type `bool`, any of the following case insensitive values will result in a true return value: `y, yes, true, 1`. Any other value will yield false. Numeric values (`int` or `float`) that are out of range will return the `min` or `max`, depending on which extreme was exceeded. For `enum` fields, the `default` will be returned if the current property value is not found in the enumerated list. The list is generally case sensitive, but you should not use duplicate values of differing case.
 
 ## The `menu` Table - Custom Command Actions
-An object's event method table can return an additional `menu` entry. This is used to construct a context menu when an object's anchor is right clicked in the editor. It is also accessible when the object is selected by itself in the editor. Each active menu entry includes an `action` handler that implements the given command.
+An object's event method table can return an additional `menu` entry. This is used to construct a context menu when an object's anchor is right clicked in the editor. It is also accessible when the object is selected by itself in the editor. Each active menu entry triggers an `menuClick` event when an item is selected by the user.
 
-The following example demonstrates the available types that are supported by the `menu` table:
+The following example demonstrates the `menu` table:
 
 ```Lua
-local obj_menu, menu1List
+local menu1List = {'subCommand 1','subCommand 2','subCommand 3','subCommand 4','subCommand 5'}
 
-local function doMenu1Command(t,menuIndex,submenuIndex)
-	print('Menu1 Clicked',obj_menu[menuIndex].name,obj_menu[menuIndex].list[submenuIndex])
-end
-
-local function doMenu2Command(t,menuIndex)
-	print('Menu2 Clicked',obj_menu[menuIndex].name)
-end
-
-menu1List = {'subCommand 1','subCommand 2','subCommand 3','subCommand 4','subCommand 5'}
-
-obj_menu = {
-	{type='choice',name='Menu Command 1',default=nil,list=menu1List,action=doMenu1Command},
-	{type='separator'},
-	{type='command',name='Menu Command 2...',action=doMenu2Command,data={custom1='anything'}},
+local obj_menu = {
+	{type='choice',name='Menu Command 1',default=nil,list=menu1List,data=nil}
+	{type='command',name='Menu Command 2...',separator=true,data={custom1='anything'}},
  }
+
+local function obj_menuInit(t)
+	-- this can change obj_menu as needed
+end
+
+local function obj_menuClick(t,menuIndex,submenuIndex)
+	if menuIndex == 1 then
+		print('Menu1 Clicked',obj_menu[menuIndex].name,obj_menu[menuIndex].list[submenuIndex])
+	elseif menuIndex == 2 then
+		print('Menu2 Clicked',obj_menu[menuIndex].name)
+	end
+end
+		
+
 ```
 
-The `obj_menu` should be included in the table returned by the plugin:
+The `menu` and its supporeting events must be included in the table returned by the plugin:
 
 ```Lua
 return {
-	spec = obj_spec,
-	menu = obj_menu,
+	...
+	menu      = obj_menu,
+	menuInit  = obj_menuInit,
+	menuClick = obj_menuClick,
 	...
  }
 ```
 
-The `action` handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is canceled by the user while in a `action` function, any changes made to the object are ignored. A custom 'data' field can be included in any `menu` table entry, and can be assigned any values that might be needed in the `action` function.
+The `menuClick` event handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is canceled by the user while in the `menuClick` function, any changes made to the object are ignored. A custom 'data' field can be included in any `menu` table entry, and can be assigned any values that might be needed in the `menuClick` function.
 
 ## Support Packages
 

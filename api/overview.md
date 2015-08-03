@@ -109,7 +109,7 @@ end
 
 local function obj_menuClick(t,menuidx,choice)
 	if menuidx == 1 then
-		print('Menu1 Clicked',obj_menu[1].name,obj_menu[menuIndex].list[choice])
+		print('Menu1 Clicked',obj_menu[1].name,obj_menu[1].list[choice])
 	elseif menuidx == 2 then
 		print('Menu2 Clicked',obj_menu[2].name)
 	end

@@ -23,13 +23,18 @@ Each user object type's Lua script must return an event method table that will b
 
 ```Lua
 return {
-	create	= local function(t) end,
-	audit	= local function(t) end,
-	spin	= local function(t,dir) end,
-	transpose = local function(t,semitones,notepos,updpatch) end,
-	play	= local function(t) end,
-	width	= local function(t) return 0 end,
-	draw	= local function(t) end
+	spec      = {{id='field1',type='text',default=''},{id='field2',type='text',default=''}},
+	menu      = {{type='command',name='cmd1...',separator=false,checkmark=false,disable=false,data=1},
+	             {type='command',name='cmd2...',separator=true,checkmark=true,disable=false,data=2}},
+	menuInit  = function(t) end,
+	menuClick = function(t,menu,choice) end,
+	create    = function(t) end,
+	audit     = function(t) end,
+	spin      = function(t,dir) end,
+	transpose = function(t,semitones,notepos,updpatch) end,
+	play      = function(t) end,
+	width     = function(t) return 0 end,
+	draw      = function(t) end
 	}
 ```
 
@@ -44,6 +49,8 @@ This method table is used as an event dispatch mechanism which forwards the list
 |  play     | **t** | The staff notation is being compiled into a performance using a buffered sequence of MIDI events. Parameter `t` provides read access to the properties for this user object. |
 |  width    | **t** | The user object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the user object. Parameter `t` provides read access to the properties for this user object. |
 |  draw     | **t** | The user object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this user object. |
+|  menuInit | **t** | The user object has been right clicked in the editor, and a menu is about to be presented. Parameter `t` provides read access to the properties for this user object, which can be used to alter the contents of the its `menu` table. |
+| menuClick | **t**<br>**menuidx**<br>**choice** | A choice has been selected from the object's right click menu. Parameter `t` provides read/write access to the properties for this user object. The `menuidx` is the key into the `menu` table, and `choice` is the **list** choice index, or **nil** for menu commands. |
 
 ## The `spec` Table - Defining Object Properties
 
@@ -91,26 +98,27 @@ The following example demonstrates the `menu` table:
 local menu1List = {'subCommand 1','subCommand 2','subCommand 3','subCommand 4','subCommand 5'}
 
 local obj_menu = {
-	{type='choice',name='Menu Command 1',default=nil,list=menu1List,data=nil}
-	{type='command',name='Menu Command 2...',separator=true,data={custom1='anything'}},
+	{type='choice',name='Menu Command 1',separator=false,disable=false,default=nil,list=menu1List,data=nil}
+	{type='command',name='Menu Command 2...',separator=true,disable=false,checkmark=true,data={custom1='anything'}},
  }
 
 local function obj_menuInit(t)
 	-- this can change obj_menu as needed
+	obj_menu[2].checkmark = t.opt1
 end
 
-local function obj_menuClick(t,menuIndex,submenuIndex)
-	if menuIndex == 1 then
-		print('Menu1 Clicked',obj_menu[menuIndex].name,obj_menu[menuIndex].list[submenuIndex])
-	elseif menuIndex == 2 then
-		print('Menu2 Clicked',obj_menu[menuIndex].name)
+local function obj_menuClick(t,menuidx,choice)
+	if menuidx == 1 then
+		print('Menu1 Clicked',obj_menu[1].name,obj_menu[menuIndex].list[choice])
+	elseif menuidx == 2 then
+		print('Menu2 Clicked',obj_menu[2].name)
 	end
 end
 		
 
 ```
 
-The `menu` and its supporeting events must be included in the table returned by the plugin:
+The `menu` and its supporting events must be included in the table returned by the plugin:
 
 ```Lua
 return {
@@ -122,7 +130,7 @@ return {
  }
 ```
 
-The `menuClick` event handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is canceled by the user while in the `menuClick` function, any changes made to the object are ignored. A custom 'data' field can be included in any `menu` table entry, and can be assigned any values that might be needed in the `menuClick` function.
+The `menuClick` event handler is free to change any values in the object via the `t` argument. The program takes care of managing the editor's undo mechanism. If a prompt/dialog is canceled by the user while in the `menuClick` function, any changes made to the object are ignored. A custom 'data' field can be included in any `menu` table entry, and can be assigned any values that might be needed in the `menuInit` or `menuClick` functions.
 
 ## Support Packages
 

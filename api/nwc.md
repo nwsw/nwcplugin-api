@@ -164,6 +164,7 @@ end
 | `ItemVisibility` |  Default, Always, TopStaff, SingleStaff, MultiStaff, Never  |
 | `Lyric2NoteAlignment` |  Start of Accidental/Note, Standard Rules  |
 | `LyricAlignment` |  Bottom, Top  |
+| `MarkerTargets` |  Articulation, Slur, Triplet  |
 | `MPCControllers` |  tempo, vol, pan, bc, pitch, mod, foot, portamento, datamsb, bal, exp, fx1, fx2, reverb, tremolo, chorus, detune, phaser  |
 | `MPCStyle` |  Absolute, Linear Sweep  |
 | `MeasureNumStyles` |  None, Plain, Circled, Boxed  |
@@ -182,3 +183,4 @@ end
 | `TempoVariance` |  Breath Mark, Caesura, Fermata, Accelerando, Allargando, Rallentando, Ritardando, Ritenuto, Rubato, Stringendo  |
 | `TextExpressionFonts` |  StaffSymbols, StaffCueSymbols, StaffItalic, StaffBold, StaffLyric, PageTitleText, PageText, PageSmallText, User1, User2, User3, User4, User5, User6  |
 | `TieDir` |  Default, Upward, Downward  |
+| `UserObjClassTypes` |  Standard, StaffSig  |

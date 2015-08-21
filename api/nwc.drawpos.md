@@ -49,14 +49,14 @@ All of the information retrieval methods from [nwc.ntnidx](nwc.ntnidx.md#methodl
 
 This creates a new `drawpos` reference, which must be done during the plugin's `init` context.
 
-All `drawpos` objects initially reference the current user object when they are first used in an event hook.
+All `drawpos` objects initially reference the current object when they are first used in an event hook.
 
 
 ------------------
 <a name="reset"></a>
 **{drawpos}:reset**()
 
-This sets a `drawpos` reference back to the current user object.
+This sets a `drawpos` reference back to the current target object.
 
 
 ------------------

@@ -56,23 +56,24 @@ This is the default instance of a [ntnidx](nwc.ntnidx.md) reference object. It i
 <a name="drawpos"></a>
 **nwc.drawpos**
 
-This is the default instance of a [drawpos](nwc.drawpos.md) reference object. It is used to reference an existing notation drawing position while running a user object's `width` and `draw` methods.
+This is the default instance of a [drawpos](nwc.drawpos.md) reference object. It is used to reference an existing notation drawing position while running an object's `width` and `draw` methods.
 
 
 ---------------------------------
 <a name="getRunContext"></a>
 **nwc.getRunContext**(), Returns 'context1','context2'
 
-This returns a value pair that generally reveals the packages that are available in the currently running context. The possible returns pairs include:
+This returns a value pair that generally reveals the packages that are available in the currently running context. The returns pairs include:
 
 | Returns | Description |
 |:---------------:| -------------------- |
 | `init`<br>**nil** | This is generally used while a script is being compiled and loaded into the NWC environment. The [nwc](nwc.md) package is available. |
-| `user`<br>`edit` | This is the context used for the `create` and `spin` event methods in `nwcuser`. Available packages include [nwc](nwc.md) and  [nwc.ntnidx](nwc.ntnidx.md). |
-| `user`<br>`predraw` | This is the context used for the `width` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and some parts of [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
-| `user`<br>`draw` | This is the context used for the `draw` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
-| `user`<br>`vplay` | This is the context used for the `transpose` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and read-only parts of [nwcplay](nwcplay.md). |
-| `user`<br>`play` | This is the context used for the `play` event method in `nwcuser`. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcplay](nwcplay.md). |
+| `obj`<br>`edit` | This is the context used for the `create`, `spin` and `menuClick` event methods. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcui](nwcui.md) (except for `spin`). |
+| `obj`<br>`fetch` | This is the context used for the `menuInit` event method. Available packages include [nwc](nwc.md) and [nwc.ntnidx](nwc.ntnidx.md). |
+| `obj`<br>`predraw` | This is the context used for the `width` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and some parts of [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
+| `obj`<br>`draw` | This is the context used for the `draw` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
+| `obj`<br>`vplay` | This is the context used for the `transpose` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and read-only parts of [nwcplay](nwcplay.md). |
+| `obj`<br>`play` | This is the context used for the `play` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcplay](nwcplay.md). |
 
 
 ---------------------------------
@@ -86,14 +87,14 @@ This method can be used to identify if a particular font typeface is available o
 <a name="isset"></a>
 **nwc.isset**(t,'PropertyName'), Returns Boolean
 
-This method can be used to determine if a user object property is currently defined in the object referenced by `t`, which is passed into a user object's event method.
+This method can be used to determine if an object property is currently defined in `t`, which is passed into an object's event method.
 
 
 ---------------------------------
 <a name="rawget"></a>
 **nwc.rawget**(t,'PropertyName'), Returns 'PropertyValue'
 
-This method can be used to retrieve the raw value of a property found in  user object's property table `t`. This method can be used to bypass the user object's `spec` table. This also works for `ntnidx` user object refences.
+This method can be used to retrieve the raw property value in the object's property table `t`. This method can be used to bypass the object's `spec` table. This also works for `ntnidx` user object refences.
 
 
 ---------------------------------

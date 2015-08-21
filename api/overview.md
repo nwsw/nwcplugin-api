@@ -1,9 +1,9 @@
-# NWC User Object Plugin API
+# NWC Object Plugin API
 
-## User Object Type Naming Conventions
-Starting in version 2.75, NoteWorthy Composer includes support for a new `User` object type.
-These objects include a sub-type which can be subclassed using specially crafted Lua scripts.
-A basic NWC User object can be represented in `nwctxt` as follows:
+## Object Type Naming Conventions
+Starting in version 2.75, NoteWorthy Composer includes support for a new generic object type, that internally is of type `User`.
+This object includes a sub-type which can be subclassed using Lua plugin scripts. An example custom NWC object represented by `nwctxt`
+is shown here:
 
 
 ```nwctxt
@@ -15,11 +15,11 @@ Each `<Object-Type-Name>` object can be subclassed with a Lua script that has a 
 `<Object-Type-Name>.nwcuser.lua`
 
 
-The `<Object-Type-Name>` must start with a letter, and is currently restricted to the ASCII character set. It is recommended that all object types include a short author identifier with a dot prefix. For example, all user object types created by Noteworthy Software will always include a `.nw` extension to uniquely identify them.
+The `<Object-Type-Name>` must start with a letter, and is currently restricted to the ASCII character set. It is recommended that all object types include a short author identifier with a dot prefix. For example, all object types created by Noteworthy Software will always include a `.nw` extension to uniquely identify them.
 
 ## Event Methods - Hooking into NWC
 
-Each user object type's Lua script must return an event method table that will be used to subclass all NWC User objects that share the matching `<Object-Type-Name>`. This should be done at the end of the plugin's script:
+Each object type's Lua script must return an event method table that will be used to subclass any objects that share the matching `<Object-Type-Name>`. This should be done at the end of the plugin's script:
 
 ```Lua
 return {
@@ -38,28 +38,28 @@ return {
 	}
 ```
 
-This method table is used as an event dispatch mechanism which forwards the listed events into the user object's plugin module. The supported event methods which can be optionally subclassed by a user object plugin include:
+This method table is used as an event dispatch mechanism which forwards the listed events into the object's plugin module. The supported event methods are:
 
 | Method    | Parameters | Event    |
 |:---------:|:----------:|:-------------- |
-|  create   | **t**      | A new object of this type is being added to the staff. Parameter `t` provides read/write access to the properties for this user object. |
-|  audit   | **t**      | This is called when an object is loaded (via file/clipboard) or a _View->Refresh Score_ is performed. Parameter `t` provides read/write access to the properties for this user object. |
-|  spin     | **t**<br>**dir** | The user applies a '+'/'-' increment/decrement operation against the user object while in the editor. Parameter `t` provides read/write access to the properties for this user object. Parameter `dir` is 1 or -1 to indicate the direction of the spin action.|
-|  transpose     | **t**<br>**semitones**<br>**notepos**<br>**updpatch** | The staff is being transposed by the user. Parameter `t` provides read/write access to the properties for this user object. Parameter `semitones` can be anything from -12 up to 12. The `notepos` indicates the preferred amount of shift that should be applied to a note position on the staff, and should be between -7 and 7. The `updpatch` indicates if the play back instrument will be transposed accordingly.|
-|  play     | **t** | The staff notation is being compiled into a performance using a buffered sequence of MIDI events. Parameter `t` provides read access to the properties for this user object. |
-|  width    | **t** | The user object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the user object. Parameter `t` provides read access to the properties for this user object. |
-|  draw     | **t** | The user object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this user object. |
-|  menuInit | **t** | The user object has been right clicked in the editor, and a menu is about to be presented. Parameter `t` provides read access to the properties for this user object, which can be used to alter the contents of the its `menu` table. |
-| menuClick | **t**<br>**menuidx**<br>**choice** | A choice has been selected from the object's right click menu. Parameter `t` provides read/write access to the properties for this user object. The `menuidx` is the key into the `menu` table, and `choice` is the **list** choice index, or **nil** for menu commands. |
+|  create   | **t**      | A new object is being added to the staff. Parameter `t` provides read/write access to the properties for this object. |
+|  audit   | **t**      | This is called when an object is loaded (via file/clipboard) or a _View->Refresh Score_ is performed. Parameter `t` provides read/write access to the properties for this object. |
+|  spin     | **t**<br>**dir** | The user applies a '+'/'-' increment/decrement operation against the object while in the editor. Parameter `t` provides read/write access to the properties for this object. Parameter `dir` is 1 or -1 to indicate the direction of the spin action.|
+|  transpose     | **t**<br>**semitones**<br>**notepos**<br>**updpatch** | The staff is being transposed by the user. Parameter `t` provides read/write access to the properties for this object. Parameter `semitones` can be anything from -12 up to 12. The `notepos` indicates the preferred amount of shift that should be applied to a note position on the staff, and should be between -7 and 7. The `updpatch` indicates if the play back instrument will be transposed accordingly.|
+|  play     | **t** | The staff notation is being compiled into a performance using a buffered sequence of MIDI events. Parameter `t` provides read access to the properties for this object. |
+|  width    | **t** | The object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the object. Parameter `t` provides read access to the properties for this object. |
+|  draw     | **t** | The object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this object. |
+|  menuInit | **t** | The object has been right clicked in the editor, and a menu is about to be presented. Parameter `t` provides read access to the properties for this object, which can be used to alter the contents of the its `menu` table. |
+| menuClick | **t**<br>**menuidx**<br>**choice** | A choice has been selected from the object's right click menu. Parameter `t` provides read/write access to the properties for this object. The `menuidx` is the key into the `menu` table, and `choice` is the **list** choice index, or **nil** for menu commands. |
 
 ## The `spec` Table - Defining Object Properties
 
 Although not required, it is recommended that an object's event method table return an additional `spec` entry. This is used to:
 
-- document the properties supported by the user object plugin
+- document the properties supported by the plugin
 - filter the values returned to the script for these properties
 
-The `spec` table should list all of the possible fields (16 fields maximum) that are supported by the user object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
+The `spec` table should list all of the possible fields (16 fields maximum) that are supported by the object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
 
 ```Lua
 local obj_spec = {
@@ -87,7 +87,7 @@ return {
  }
 ```
 
-When this is done, all property values for a user object of this type will be filtered through the lens of its `spec` table. If a property does not exist in the object, then the `default` value from the spec will be returned. For properties of type `bool`, any of the following case insensitive values will result in a true return value: `y, yes, true, 1`. Any other value will yield false. Numeric values (`int` or `float`) that are out of range will return the `min` or `max`, depending on which extreme was exceeded. For `enum` fields, the `default` will be returned if the current property value is not found in the enumerated list. The list is generally case sensitive, but you should not use duplicate values of differing case.
+When this is done, all property values for an object will be filtered through the lens of its `spec` table. If a property does not exist in the object, then the `default` value from the spec will be returned. For properties of type `bool`, any of the following case insensitive values will result in a true return value: `y, yes, true, 1`. Any other value will yield false. Numeric values (`int` or `float`) that are out of range will return the `min` or `max`, depending on which extreme was exceeded. For `enum` fields, the `default` will be returned if the current property value is not found in the enumerated list. The list is generally case sensitive, but you should not use duplicate values of differing case.
 
 ## The `menu` Table - Custom Command Actions
 An object's event method table can return an additional `menu` entry. This is used to construct a context menu when an object's anchor is right clicked in the editor. It is also accessible when the object is selected by itself in the editor. Each active menu entry triggers an `menuClick` event when an item is selected by the user.
@@ -134,7 +134,7 @@ The `menuClick` event handler is free to change any values in the object via the
 
 ## Support Packages
 
-The following support packages are available for use by the user object plugin, depending on which event method is currently executing in context:
+The following support packages are available for use by the object plugin, depending on which event method is currently executing in context:
 
 - [nwc](nwc.md)
 

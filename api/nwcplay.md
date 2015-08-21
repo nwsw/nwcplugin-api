@@ -40,7 +40,7 @@ This is a constant that expresses the Pulses Per Quarter Note used when renderin
 <a name="user"></a>
 **nwcplay.user**
 
-This is a [nwc.ntnidx](nwc.ntnidx.md) reference, initially bound to the current user object.
+This is a [nwc.ntnidx](nwc.ntnidx.md) reference, initially bound to the current object.
 
 
 ------------------
@@ -61,7 +61,7 @@ This returns the currently active performance style.
 <a name="getNoteNumber"></a>
 **nwcplay.getNoteNumber**([StaffPos]), Returns #NoteNumber
 
-This returns the MIDI note number for the current position on the staff, based on the currently active clef, key, bar accidentals, and transposition. It accepts an offset index relative to the current user object's staff position which defaults to 0 (the current user object's position).
+This returns the MIDI note number for the current position on the staff, based on the currently active clef, key, bar accidentals, and transposition. It accepts an offset index relative to the current object's staff position which defaults to 0 (the current object's position).
 
 The `StaffPos` can also be a `nwctxt` specification, as returned by [ntnidx:notePitchPos()](nwc.ntnidx.md#notePitchPos).
 
@@ -112,14 +112,14 @@ This returns the default note velocity at the current play back position.
 <a name="note"></a>
 **nwcplay.note**(#offsetSPP,#durationPulses,#midiNoteNumber,[#velocity])
 
-This adds a note to the performance relative to the current time position of the user object. The channel and port are set by the current staff environment. The durationPulses and offsetSPP are restricted to an area near the current play back position. If the velocity is not specified, then the current velocity from the staff position is used.
+This adds a note to the performance relative to the current time position of the object. The channel and port are set by the current staff environment. The durationPulses and offsetSPP are restricted to an area near the current play back position. If the velocity is not specified, then the current velocity from the staff position is used.
 
 
 ------------------
 <a name="midi"></a>
 **nwcplay.midi**(#offsetSPP,'Command',#midiData1,[#midiData2])
 
-This adds a midi message into the performance relative to the current time position of the user object. The channel and port are set by the current staff environment.
+This adds a midi message into the performance relative to the current time position of the object. The channel and port are set by the current staff environment.
 
 The command must be a valid, non-sysex midi command number, or one of the following command names: noteOff, noteOn, keyAftertouch, controller, patch, channelAftertouch, or pitchBend.
 

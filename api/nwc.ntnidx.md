@@ -71,14 +71,14 @@ The following methods are available from `ntnidx`:
 
 This creates a new `ntnidx` reference, which can only be done during the plugin's `init` context.
 
-All `ntnidx` objects always reference the current user object when first used in an event hook.
+All `ntnidx` objects always reference the current object when first used in an event hook.
 
 
 ------------------
 <a name="reset"></a>
 **{ntnidx}:reset**()
 
-This sets a `ntnidx` reference back to the current user object.
+This sets a `ntnidx` reference back to the current object.
 
 
 ------------------
@@ -100,7 +100,7 @@ end
 ...
 
 if idx2 > 0 then
-	-- idx2 is located after the currently active user object
+	-- idx2 is located after the currently active object
 end
 ```
 
@@ -108,14 +108,14 @@ end
 <a name="indexOffset"></a>
 **{ntnidx}:indexOffset**(), Returns IntegerOffset
 
-This returns the offset index from the current user object.
+This returns the offset index from the current object.
 
 
 ------------------
 <a name="sppOffset"></a>
 **{ntnidx}:sppOffset**(), Returns IntegerOffset
 
-This returns the relative song position pointer offset from the current user object. This value is suitable for use in [nwcplay](nwcplay.md) functions. This value will be negative when the current `ntnidx` is behind the current anchoring index.
+This returns the relative song position pointer offset from the current object. This value is suitable for use in [nwcplay](nwcplay.md) functions. This value will be negative when the current `ntnidx` is behind the current anchoring index.
 
 
 ---------------------------------
@@ -136,7 +136,7 @@ This returns the nwctxt property value for the current object, or Nil if this pr
 <a name="staffPos"></a>
 **{ntnidx}:staffPos**(), returns Number
 
-This returns the staff position of the object. This works best with expression and user objects.
+This returns the staff position of the object. This works best with expression and objects.
 
 
 ------------------
@@ -304,14 +304,14 @@ This method returns a table containing the nwctxt properties for the object.
 <a name="userType"></a>
 **{ntnidx}:userType**(), Returns 'UserObjType'
 
-This method returns the type of the current User object. If the item is not a User item, then `nil` is returned.
+This method returns the type of the current object. If the item is not a custom object (User type), then `nil` is returned.
 
 
 ---------------------------------
 <a name="userProp"></a>
 **{ntnidx}:userProp**('PropertyLabel'), Returns 'PropertyValue'
 
-This returns the value for any custom property that exists in the current User object, or `nil` if this is not a User object. This value is filtered through the object's `spec` table.
+This returns the value for any custom property that exists in the current object, or `nil` if this is not a custom `User` object. This value is filtered through the object's `spec` table.
 
 
 ---------------------------------
@@ -334,7 +334,7 @@ This returns the staff Y coordinate for the given NoteNumber. The NoteNumber mus
 
 This returns the PitchPos nwctxt for the given NoteNumber. The NoteNumber must start from 1, and will yield valid positions up through [{ntnidx}:noteCount()](#noteCount). This function returns `nil` if there is no such note number.
 
-Unlike the `notePos` function, the position information contained in the `PitchPosText` uses an absolute staff position, and would need to be normalized with a user object's current staff position when drawing.
+Unlike the `notePos` function, the position information contained in the `PitchPosText` uses an absolute staff position, and would need to be normalized with an object's current staff position when drawing.
 
 
 ---------------------------------
@@ -366,7 +366,7 @@ This method can be used to find other items on the same staff as the current obj
 The following values are supported for the optional 'What' field:
 
  - **user**, ['UserObjType', 'UserPropertyLabel']
-   <br>This finds a matching user object. If 'UserObjType' is indicated, then only user objects of this type will be matched. If 'UserPropertyLabel' is indicated, then only user objects that contain a value for this property will be matched. The object's static `spec` table is not used in this process.
+   <br>This finds a matching custom object. If 'UserObjType' is indicated, then only objects of this type will be matched. If 'UserPropertyLabel' is indicated, then only objects that contain a value for this property will be matched. The object's static `spec` table is not used in this process.
    
  - **objType**, ['Type', ...]
    <br>This finds a matching object type, as returned from the `objType()` method. Multiple object type strings can be included in the method call, and this will match against any included type.

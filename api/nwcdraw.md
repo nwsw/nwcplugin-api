@@ -1,5 +1,5 @@
 # The `nwcdraw` Package
-The `nwcdraw` package provides utility functions for use by a user object's `width` and `draw` event methods.
+The `nwcdraw` package provides utility functions for use by an object's `width` and `draw` event methods.
 
 The following functions are available in both the `width` and `draw` events:
 
@@ -62,7 +62,7 @@ These remaining functions can only be used from the `draw` event method (when `n
 ## About Drawing Coordinates
 
 The `draw` event has a two dimensional, floating point, coordinate system relative to its current position in the staff. The point (0,0) is the base point for the object. The **x dimension** uses a notehead width resolution, much like the
-Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects. A coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the user object's anchor position.
+Spacer object. The **y dimension** uses a staff position system, which is the same as is used by Expression objects. A coordinate of (1.5, 2.0) would be one and a half noteheads to the right and two steps up the staff from the object's anchor position.
 
 
 ------------------
@@ -71,7 +71,7 @@ Spacer object. The **y dimension** uses a staff position system, which is the sa
 <a name="user"></a>
 **nwcdraw.user**
 
-This is a [nwc.drawpos](nwc.drawpos.md) reference, initially bound to the current user object.
+This is a [nwc.drawpos](nwc.drawpos.md) reference, initially bound to the current object.
 
 
 ------------------
@@ -110,7 +110,7 @@ This indicates if the `draw` event is currently active. If neither `draw` nor `w
 <a name="isAutoInsert"></a>
 **nwcdraw.isAutoInsert**(), returns Boolean
 
-This indicates if the current user object has been automatically inserted at the start of the current system. When the drawing target is `print`, an auto-inserted drawing position will typically be at the start of the system staff. When in `edit` or `view` targets, the auto-inserted drawing position will typically be off screen (not visible to the user).
+This indicates if the current object has been automatically inserted at the start of the current system. When the drawing target is `print`, an auto-inserted drawing position will typically be at the start of the system staff. When in `edit` or `view` targets, the auto-inserted drawing position will typically be off screen (not visible to the user).
 
 
 ------------------
@@ -158,7 +158,7 @@ This returns the current page counter. In edit mode, this always returns 1. When
 <a name="getPageRect"></a>
 **nwcdraw.getPageRect**(), Returns #Left,#Top,#Right,#Bottom
 
-During a printer-based `draw` event, this returns the left, top, right, and bottom coordinates of the current page, as controlled by the page margins. In edit mode, this just returns the bounding area of the current user object.
+During a printer-based `draw` event, this returns the left, top, right, and bottom coordinates of the current page, as controlled by the page margins. In edit mode, this just returns the bounding area of the current object.
 
 
 ------------------
@@ -338,4 +338,4 @@ This closes and renders the current path. The RenderMode should be one of:
 <a name="width"></a>
 **nwcdraw.width**(), Returns #Size
 
-This return the staff width reserved for the current user object.
+This return the staff width reserved for the current object.

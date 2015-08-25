@@ -43,7 +43,7 @@ These remaining functions can only be used from the `draw` event method (when `n
 <td><a href="#hintline">hintline</a></td>
 <td><a href="#line">line</a></td>
 <td><a href="#moveTo">moveTo</a></td>
-<td><a href="#opaqueText">opaqueText</a></td>
+<td><a href="#opaqueMode">opaqueMode</a></td>
 <td><a href="#rectangle">rectangle</a></td>
 </tr><tr>
 <td><a href="#roundRect">roundRect</a></td>
@@ -232,8 +232,8 @@ This turns on **whiteout** mode, where everything is drawn in the background col
 
 
 ------------------
-<a name="opaqueText"></a>
-**nwcdraw.opaqueText**([true/false]), Returns `boolean` or `nil`
+<a name="opaqueMode"></a>
+**nwcdraw.opaqueMode**([true/false]), Returns `boolean` or `nil`
 
 This controls the `OPAQUE` property for text. When enabled, text is surrounded by a background color. When disabled, text is drawn transparently into the staff.
 

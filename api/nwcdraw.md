@@ -43,9 +43,10 @@ These remaining functions can only be used from the `draw` event method (when `n
 <td><a href="#hintline">hintline</a></td>
 <td><a href="#line">line</a></td>
 <td><a href="#moveTo">moveTo</a></td>
+<td><a href="#opaqueText">opaqueText</a></td>
 <td><a href="#rectangle">rectangle</a></td>
-<td><a href="#roundRect">roundRect</a></td>
 </tr><tr>
+<td><a href="#roundRect">roundRect</a></td>
 <td><a href="#setPen">setPen</a></td>
 <td><a href="#setWhiteout">setWhiteout</a></td>
 <td><a href="#strokeText">strokeText</a></td>
@@ -228,6 +229,15 @@ The PenStyle can be one of 'solid', 'dot', or 'dash'. The ThicknessMicrons sets 
 **nwcdraw.setWhiteout**([false])
 
 This turns on **whiteout** mode, where everything is drawn in the background color. When printing, this sets the drawing color to White. Specifying **false** in the function call will turn off **whiteout** mode.
+
+
+------------------
+<a name="opaqueText"></a>
+**nwcdraw.opaqueText**([true/false]), Returns `boolean` or `nil`
+
+This controls the `OPAQUE` property for text. When enabled, text is surrounded by a background color. When disabled, text is drawn transparently into the staff.
+
+When called without argument, this returns the current value for the `OPAQUE` property.
 
 
 ------------------

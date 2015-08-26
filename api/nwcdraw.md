@@ -35,27 +35,29 @@ These remaining functions can only be used from the `draw` event method (when `n
 <table>
 <tr>
 <td><a href="#alignText">alignText</a></td>
+<td><a href="#barSegment">barSegment</a></td>
 <td><a href="#bezier">bezier</a></td>
 <td><a href="#curve">curve</a></td>
 <td><a href="#ellipse">ellipse</a></td>
-<td><a href="#getPageRect">getPageRect</a></td>
 </tr><tr>
+<td><a href="#getPageRect">getPageRect</a></td>
 <td><a href="#hintline">hintline</a></td>
 <td><a href="#line">line</a></td>
 <td><a href="#moveTo">moveTo</a></td>
 <td><a href="#opaqueMode">opaqueMode</a></td>
-<td><a href="#rectangle">rectangle</a></td>
 </tr><tr>
+<td><a href="#rectangle">rectangle</a></td>
 <td><a href="#roundRect">roundRect</a></td>
 <td><a href="#setPen">setPen</a></td>
 <td><a href="#setWhiteout">setWhiteout</a></td>
+</tr><tr>
 <td><a href="#strokeText">strokeText</a></td>
 <td><a href="#text">text</a></td>
+<td><a href="#width">width</a></td>
 </tr><tr>
 <td><a href="#beginPath">beginPath</a></td>
 <td><a href="#closeFigure">closeFigure</a></td>
 <td><a href="#endPath">endPath</a></td>
-<td><a href="#width">width</a></td>
 </tr>
 </table>
 
@@ -259,6 +261,15 @@ This draws an editor only hint line. This will only appear when in the editor an
 **nwcdraw.line**(#XCoord,#YCoord,[#XCoord],[#YCoord])
 
 This draws a line using the current pen. Only the first X coordinate is required, as the rest default to the current drawing position (set by nwcdraw.moveTo).
+
+
+------------------
+<a name="barSegment"></a>
+**nwcdraw.barSegment**('BarType',#Y1,#Y2), Returns `#Width`
+
+This draws a bar segment in the same style as the standard bar lines. `BarType` should be one of `nwc.txt.BarLineType`. `Y1` and `Y2` determine the upper and lower end points for the bar segment. The calculated width for the segment is returned.
+
+**Note:** Repeat marks are not drawn by this function, regardless of the requested `BarType`.
 
 
 ------------------

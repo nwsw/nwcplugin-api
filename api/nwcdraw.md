@@ -265,9 +265,9 @@ This draws a line using the current pen. Only the first X coordinate is required
 
 ------------------
 <a name="barSegment"></a>
-**nwcdraw.barSegment**('BarType',#Y1,#Y2), Returns `#Width`
+**nwcdraw.barSegment**('BarType',#Y1,#Y2), Returns #Width
 
-This draws a bar segment in the same style as the standard bar lines. `BarType` should be one of `nwc.txt.BarLineType`. `Y1` and `Y2` determine the upper and lower end points for the bar segment. The calculated width for the segment is returned.
+This draws a bar segment in the same style as the standard bar lines. `BarType` should be one of [nwc.txt.BarLineType](nwc.md#txt). `Y1` and `Y2` determine the upper and lower end points for the bar segment. The calculated width for the segment is returned.
 
 **Note:** Repeat marks are not drawn by this function, regardless of the requested `BarType`.
 

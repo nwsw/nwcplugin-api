@@ -18,8 +18,8 @@ The following methods are provided in the `ntnidx` object:
 </tr><tr>
 <td><a href="#find">find</a></td>
 <td><a href="#articulationCount">articulationCount</a></td>
-<td><a href="#durationBase">durationBase</a></td>
 <td><a href="#indexOffset">indexOffset</a></td>
+<td><a href="#durationBase">durationBase</a></td>
 </tr><tr>
 <td><a href="#isBeamed">isBeamed</a></td>
 <td><a href="#isDotted">isDotted</a></td>
@@ -45,18 +45,19 @@ The following methods are provided in the `ntnidx` object:
 <td><a href="#isTriplet">isTriplet</a></td>
 </tr><tr>
 <td><a href="#noteCount">noteCount</a></td>
+<td><a href="#noteDurBase">noteDurBase</a></td>
 <td><a href="#notePos">notePos</a></td>
 <td><a href="#notePitchPos">notePitchPos</a></td>
+</tr><tr>
 <td><a href="#objProp">objProp</a></td>
 <td><a href="#objType">objType</a></td>
-</tr><tr>
 <td><a href="#propTable">propTable</a></td>
+<td><a href="#userProp">userProp</a></td>
+<td><a href="#userType">userType</a></td>
+</tr><tr>
 <td><a href="#sppOffset">sppOffset</a></td>
 <td><a href="#staffPos">staffPos</a></td>
 <td><a href="#stemDir">stemDir</a></td>
-<td><a href="#userProp">userProp</a></td>
-</tr><tr>
-<td><a href="#userType">userType</a></td>
 </tr>
 </table>
 
@@ -141,9 +142,17 @@ This returns the staff position of the object. This works best with expression a
 
 ------------------
 <a name="durationBase"></a>
-**{ntnidx}:durationBase**([#NoteNumber]), returns 'Duration' or nil
+**{ntnidx}:durationBase**([#NoteNumber]), returns `nwc.txt.NoteDuration` or nil
 
-Returns the note position's named duration.
+Returns the note position's named duration using the `nwc.txt.NoteDuration` enumeration.
+Returns nil if this is not a valid note or rest position.
+
+
+------------------
+<a name="noteDurBase"></a>
+**{ntnidx}:noteDurBase**([#NoteNumber]), returns `nwc.txt.NoteDurBase` or nil
+
+Returns the note position's named duration using the `nwc.txt.NoteDurBase` enumeration.
 Returns nil if this is not a valid note or rest position.
 
 

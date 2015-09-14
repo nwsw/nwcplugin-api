@@ -170,8 +170,9 @@ end
 | `MeasureNumStyles` |  None, Plain, Circled, Boxed  |
 | `NoteConnectState` |  None, First, Middle, End  |
 | `NoteDuration` |  Whole, Half, Quarter, Eighth, Sixteenth, Thirtysecond, Sixtyfourth  |
+| `NoteDurBase` |  Whole, Half, 4th, 8th, 16th, 32nd, 64th  |
 | `NoteScale` |  A, B, C, D, E, F, G  |
-| `ObjLabels` |  Clef, Key, Bar, Ending, Instrument, TimeSig, Tempo, Dynamic, Note, Rest, Chord, SustainPedal, Flow, MPC, TempoVariance, DynamicVariance, PerformanceStyle, Text, RestChord, ChordName, Spacer, RestMultiBar, Boundary, Marker, User  |
+| `ObjLabels` |  Clef, Key, Bar, Ending, Instrument, TimeSig, Tempo, Dynamic, Note, Rest, Chord, SustainPedal, Flow, MPC, TempoVariance, DynamicVariance, PerformanceStyle, Text, RestChord, User, Spacer, RestMultiBar, Boundary, Marker  |
 | `OctaveShift` |  None, Octave Up, Octave Down  |
 | `PerformanceStyle` |  Ad Libitum, Animato, Cantabile, Con brio, Dolce, Espressivo, Grazioso, Legato, Maestoso, Marcato, Meno mosso, Poco a poco, Più mosso, Semplice, Simile, Solo, Sostenuto, Sotto Voce, Staccato, Subito, Tenuto, Tutti, Volta Subito  |
 | `PlayMidiCmds` |  noteOff, noteOn, keyAftertouch, controller, patch, channelAftertouch, pitchBend  |

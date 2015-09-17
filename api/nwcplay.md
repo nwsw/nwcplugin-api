@@ -9,16 +9,17 @@ The following are available:
 <td><a href="#PPQ">PPQ</a></td>
 <td><a href="#user">user</a></td>
 </tr><tr>
+<td><a href="#calcDurLength">calcDurLength</a></td>
 <td><a href="#getBarLength">getBarLength</a></td>
 <td><a href="#getChannel">getChannel</a></td>
 <td><a href="#getClef">getClef</a></td>
-<td><a href="#getNoteNumber">getNoteNumber</a></td>
 </tr><tr>
+<td><a href="#getNoteNumber">getNoteNumber</a></td>
 <td><a href="#getNoteVelocity">getNoteVelocity</a></td>
 <td><a href="#getPerfStyle">getPerfStyle</a></td>
 <td><a href="#getPort">getPort</a></td>
-<td><a href="#getTimeSig">getTimeSig</a></td>
 </tr><tr>
+<td><a href="#getTimeSig">getTimeSig</a></td>
 <td><a href="#getTransposition">getTransposition</a></td>
 </tr><tr>
 <td><a href="#midi">midi</a></td>
@@ -92,6 +93,15 @@ This returns the number of semitones of transposition that apply at the current 
 **nwcplay.getTimeSig**(), Returns #Numerator,#Denominator
 
 This returns the time signature at the current play back position.
+
+
+------------------
+<a name="calcDurLength"></a>
+**nwcplay.calcDurLength**('durName'), Returns #SongPulses
+
+This returns the total song pulses associated with the `durName`.
+
+`durName` must be one of the enumeration values from `nwc.txt.NoteDuration` or `nwc.txt.NoteDurBase`.
 
 
 ------------------

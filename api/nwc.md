@@ -174,11 +174,15 @@ end
 | `NoteScale` |  A, B, C, D, E, F, G  |
 | `ObjLabels` |  Clef, Key, Bar, Ending, Instrument, TimeSig, Tempo, Dynamic, Note, Rest, Chord, SustainPedal, Flow, MPC, TempoVariance, DynamicVariance, PerformanceStyle, Text, RestChord, User, Spacer, RestMultiBar, Boundary, Marker  |
 | `OctaveShift` |  None, Octave Up, Octave Down  |
+| `PageMarginFields` |  Left, Top, Right, Bottom, Mirror  |
+| `PageSetupFields` |  TitlePage, JustifyVertically, PrintSystemSepMark, ExtendLastSystem, DurationPadding, PageNumbers, StaffLabels, BarNumbers, StartingBar, AllowLayering  |
 | `PerformanceStyle` |  Ad Libitum, Animato, Cantabile, Con brio, Dolce, Espressivo, Grazioso, Legato, Maestoso, Marcato, Meno mosso, Poco a poco, Più mosso, Semplice, Simile, Solo, Sostenuto, Sotto Voce, Staccato, Subito, Tenuto, Tutti, Volta Subito  |
 | `PlayMidiCmds` |  noteOff, noteOn, keyAftertouch, controller, patch, channelAftertouch, pitchBend  |
+| `SongInfoFields` |  Title, Author, Lyricist, Copyright1, Copyright2, Comments  |
 | `SpecialSignatures` |  Standard, Common, AllaBreve  |
 | `StaffEndBarLineType` |  Section Close, Master Repeat Close, Single, Double, Open (hidden)  |
 | `StaffLabelStyles` |  None, First System, Top Systems, All Systems  |
+| `StaffProperties` |  Name, Label, LabelAbbr, Group, EndingBar, BoundaryTop, BoundaryBottom, Lines, BracketWithNext, BraceWithNext, ConnectBarsWithNext, LayerWithNext, MultiPartDotPlacement, Color, Muted, Volume, StereoPan, Device, Channel  |
 | `SustainPedalStatus` |  Down, Released  |
 | `TempoBase` |  Eighth, Eighth Dotted, Quarter, Quarter Dotted, Half, Half Dotted  |
 | `TempoVariance` |  Breath Mark, Caesura, Fermata, Accelerando, Allargando, Rallentando, Ritardando, Ritenuto, Rubato, Stringendo  |

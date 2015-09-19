@@ -157,28 +157,28 @@ This method can be used to set a new font for text. The Size is in Y coordinates
 
 ------------------
 <a name="getPageMargin"></a>
-**nwcdraw.getPageMargin**(@nwc.txt.PageMarginFields), Returns `Variant`
+**nwcdraw.getPageMargin**(@[nwc.txt.PageMarginFields](nwc.md#txt)), Returns `Variant`
 
 This can be used to retrieve page margin properties.
 
 
 ------------------
 <a name="getPageSetup"></a>
-**nwcdraw.getPageSetup**(@nwc.txt.PageSetupFields), Returns `Variant`
+**nwcdraw.getPageSetup**(@[nwc.txt.PageSetupFields](nwc.md#txt)), Returns `Variant`
 
 This can be used to retrieve various page setup properties.
 
 
 ------------------
 <a name="getSongInfo"></a>
-**nwcdraw.getSongInfo**(@nwc.txt.SongInfoFields), Returns `Variant`
+**nwcdraw.getSongInfo**(@[nwc.txt.SongInfoFields](nwc.md#txt)), Returns `Variant`
 
 This can be used to retrieve properties found in File, Info.
 
 
 ------------------
 <a name="getStaffProp"></a>
-**nwcdraw.getStaffProp**(@nwc.txt.StaffProperties), Returns `Variant`
+**nwcdraw.getStaffProp**(@[nwc.txt.StaffProperties](nwc.md#txt)), Returns `Variant`
 
 This can be used to retrieve various staff properties.
 

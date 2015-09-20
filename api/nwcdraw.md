@@ -14,6 +14,11 @@ The following functions are available in both the `width` and `draw` events:
 </tr><tr>
 <td><a href="#getMicrons">getMicrons</a></td>
 <td><a href="#getPageCounter">getPageCounter</a></td>
+<td><a href="#getPageMargin">getPageMargin</a></td>
+<td><a href="#getPageSetup">getPageSetup</a></td>
+</tr><tr>
+<td><a href="#getSongInfo">getSongInfo</a></td>
+<td><a href="#getStaffProp">getStaffProp</a></td>
 <td><a href="#getSystemCounter">getSystemCounter</a></td>
 </tr><tr>
 <td><a href="#getTarget">getTarget</a></td>
@@ -148,6 +153,34 @@ This method can be used to set a new font for text. The Size is in Y coordinates
 ------------------
 <a name="getFontStyle"></a>
 **nwcdraw.getFontStyle**(), Returns 'Style'
+
+
+------------------
+<a name="getPageMargin"></a>
+**nwcdraw.getPageMargin**(@[nwc.txt.PageMarginFields](nwc.md#txt)), Returns `Variant`
+
+This can be used to retrieve page margin properties.
+
+
+------------------
+<a name="getPageSetup"></a>
+**nwcdraw.getPageSetup**(@[nwc.txt.PageSetupFields](nwc.md#txt)), Returns `Variant`
+
+This can be used to retrieve various page setup properties.
+
+
+------------------
+<a name="getSongInfo"></a>
+**nwcdraw.getSongInfo**(@[nwc.txt.SongInfoFields](nwc.md#txt)), Returns `Variant`
+
+This can be used to retrieve properties found in File, Info.
+
+
+------------------
+<a name="getStaffProp"></a>
+**nwcdraw.getStaffProp**(@[nwc.txt.StaffProperties](nwc.md#txt)), Returns `Variant`
+
+This can be used to retrieve various staff properties.
 
 
 ------------------

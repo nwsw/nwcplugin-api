@@ -1,7 +1,7 @@
 # NWC Object Plugin API
 
 ## Object Type Naming Conventions
-Starting in version 2.75, NoteWorthy Composer includes support for a new generic object type, that internally is of type `User`.
+NoteWorthy Composer Version 2.75 includes support for a new generic object type, that internally is of type `User`.
 This object includes a sub-type which can be subclassed using Lua plugin scripts. An example custom NWC object represented by `nwctxt`
 is shown here:
 

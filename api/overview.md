@@ -31,6 +31,7 @@ return {
 	create    = function(t) end,
 	audit     = function(t) end,
 	spin      = function(t,dir) end,
+	onChar    = function(t,c) end,
 	transpose = function(t,semitones,notepos,updpatch) end,
 	play      = function(t) end,
 	width     = function(t) return 0 end,
@@ -45,6 +46,7 @@ This method table is used as an event dispatch mechanism which forwards the list
 |  create   | **t**      | A new object is being added to the staff. Parameter `t` provides read/write access to the properties for this object. |
 |  audit   | **t**      | This is called when an object is loaded (via file/clipboard) or a _View->Refresh Score_ is performed. Parameter `t` provides read/write access to the properties for this object. |
 |  spin     | **t**<br>**dir** | The user applies a '+'/'-' increment/decrement operation against the object while in the editor. Parameter `t` provides read/write access to the properties for this object. Parameter `dir` is 1 or -1 to indicate the direction of the spin action.|
+|  onChar   | **t**<br>**c** | The user has pressed a character on the computer keyboard while targeting this object (it is selected by itself from within the editor). Parameter `t` provides read/write access to the properties for this object. Parameter `c` is the numeric key that has been pressed. Returns `true` if the plugin has responded to the key with an action. Returns `false` if the key should be handled in the standard fashion by the editor. |
 |  transpose     | **t**<br>**semitones**<br>**notepos**<br>**updpatch** | The staff is being transposed by the user. Parameter `t` provides read/write access to the properties for this object. Parameter `semitones` can be anything from -12 up to 12. The `notepos` indicates the preferred amount of shift that should be applied to a note position on the staff, and should be between -7 and 7. The `updpatch` indicates if the play back instrument will be transposed accordingly.|
 |  play     | **t** | The staff notation is being compiled into a performance using a buffered sequence of MIDI events. Parameter `t` provides read access to the properties for this object. |
 |  width    | **t** | The object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the object. Parameter `t` provides read access to the properties for this object. |

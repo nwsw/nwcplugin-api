@@ -1,7 +1,7 @@
 # `drawpos` References
 This object enables reference access to different drawing positions on a visible staff.
 
-A `drawpos` object must be declared during plugin startup intialization before it can be used in a `draw` hook. 
+A `drawpos` object must be declared during plugin startup intialization before it can be used in a `draw` hook.
 An existing instance is always available as `nwc.drawpos`.
 
 Additional `drawpos` reference objects can be declared during plugin `init` via the <a href="#new">new</a> method:
@@ -32,8 +32,11 @@ The following methods are provided by the `drawpos` object:
 <td><a href="#xyLyric">xyLyric</a></td>
 <td><a href="#xyRight">xyRight</a></td>
 </tr><tr>
+<td><a href="#xyNoteAccidental">xyNoteAccidental</a></td>
+<td><a href="#xyNoteHead">xyNoteHead</a></td>
 <td><a href="#xyStemAnchor">xyStemAnchor</a></td>
 <td><a href="#xyStemTip">xyStemTip</a></td>
+</tr><tr>
 <td><a href="#xyTimeslot">xyTimeslot</a></td>
 </tr>
 </table>
@@ -108,7 +111,7 @@ Returns nil for 'Separator' if none exists, such as for the last syllable and la
 <a name="width"></a>
 **{drawpos}:width**(), returns #Width
 
-This returns the width of the current drawpos. 
+This returns the width of the current drawpos.
 
 
 ------------------
@@ -135,6 +138,20 @@ If the current `drawpos` is not eligible for lyric text, then this function retu
 in this circumstance.
 
 Returns nil if the #LyricRow does not exist.
+
+
+------------------
+<a name="xyNoteAccidental"></a>
+**{drawpos}:xyNoteAccidental**([#NoteNumber]), returns #X,#Y
+
+This returns the anchoring position for a target note's accidental in `{drawpos}`. The optional `NoteNumber` is used to indicate a member note in a chord. If an accidental is not found at this position then `nil` is returned.
+
+
+------------------
+<a name="xyNoteHead"></a>
+**{drawpos}:xyNoteHead**([#NoteNumber]), returns #X,#Y
+
+This returns the anchoring position for a target note head in `{drawpos}`. The optional `NoteNumber` is used to indicate a member note in a chord. Returns `nil` when a note is not found.
 
 
 ------------------

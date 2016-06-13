@@ -1,4 +1,4 @@
--- Version 0.22
+-- Version 1.0
 
 --[[----------------------------------------------------------------
 xyAnalyzer.demo
@@ -19,9 +19,10 @@ local function getMatchingTableEntry(t, fval)
 end
 
 --------------------------------------------------------------------
-local validMethods = {'xyAnchor','xyTimeslot','xyLyric','xyRight','xyAlignAnchor','xyStemAnchor','xyStemTip'}
+local validMethods = {'xyAnchor','xyTimeslot','xyLyric','xyRight','xyAlignAnchor','xyStemAnchor','xyStemTip','xyNoteHead','xyNoteAccidental'}
 local validDirections = {'nil','-1','+1'}
 local validLyricNumber = {'1','2','3','4'}
+local validNoteNumber = {'nil','1','2','3'}
 local validParm1 = {
 	xyAnchor = validDirections,
 	xyTimeslot = validDirections,
@@ -30,16 +31,22 @@ local validParm1 = {
 	xyAlignAnchor = validDirections,
 	xyStemAnchor = validDirections,
 	xyStemTip = validDirections,
+	xyNoteHead = validNoteNumber,
+	xyNoteAccidental = validNoteNumber,
 	}
+
+local obj_spec = {
+	{ id='Method', label='drawidx Method', type='enum', default=validMethods[1], list=validMethods},
+	{ id='Parm1', label='Function Parm 1', type='text', default='nil' },
+}
 
 local function do_create(t)
 	t.Method = validMethods[1]
-
 	t.Parm1 = 'nil' -- tonumber() will make this nil in the draw method
 end
 
 local function do_spin(t,d)
-	local m = t.Method or validMethods[1]
+	local m = t.Method
 	local p1 = t.Parm1
 	local p1valid = validParm1[m] or validParm1.xyAnchor
 	local i = getMatchingTableEntry(p1valid,p1) or 1
@@ -60,7 +67,7 @@ local function do_spin(t,d)
 	end
 
 	t.Method = validMethods[i]
-	p1valid = validParm1[t.Method] 
+	p1valid = validParm1[t.Method]
 	t.Parm1 = (d > 0) and p1valid[1] or p1valid[#p1valid]
 end
 
@@ -81,9 +88,9 @@ local function do_draw(t)
 	nwcdraw.setFont("Courier New",3)
 	local w,h = nwcdraw.calcTextSize(m)
 
-	if not nwcdraw.isDrawing() then return nwcdraw.calcTextSize('WWW') end
+	if not nwcdraw.isDrawing() then return w end
 
-	nwcdraw.alignText('bottom','right')
+	nwcdraw.alignText('top','right')
 
 	if dpos:find("prior") then
 		nwcdraw.text(m)
@@ -92,7 +99,7 @@ local function do_draw(t)
 		if x then
 			local cx = 0.3
 			local cy = cx*nwcdraw.getAspectRatio()
-			nwcdraw.moveTo(0,0)
+			nwcdraw.moveTo(-w,0)
 			nwcdraw.hintline(x,y)
 			nwcdraw.ellipse(cx,cy)
 			if v3 then
@@ -108,6 +115,7 @@ end
 
 --------------------------------------------------------------------
 return {
+	spec	= obj_spec,
 	create	= do_create,
 	spin	= do_spin,
 	width	= do_draw,

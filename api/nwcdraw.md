@@ -39,6 +39,7 @@ These remaining functions can only be used from the `draw` event method (when `n
 
 <table>
 <tr>
+
 <td><a href="#alignText">alignText</a></td>
 <td><a href="#barSegment">barSegment</a></td>
 <td><a href="#bezier">bezier</a></td>
@@ -48,9 +49,10 @@ These remaining functions can only be used from the `draw` event method (when `n
 <td><a href="#getPageRect">getPageRect</a></td>
 <td><a href="#hintline">hintline</a></td>
 <td><a href="#line">line</a></td>
+<td><a href="#moveBy">moveBy</a></td>
 <td><a href="#moveTo">moveTo</a></td>
-<td><a href="#opaqueMode">opaqueMode</a></td>
 </tr><tr>
+<td><a href="#opaqueMode">opaqueMode</a></td>
 <td><a href="#rectangle">rectangle</a></td>
 <td><a href="#roundRect">roundRect</a></td>
 <td><a href="#setPen">setPen</a></td>
@@ -59,6 +61,7 @@ These remaining functions can only be used from the `draw` event method (when `n
 <td><a href="#strokeText">strokeText</a></td>
 <td><a href="#text">text</a></td>
 <td><a href="#width">width</a></td>
+<td><a href="#xyPos">xyPos</a></td>
 </tr><tr>
 <td><a href="#beginPath">beginPath</a></td>
 <td><a href="#closeFigure">closeFigure</a></td>
@@ -273,6 +276,20 @@ This turns on **whiteout** mode, where everything is drawn in the background col
 This controls the `OPAQUE` property for text. When enabled, text is surrounded by a background color. When disabled, text is drawn transparently into the staff.
 
 When called without argument, this returns the current value for the `OPAQUE` property.
+
+
+------------------
+<a name="xyPos"></a>
+**nwcdraw.xyPos**(), Returns #X,#Y
+
+This returns the current drawing position.
+
+
+------------------
+<a name="moveBy"></a>
+**nwcdraw.moveBy**(#XOffset,[#YOffset])
+
+This moves the current starting position by the specified offset. Only the X offset is required.
 
 
 ------------------

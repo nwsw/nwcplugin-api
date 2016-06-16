@@ -142,16 +142,28 @@ Returns nil if the #LyricRow does not exist.
 
 ------------------
 <a name="xyNoteAccidental"></a>
-**{drawpos}:xyNoteAccidental**([#NoteNumber]), returns #X,#Y
+**{drawpos}:xyNoteAccidental**([#NoteNumber]), returns #X,#Y,#AccIndicator
 
-This returns the anchoring position for a target note's accidental in `{drawpos}`. The optional `NoteNumber` is used to indicate a member note in a chord. If an accidental is not found at this position then `nil` is returned.
+This returns the anchoring position for a target note's accidental in `{drawpos}`. The optional `NoteNumber` is used to indicate a member note in a chord. The `AccIndicator` will be an offset value indicating the pitch shift associated with the accidental (one of -2, -1, 0, 1, or 2), or `nil` if no accidental is assigned to the target note.
+
+Returns `nil` when a note is not found.
 
 
 ------------------
 <a name="xyNoteHead"></a>
-**{drawpos}:xyNoteHead**([#NoteNumber]), returns #X,#Y
+**{drawpos}:xyNoteHead**([#NoteNumber]), returns #X,#Y,#GlyphIndicator
 
-This returns the anchoring position for a target note head in `{drawpos}`. The optional `NoteNumber` is used to indicate a member note in a chord. Returns `nil` when a note is not found.
+This returns the anchoring position for a target note head in `{drawpos}`. The optional `NoteNumber` is used to indicate a member note in a chord.
+
+`GlyphIndicator` is the ordinal value for the *nwctxt* character representation of the note head. For example:
+
+```Lua
+string.byte("o") -- indicates a standard notehead
+string.byte("z") -- indicates a blank notehead
+string.byte("x") -- indicates a X notehead
+```
+
+Returns `nil` when a note is not found.
 
 
 ------------------

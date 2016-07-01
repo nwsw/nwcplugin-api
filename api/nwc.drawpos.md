@@ -144,7 +144,15 @@ Returns nil if the #LyricRow does not exist.
 <a name="xyNoteAccidental"></a>
 **{drawpos}:xyNoteAccidental**([#NoteNumber]), returns #X,#Y,#AccIndicator
 
-This returns the anchoring position for a target note's accidental in `{drawpos}`. The optional `NoteNumber` is used to indicate a member note in a chord. The `AccIndicator` will be an offset value indicating the pitch shift associated with the accidental (one of -2, -1, 0, 1, or 2), or `nil` if no accidental is assigned to the target note.
+This returns the anchoring position for a target note's accidental in `{drawpos}`. The optional `NoteNumber` is used to indicate a member note in a chord. The `AccIndicator` is the ordinal value for the *nwctxt* character representation of the accidental, as shown below:
+
+```Lua
+string.byte("#") -- sharp
+string.byte("b") -- flat
+string.byte("n") -- natural
+string.byte("x") -- double sharp
+string.byte("v") -- double flat
+```
 
 Returns `nil` when a note is not found.
 

@@ -5,6 +5,7 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 <table>
 <tr>
 <td><a href='#txt'>txt</a></td>
+<td><a href="#VERSIONDATE">VERSIONDATE</a></td>
 <td><a href="#VERSION">VERSION</a></td>
 <td><a href="#VERSIONTEXT">VERSIONTEXT</a></td>
 <td><a href="#VERSIONKEY">VERSIONKEY</a></td>
@@ -23,6 +24,13 @@ The `nwc` object provides initialization and debugging methods for use the *Note
 <td><a href="#rawget">rawget</a></td>
 </tr>
 </table>
+
+---------------------------------
+<a name="VERSIONDATE"></a>
+**nwc.VERSIONDATE**
+
+This is a constant string that indicates the build day of the current program, in the form YYYYMMDD. This is the easiest way to establish the API vintage of the current environment.
+
 
 ---------------------------------
 <a name="VERSION"></a>

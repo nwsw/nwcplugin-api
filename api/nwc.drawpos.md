@@ -199,4 +199,4 @@ This returns the anchoring timeslot coordinate for the note or rest located at `
 <a name="xyRight"></a>
 **{drawpos}:xyRight**(), returns #X,#Y
 
-This returns the right side egde coordinate for the position located at `{drawpos}`.
+This returns the right side edge coordinate for the position located at `{drawpos}`.

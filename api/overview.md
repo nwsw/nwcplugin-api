@@ -23,6 +23,7 @@ Each object type's Lua script must return an event method table that will be use
 
 ```Lua
 return {
+	nwcut     = {['User tool action 1']='Clip',['User tool action 2']='File'},
 	spec      = {{id='field1',type='text',default=''},{id='field2',type='text',default=''}},
 	menu      = {{type='command',name='cmd1...',separator=false,checkmark=false,disable=false,data=1},
 	             {type='command',name='cmd2...',separator=true,checkmark=true,disable=false,data=2}},
@@ -53,6 +54,48 @@ This method table is used as an event dispatch mechanism which forwards the list
 |  draw     | **t** | The object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this object. |
 |  menuInit | **t** | The object has been right clicked in the editor, and a menu is about to be presented. Parameter `t` provides read access to the properties for this object, which can be used to alter the contents of the its `menu` table. |
 | menuClick | **t**<br>**menuidx**<br>**choice** | A choice has been selected from the object's right click menu. Parameter `t` provides read/write access to the properties for this object. The `menuidx` is the key into the `menu` table, and `choice` is the **list** choice index, or **nil** for menu commands. |
+
+## The `nwcut` Table - Defining User Tool Actions
+
+A plugin has the optional ability to define one or more actions that can be accessed from the User Tool command. This is done via the `nwcut` return entry, defined as an associative table with the key being the action to perform, and the value indicating whether the command accepts `File` or `Clip` content:
+
+```Lua
+nwcut = {
+	['clip action']='Clip',
+	['file action']='File'
+	},
+```
+
+The plugin then implements the user tool actions in a `nwcut` environment hook. The presence of the `nwcut` package indicates that the script's entry point is actually from a user tool invocation. This environment is fully described in the [User Tool API section](https://lua.noteworthycomposer.com/usertool/nwcut.html).
+
+A full sample plugin that delivers a series of user tools without any traditional object support is shown below:
+
+```Lua
+-- This object plugin is used to provide a series of user tools. It is not meant to provide any
+-- direct user object support via Insert, Object.
+
+if nwcut then
+	-- This is the user tool entry point. All user tool code must be done from within this nwcut
+	-- environment hook. The standard object plugin environment is not available when run from this
+	-- entry point. The object name and action are passed into this entry point via the arg[] table.
+	local userObjTypeName = arg[1]
+	local userAction = arg[2]
+
+	nwcut.warn(string.format('Object: %s, Action: %s',userObjTypeName,userAction))
+	return
+end
+
+-- Everything below here runs in the nwc object plugin context. In this example, we simply
+-- provide a set of user tools, and disable the corresponding object's create action.
+
+return {
+	create = false, -- excludes object from Insert, Object list
+	nwcut = {
+		['Action 1'] = 'Clip',
+		['Action 2'] = 'File'
+		},
+	}
+```	
 
 ## The `spec` Table - Defining Object Properties
 

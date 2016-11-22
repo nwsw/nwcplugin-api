@@ -20,11 +20,13 @@ The following functions are available in both the `width` and `draw` events:
 <td><a href="#getSongInfo">getSongInfo</a></td>
 <td><a href="#getStaffProp">getStaffProp</a></td>
 <td><a href="#getSystemCounter">getSystemCounter</a></td>
-</tr><tr>
 <td><a href="#getTarget">getTarget</a></td>
+</tr><tr>
 <td><a href="#getTypeface">getTypeface</a></td>
+<td><a href="#intersectBeam">intersectBeam</a></td>
 <td><a href="#isAutoInsert">isAutoInsert</a></td>
 <td><a href="#isDrawing">isDrawing</a></td>
+<td><a href="#isHidden">isHidden</a></td>
 </tr><tr>
 <td><a href="#setFont">setFont</a></td>
 <td><a href="#setFontClass">setFontClass</a></td>
@@ -46,18 +48,19 @@ These remaining functions can only be used from the `draw` event method (when `n
 <td><a href="#curve">curve</a></td>
 <td><a href="#ellipse">ellipse</a></td>
 </tr><tr>
-<td><a href="#getPageRect">getPageRect</a></td>
 <td><a href="#hintline">hintline</a></td>
 <td><a href="#line">line</a></td>
+<td><a href="#lineBy">lineBy</a></td>
 <td><a href="#moveBy">moveBy</a></td>
 <td><a href="#moveTo">moveTo</a></td>
 </tr><tr>
+<td><a href="#getPageRect">getPageRect</a></td>
 <td><a href="#opaqueMode">opaqueMode</a></td>
 <td><a href="#rectangle">rectangle</a></td>
 <td><a href="#roundRect">roundRect</a></td>
 <td><a href="#setPen">setPen</a></td>
-<td><a href="#setWhiteout">setWhiteout</a></td>
 </tr><tr>
+<td><a href="#setWhiteout">setWhiteout</a></td>
 <td><a href="#strokeText">strokeText</a></td>
 <td><a href="#text">text</a></td>
 <td><a href="#width">width</a></td>
@@ -125,6 +128,13 @@ This indicates if the current object has been automatically inserted at the star
 
 
 ------------------
+<a name="isHidden"></a>
+**nwcdraw.isHidden**(), returns Boolean
+
+This indicates if the current object is hidden and will not be shown on the printed copy of the work.
+
+
+------------------
 <a name="setFontClass"></a>
 **nwcdraw.setFontClass**('ClassName')
 
@@ -147,20 +157,23 @@ This method can be used to set a new font for text. The Size is in Y coordinates
 <a name="getTypeface"></a>
 **nwcdraw.getTypeface**(), Returns 'Typeface'
 
+This returns the current typeface that will be used for drawing text.
 
 ------------------
 <a name="getFontSize"></a>
 **nwcdraw.getFontSize**(), Returns #Size
 
+Returns the current font size for drawing text.
 
 ------------------
 <a name="getFontStyle"></a>
 **nwcdraw.getFontStyle**(), Returns 'Style'
 
+Returns the current font style. The Style is a string that may contain the following characters: 'b' for bold, 'i' for italic, and 'r' for regular text.
 
 ------------------
 <a name="getPageMargin"></a>
-**nwcdraw.getPageMargin**(@[nwc.txt.PageMarginFields](nwc.md#txt)), Returns `Variant`
+**nwcdraw.getPageMargin**(@[nwc.txt.PageMarginFields](nwc.md#txt)), Returns `Value`
 
 This can be used to retrieve page margin properties.
 
@@ -300,6 +313,51 @@ This sets the current starting position for the next line. Only the X coordinate
 
 
 ------------------
+<a name="intersectBeam"></a>
+**nwcdraw.intersectBeam**(#Dir,[Grace])
+
+Using the current position, find the nearest intersecting beam, with Dir >= 0 looking up, or Dir < 0 looking down.
+
+Set Grace to true to intersect with grace note beams.
+
+When an intersect is found, the current position is updated, and returns Up or Down, followed by starting and ending coordinates for the beam.
+
+```lua
+local function drawBeamSegment(m,b,grace,dir,x1,l)
+	local beamh = (grace and 0.5 or 1) * ((dir == 'Up') and -1 or 1)
+	local y1 = m*x1 + b
+	local x2 = x1+l
+	local y2 = m*x2 + b
+	nwcdraw.setPen('solid',10)
+	nwcdraw.beginPath()
+		nwcdraw.moveTo(x1,y1)
+		nwcdraw.line(x2,y2)
+		nwcdraw.line(x2,y2+beamh)
+		nwcdraw.line(x1,y1+beamh)
+		nwcdraw.line(x1,y1)
+	nwcdraw.endPath()
+end
+	
+for dir=-1,1,2 do
+	local beamdir,bx1,by1,bx2,by2 = nwcdraw.intersectBeam(dir)
+	if beamdir then
+		-- cx,cy is the intersect point
+		local cx,cy = nwcdraw.xyPos()
+
+		-- setup for y = mx + b
+		local m = (by2-by1)/(bx2-bx1)
+		local b = by1 - (m*bx1)
+	
+		-- draw a line from the intersect back home
+		nwcdraw.line(cx,0)
+
+		-- draw a short beam segment at the object's home location
+		drawBeamSegment(m,0,false,beamdir,0,2)
+	end
+end
+```
+
+------------------
 <a name="hintline"></a>
 **nwcdraw.hintline**(#XCoord,#YCoord,[#XCoord],[#YCoord])
 
@@ -311,6 +369,14 @@ This draws an editor only hint line. This will only appear when in the editor an
 **nwcdraw.line**(#XCoord,#YCoord,[#XCoord],[#YCoord])
 
 This draws a line using the current pen. Only the first X coordinate is required, as the rest default to the current drawing position (set by nwcdraw.moveTo).
+
+
+------------------
+<a name="lineBy"></a>
+**nwcdraw.lineBy**(#XOffset,[#YOffset,#XOffset2,#YOffset2,...])
+
+Similar to the <a href="#moveBy">moveBy</a> function, this draws lines to offset positions, starting from the current position and using the current pen.
+Up to 6 offset coordinate pairs can be provided in a single call.
 
 
 ------------------

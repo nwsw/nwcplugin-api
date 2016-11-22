@@ -58,7 +58,8 @@ Parameters:
 
 Supported `datatype` strings:
 
-- "*" indicates a text response
+- "*" indicates a single line text response
+- "_" indicates a multiple line text response
 - "#" indicates a numeric/integer response; the range can be specified in brackets (e.g. "#[-2,5]" supports values from -2 through 5)
 - "#.#" indicates a real number response; the range can be specified in brackets (e.g. "#.#[-9.9,9.9]" supports values from -9.9 through 9.9)
 - "@" indicates a coordinate vector; the maximum range for the x and y value pairs can be specified in brackets (e.g. "@([0,5],[-5,5])" indicates a coordinate where X cannot be less than zero, and Y cannot be less than -5); both an X and Y value are accepted as input data, and both are returned from this function

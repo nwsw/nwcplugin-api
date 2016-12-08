@@ -17,6 +17,27 @@ Each `<Object-Type-Name>` object can be subclassed with a Lua script that has a 
 
 The `<Object-Type-Name>` must start with a letter, and is currently restricted to the ASCII character set. It is recommended that all object types include a short author identifier with a dot prefix. For example, all object types created by Noteworthy Software will always include a `.nw` extension to uniquely identify them.
 
+## Object Class
+
+Every object instance is marked with special `Class` designation, which can be one of:
+
+- **Standard**
+
+   This is the default class, which makes the object instance behave very much like a typical text expression on the staff.
+
+- **StaffSig**
+
+   This indicates that the object instance behaves much like a staff signature object, such as a Clef or a Key Signature. The nearest
+   instance of this object will always be added at the front of each printed staff system, with `isAutoInsert` being set when the object
+   does not appear in place.
+
+- **Span**
+
+   This indicates that the object will span one or more other items on the staff, similar to a beam, slur, hairpin, or special ending.
+   Plugins that implement this class can optionally provide a `span` method that describes the length and nature of the span. Objects in this
+   class are the last items to be rendered on their staff. The `isAutoInsert` mechanism is used to allow a Span class object to complete
+   its drawing in later printed systems.
+
 ## Event Methods - Hooking into NWC
 
 Each object type's Lua script must return an event method table that will be used to subclass any objects that share the matching `<Object-Type-Name>`. This should be done at the end of the plugin's script:
@@ -35,6 +56,7 @@ return {
 	onChar    = function(t,c) end,
 	transpose = function(t,semitones,notepos,updpatch) end,
 	play      = function(t) end,
+	span      = function(t) return 1 end,
 	width     = function(t) return 0 end,
 	draw      = function(t) end
 	}
@@ -42,18 +64,19 @@ return {
 
 This method table is used as an event dispatch mechanism which forwards the listed events into the object's plugin module. The supported event methods are:
 
-| Method    | Parameters | Event    |
-|:---------:|:----------:|:-------------- |
-|  create   | **t**      | A new object is being added to the staff. Parameter `t` provides read/write access to the properties for this object. |
-|  audit   | **t**      | This is called when an object is loaded (via file/clipboard) or a _View->Refresh Score_ is performed. Parameter `t` provides read/write access to the properties for this object. |
-|  spin     | **t**<br>**dir** | The user applies a '+'/'-' increment/decrement operation against the object while in the editor. Parameter `t` provides read/write access to the properties for this object. Parameter `dir` is 1 or -1 to indicate the direction of the spin action.|
-|  onChar   | **t**<br>**c** | The user has pressed a character on the computer keyboard while targeting this object (it is selected by itself from within the editor). Parameter `t` provides read/write access to the properties for this object. Parameter `c` is the numeric character key that has been pressed. Returns `true` if the plugin has responded to the key withs an action. Returns `false` if the key should be handled in the standard fashion by the editor. |
-|  transpose     | **t**<br>**semitones**<br>**notepos**<br>**updpatch** | The staff is being transposed by the user. Parameter `t` provides read/write access to the properties for this object. Parameter `semitones` can be anything from -12 up to 12. The `notepos` indicates the preferred amount of shift that should be applied to a note position on the staff, and should be between -7 and 7. The `updpatch` indicates if the play back instrument will be transposed accordingly.|
-|  play     | **t** | The staff notation is being compiled into a performance using a buffered sequence of MIDI events. Parameter `t` provides read access to the properties for this object. |
-|  width    | **t** | The object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the object. Parameter `t` provides read access to the properties for this object. |
-|  draw     | **t** | The object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this object. |
-|  menuInit | **t** | The object has been right clicked in the editor, and a menu is about to be presented. Parameter `t` provides read access to the properties for this object, which can be used to alter the contents of the its `menu` table. |
-| menuClick | **t**<br>**menuidx**<br>**choice** | A choice has been selected from the object's right click menu. Parameter `t` provides read/write access to the properties for this object. The `menuidx` is the key into the `menu` table, and `choice` is the **list** choice index, or **nil** for menu commands. |
+| Method       | Parameters | Event    |
+|:------------:|:----------:|:-------------- |
+|  create      | **t**      | A new object is being added to the staff. Parameter `t` provides read/write access to the properties for this object. |
+|  audit       | **t**      | This is called when an object is loaded (via file/clipboard) or a _View->Refresh Score_ is performed. Parameter `t` provides read/write access to the properties for this object. |
+|  spin        | **t**<br>**dir** | The user applies a '+'/'-' increment/decrement operation against the object while in the editor. Parameter `t` provides read/write access to the properties for this object. Parameter `dir` is 1 or -1 to indicate the direction of the spin action.|
+|  onChar      | **t**<br>**c** | The user has pressed a character on the computer keyboard while targeting this object (it is selected by itself from within the editor). Parameter `t` provides read/write access to the properties for this object. Parameter `c` is the numeric character key that has been pressed. Returns `true` if the plugin has responded to the key withs an action. Returns `false` if the key should be handled in the standard fashion by the editor. |
+|  transpose   | **t**<br>**semitones**<br>**notepos**<br>**updpatch** | The staff is being transposed by the user. Parameter `t` provides read/write access to the properties for this object. Parameter `semitones` can be anything from -12 up to 12. The `notepos` indicates the preferred amount of shift that should be applied to a note position on the staff, and should be between -7 and 7. The `updpatch` indicates if the play back instrument will be transposed accordingly.|
+|  play        | **t** | The staff notation is being compiled into a performance using a buffered sequence of MIDI events. Parameter `t` provides read access to the properties for this object. |
+|  span        | **t** | An optional method called for objects using the `Span` class. This returns a value pair: the size of the span, and one of the `nwctxt.SpanTypes` (notes,syllables,bars,ticks,items) with `notes` being the default. Parameter `t` provides read access to the properties for this object. |
+|  width       | **t** | The object is being evaluated for inclusion in a displayable medium, such as an editor view or printed page, and it is given an opportunity to request a reserved width on the staff. The method should retuurn a required width, or no width will be reserved for the object. Parameter `t` provides read access to the properties for this object. |
+|  draw        | **t** | The object needs to be rendered into a window or onto a printed page. Parameter `t` provides read access to the properties for this object. |
+|  menuInit    | **t** | The object has been right clicked in the editor, and a menu is about to be presented. Parameter `t` provides read access to the properties for this object, which can be used to alter the contents of the its `menu` table. |
+|  menuClick   | **t**<br>**menuidx**<br>**choice** | A choice has been selected from the object's right click menu. Parameter `t` provides read/write access to the properties for this object. The `menuidx` is the key into the `menu` table, and `choice` is the **list** choice index, or **nil** for menu commands. |
 
 ## The `nwcut` Table - Defining User Tool Actions
 

@@ -363,6 +363,8 @@ This method can be used to find other items on the same staff as the current obj
    <br>Finds the `ntnidx` referenced object.
  - [nwc.drawpos](nwc.drawpos.md)
    <br>Finds the `drawpos` object.
+ - **'span'**
+   <br>Finds the last item that completes the span, which is indicated by the same value pair as is returned by the `span` event method. Returns false if the span could not be completed.
  - **'next'**
    <br>Finds the next match to the right of the current object.
  - **'prior'**

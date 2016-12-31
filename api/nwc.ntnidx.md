@@ -391,6 +391,9 @@ The following values are supported for the optional 'What' field:
  - **noteOrRest**
    <br>This matches any note or rest item, including grace notes.
    
+ - **noteRestBar**
+   <br>This matches any note, rest, or bar item, including grace notes and multi-measure rests.
+   
  - **noteAt**, #NotePosition
    <br>This matches any item that contains a note at the designated NotePosition.
 

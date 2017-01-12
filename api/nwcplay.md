@@ -7,6 +7,7 @@ The following are available:
 <table>
 <tr>
 <td><a href="#PPQ">PPQ</a></td>
+<td><a href="#MAXSPPOFFSET">MAXSPPOFFSET</a></td>
 <td><a href="#user">user</a></td>
 </tr><tr>
 <td><a href="#calcDurLength">calcDurLength</a></td>
@@ -35,6 +36,13 @@ The following are available:
 **nwcplay.PPQ**
 
 This is a constant that expresses the Pulses Per Quarter Note used when rendering the notation to MIDI.
+
+
+------------------
+<a name="MAXSPPOFFSET"></a>
+**nwcplay.MAXSPPOFFSET**
+
+This is a constant that expresses the maximum SPP offset values that can be used for the <a href="#midi">midi</a> and <a href="#note">note</a> methods.
 
 
 ------------------
@@ -120,17 +128,21 @@ This returns the default note velocity at the current play back position.
 
 ------------------
 <a name="note"></a>
-**nwcplay.note**(#offsetSPP,#durationPulses,#midiNoteNumber,[#velocity])
+**nwcplay.note**(#offsetSPP,#durationPulses,#midiNoteNumber,[#velocity]), Returns Boolean [,'ErrorText']
 
-This adds a note to the performance relative to the current time position of the object. The channel and port are set by the current staff environment. The durationPulses and offsetSPP are restricted to an area near the current play back position. If the velocity is not specified, then the current velocity from the staff position is used.
+This adds a note to the performance relative to the current time position of the object. The channel and port are set by the current staff environment. The durationPulses and offsetSPP are restricted to an area near the current play back position (MAXSPPOFFSET). If the velocity is not specified, then the current velocity from the staff position is used.
+
+Returns false on error, and includes the error text as a second return value.
 
 
 ------------------
 <a name="midi"></a>
-**nwcplay.midi**(#offsetSPP,'Command',#midiData1,[#midiData2])
+**nwcplay.midi**(#offsetSPP,'Command',#midiData1,[#midiData2]), Returns Boolean [,'ErrorText']
 
-This adds a midi message into the performance relative to the current time position of the object. The channel and port are set by the current staff environment.
+This adds a midi message into the performance relative to the current time position of the object. The offsetSPP is restricted to an area near the current play back position (MAXSPPOFFSET). The channel and port are set by the current staff environment.
 
 The command must be a valid, non-sysex midi command number, or one of the following command names: noteOff, noteOn, keyAftertouch, controller, patch, channelAftertouch, or pitchBend.
 
 If midiData2 is not provided, then it will be zero.
+
+Returns false on error, and includes the error text as a second return value.

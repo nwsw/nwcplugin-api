@@ -127,22 +127,30 @@ Although not required, it is recommended that an object's event method table ret
 - document the properties supported by the plugin
 - filter the values returned to the script for these properties
 
-The `spec` table should list all of the possible fields (16 fields maximum) that are supported by the object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
+The `spec` table should list all of the possible fields that are supported by the object type, and describe the nature of the value that each field will contain. The following example demonstrates all of the available types that are supported by the `spec` table:
 
 ```Lua
 local obj_spec = {
 	{id='field1',label='Enable field&1',type='bool',default=true},
 	{id='field2',type='int',default=0,min=0,max=100},
 	{id='field3',type='float',default=0.0,min=-5.0,max=5.0,step=0.1},
-	{id='field4',type='text',default='mytext'},
-	{id='field5',label='What duration',type='enum',default='Quarter',list=nwc.txt.NoteDuration},
-	{id='field6',label='Select from list',type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
+	-------------
+	{id='field4',label='Apply duration',labelFirst=true,type='bool',default=true,separator=true},
+	{id='field5',label=false,type='int',default=0,min=0,max=100,width=5},
+	{id='field6',label=false,type='enum',list=nwc.txt.NoteDuration,default=nwc.txt.NoteDuration[3],width=15},
+	-------------
+	{id='field7',type='text',default='mytext',width=10,separator=true},
+	{id='field8',label='Select from list',type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
  }
 ```
 
 Some additional notes about the field types:
 
+- A `separator` option can be used to start a new group of properties that should be visually separated from any prior properties.
+- A `width` value can be used to control the size of the control, based on an average character width.
+- A `bool` type can use force a standard left side label by setting a `labelFirst` option. Use of this option cancels the effect of an explicit `width` value.
 - The `label`value is optional. When provided, it will be used in the NWC property sheet.
+- When `label` is set to false, no label will be used on the control, and an attempt will be made to fit the control in the same row as the previous control.
 - When not specified, the default `min` is -1000 and default `max` is 1000.
 
 The `obj_spec` should be included in the table returned by the plugin:

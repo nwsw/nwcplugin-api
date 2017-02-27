@@ -76,7 +76,7 @@ This returns a value pair that generally reveals the packages that are available
 | Returns | Description |
 |:---------------:| -------------------- |
 | `init`<br>**nil** | This is generally used while a script is being compiled and loaded into the NWC environment. The [nwc](nwc.md) package is available. |
-| `obj`<br>`edit` | This is the context used for the `create`, `spin` and `menuClick` event methods. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcui](nwcui.md) (except for `spin`). |
+| `obj`<br>`edit` | This is the context used for the `create`, `spin`, `onChar`, and `menuClick` event methods. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and [nwcui](nwcui.md) (except for `spin`). |
 | `obj`<br>`fetch` | This is the context used for the `menuInit` and `span` event methods. Available packages include [nwc](nwc.md) and [nwc.ntnidx](nwc.ntnidx.md). |
 | `obj`<br>`predraw` | This is the context used for the `width` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), and some parts of [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |
 | `obj`<br>`draw` | This is the context used for the `draw` event method. Available packages include [nwc](nwc.md), [nwc.ntnidx](nwc.ntnidx.md), [nwcdraw](nwcdraw.md) and [nwc.drawpos](nwc.drawpos.md). |

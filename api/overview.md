@@ -135,19 +135,21 @@ local obj_spec = {
 	{id='field2',type='int',default=0,min=0,max=100},
 	{id='field3',type='float',default=0.0,min=-5.0,max=5.0,step=0.1},
 	-------------
-	{id='field4',label='Apply duration',labelFirst=true,type='bool',default=true,separator=true},
-	{id='field5',label=false,type='int',default=0,min=0,max=100,width=5},
-	{id='field6',label=false,type='enum',list=nwc.txt.NoteDuration,default=nwc.txt.NoteDuration[3],width=15},
+	{id='field4',label='Apply duration',labelFirst=true,type='bool',default=true,separator='-'},
+	{id='field5',label='Field5',type='int',default=0,min=0,max=100,width=5,separator=' '},
+	{id='field6',label='Field6',type='enum',list=nwc.txt.NoteDuration,default=nwc.txt.NoteDuration[3],separator=' '},
 	-------------
-	{id='field7',type='text',default='mytext',width=10,separator=true},
+	{id='field7',type='text',default='mytext',width=10,separator='\n'},
 	{id='field8',label='Select from list',type='enum',default='Quarter',list={'Whole', 'Half', 'Quarter', 'Eighth', 'Sixteenth', 'Thirtysecond', 'Sixtyfourth'}},
  }
 ```
 
 Some additional notes about the field types:
 
-- A `separator` option can be used to start a new group of properties that should be visually separated from any prior properties.
-- A `width` value can be used to control the size of the control, based on an average character width.
+- A `separator` option can be used to control how the property should be visually separated from any prior properties. Generally set as a text string, possibilities include:
+a space `' '` to inline the property with its previous property when possible, a dash `'-'` to start a new group of properties, with extra space and a separator line,
+a line feed `'\n'` to create a vertical gap from the prior properties, or an empty string `''` (the default) which shows the property in its own row.
+- A `width` value can be used to control the size of the control, based on an average character width. This is most useful for text properties, but can also be useful for numbers.
 - A `bool` type can use force a standard left side label by setting a `labelFirst` option. Use of this option cancels the effect of an explicit `width` value.
 - The `label`value is optional. When provided, it will be used in the NWC property sheet.
 - When `label` is set to false, no label will be used on the control, and an attempt will be made to fit the control in the same row as the previous control.
